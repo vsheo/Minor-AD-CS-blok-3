@@ -4,6 +4,8 @@
 # if __name__ == "__main__":
 #     startSession()
 
+import os
+from dotenv import load_dotenv
 
 from typing import Final
 
@@ -13,7 +15,8 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters, C
 
 print('Bot is now starting up...')
 
-API_TOKEN: Final = '8561797174:AAGV1m7qbcVXE-e06yDovSpv95d_pyySFiw'
+load_dotenv()
+API_TOKEN: Final = os.getenv("TELEGRAM_BOT_TOKEN")
 BOT_HANDLE: Final = '@Daughter1738Bot'
 
 
