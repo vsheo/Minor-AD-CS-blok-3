@@ -10,7 +10,7 @@ async def banner_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # lijst van alle commands terug geven
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text('Here comes the help')
+    await update.message.reply_text(get_command_list())
 
 # Reactie om alles dat geen slash command is
 async def no_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
