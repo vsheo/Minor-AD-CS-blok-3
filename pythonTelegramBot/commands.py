@@ -1,7 +1,14 @@
+# Deze file bevat alle commands die via telegram chat uitgevoerd kunnen worden
+
 from telegram import Update
 from telegram.ext import ContextTypes
+from functions import *
 
-# Command to provide help information
+# ASCII banner
+async def banner_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(get_banner())
+
+# lijst van alle commands terug geven
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text('Here comes the help')
 

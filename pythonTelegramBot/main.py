@@ -16,6 +16,7 @@ if __name__ == '__main__':
     app = Application.builder().token(API_TOKEN).build()
 
     # Register command handlers
+    app.add_handler(CommandHandler('banner', banner_command))
     app.add_handler(CommandHandler('help', help_command))
 
     # Register message handler

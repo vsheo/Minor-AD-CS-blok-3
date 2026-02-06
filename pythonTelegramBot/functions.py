@@ -1,32 +1,20 @@
-# functie die afgedraaid wordt als de session start
-def startSession():
+# deze file bevat alle functies die aangeroepen worden wanneer een command uitgevoerd wordt
+
+# functies die afgedraaid worden om de banner te maken
+def get_banner() -> str:
     """
-    Bij de start van de sessie toon de ASCII banner.
+    Geeft de ASCII banner terug als string.
     """
-    banner = r"""
-8888888b.                            888                             d8b      888 888                                                      
-888   Y88b                           888                             Y8P      888 888                                                      
-888    888                           888                                      888 888                                                      
-888   d88P 888  888 888d888 88888b.  888  .d88b.       88888b.d88b.  888  .d88888 888888 .d88b.  888d888 88888b.d88b.                      
-8888888P"  888  888 888P"   888 "88b 888 d8P  Y8b      888 "888 "88b 888 d88" 888 888   d8P  Y8b 888P"   888 "888 "88b                     
-888        888  888 888     888  888 888 88888888      888  888  888 888 888  888 888   88888888 888     888  888  888                     
-888        Y88b 888 888     888 d88P 888 Y8b.          888  888  888 888 Y88b 888 Y88b. Y8b.     888     888  888  888                     
-888         "Y88888 888     88888P"  888  "Y8888       888  888  888 888  "Y88888  "Y888 "Y8888  888     888  888  888                     
-                            888                                                                                                            
-                            888                                                                                                            
-                            888                                                                                                            
-888b     d888                                                         .d8888b.           888     888 d8b                          888      
-8888b   d8888                                                        d88P  "88b          888     888 Y8P                          888      
-88888b.d88888                                                        Y88b. d88P          888     888                              888      
-888Y88888P888 888  888  8888b.  88888888 88888b.d88b.   8888b.        "Y8888P"           Y88b   d88P 888 888d888 .d88b.  .d8888b  88888b.  
-888 Y888P 888 888  888     "88b    d88P  888 "888 "88b     "88b      .d88P88K.d88P        Y88b d88P  888 888P"  d8P  Y8b 88K      888 "88b 
-888  Y8P  888 888  888 .d888888   d88P   888  888  888 .d888888      888"  Y888P"          Y88o88P   888 888    88888888 "Y8888b. 888  888 
-888   "   888 Y88b 888 888  888  d88P    888  888  888 888  888      Y88b .d8888b           Y888P    888 888    Y8b.          X88 888  888 
-888       888  "Y88888 "Y888888 88888888 888  888  888 "Y888888       "Y8888P" Y88b          Y8P     888 888     "Y8888   88888P' 888  888 
-    """
-    print(banner)
-    print("=" * 90)
-    print("gebruik / commands om opdrachten uit te voeren")
-    print("gebruik /help om alle commands te zien")
-    print("=" * 90)
-    print()
+    return r"""
+┌─┐┬  ┬  ┬─┐  ┌─┐ ┬     ┌─┐ 
+├─┘│  │  ├┬┘  ├─┘ │     ├┤  
+┴    └─┘   ┴└─  ┴     ┴─┘ └─┘ 
+                             
+┌┬┐ ┬ ┌┬┐ ┌┬┐┌─┐ ┬─┐ ┌┬┐
+│││ │    ││   │   ├┤   ├ ┬┘  │││
+┴   ┴ ┴ ─┴┘   ┴   └─┘ ┴ └─ ┴   ┴
+
+====================================
+Viresh & Muazma
+====================================
+"""
