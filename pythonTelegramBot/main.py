@@ -22,7 +22,7 @@ if __name__ == '__main__':
     # Register message handler
     app.add_handler(MessageHandler(filters.TEXT, no_command))
 
-    # Register error handler
+    # Register error handler 
     app.add_error_handler(log_error)
 
     print('Starting polling...')
