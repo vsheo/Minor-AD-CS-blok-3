@@ -37,6 +37,7 @@ Command Lijst:
 /screenshot  -   maakt een screenshot
 """
 
+# maak een video recording met de webcam
 # source: https://www.geeksforgeeks.org/python/python-opencv-capture-video-from-camera/
 def get_camRecording():
     # folder waar de video opgeslagen wordt
@@ -77,3 +78,6 @@ def get_camRecording():
     cam.release()
     out.release()
     cv2.destroyAllWindows()
+
+# verstuur een video naar de telegram chat
+def post_camrecording():

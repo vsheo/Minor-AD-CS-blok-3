@@ -1,5 +1,4 @@
 # Deze file bevat alle commands die via telegram chat uitgevoerd kunnen worden
-
 from telegram import Update
 from telegram.ext import ContextTypes
 from functions import *
@@ -18,6 +17,10 @@ async def no_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "Ik reageer alleen op slash commands. Gebruik /help voor een overzicht van alle commands."
     )
 
+# webcam recording maken
+async def start_recording(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("Webcam opname wordt gestart...")
+    get_camRecording()
 
 # Log errors
 async def log_error(update: Update, context: ContextTypes.DEFAULT_TYPE):
