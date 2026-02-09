@@ -19,8 +19,13 @@ async def no_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # webcam recording maken
 async def start_recording(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Webcam opname wordt gestart...")
-    get_camRecording()
+    # Source: https://stackoverflow.com/questions/47615956/send-video-through-telegram-python-api
+    await context.bot.send_video(
+        chat_id=update.effective_chat.id,
+        video=open(get_camRecording(), 'rb'),
+        supports_streaming=True
+    )
+
 
 # Log errors
 async def log_error(update: Update, context: ContextTypes.DEFAULT_TYPE):
