@@ -1,6 +1,7 @@
 # Deze file bevat alle functies die binnen de async commands uitgevoerd kunnen wordt
 import cv2, os, time, subprocess, sys, ctypes
 
+
 # functie die afgedraaid wordt om de banner te maken
 def get_banner() -> str:
     """
@@ -97,6 +98,7 @@ def powershell_command(cmd):
     # zet admin rechten aan
     get_adminRights()
 
+    # https://www.phillipsj.net/posts/executing-powershell-from-python/
     # dit is de powershell command die uitgevoerd moet worden (deze command heeft adim rights nodig)
     runCommand = subprocess.run(
         ["powershell", "-Command", cmd], 

