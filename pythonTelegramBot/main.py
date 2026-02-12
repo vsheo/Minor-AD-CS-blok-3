@@ -8,7 +8,7 @@ print('Bot is now starting up...')
 
 load_dotenv()
 API_TOKEN: Final = os.getenv("TELEGRAM_BOT_TOKEN")
-BOT_HANDLE: Final = '@Daughter1738Bot'
+# BOT_HANDLE: Final = '@Daughter1738Bot'
 
 
 # Start the bot

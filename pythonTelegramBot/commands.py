@@ -4,6 +4,8 @@ from telegram.ext import ContextTypes
 from functions import *
 
 # ASCII banner
+# update info over binnenkomende bericht
+# context extra informatie die je kan gebruiken
 async def banner_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(get_banner())
 
