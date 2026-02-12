@@ -1,3 +1,4 @@
+# In deze file wordt de bot opgestart en luister hij  naar commands
 import os
 from dotenv import load_dotenv
 from typing import Final

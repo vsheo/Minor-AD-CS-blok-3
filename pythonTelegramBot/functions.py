@@ -1,6 +1,5 @@
+# Deze file bevat alle functies die binnen de async commands uitgevoerd kunnen wordt
 import cv2, os, time, subprocess, sys, subprocess, ctypes
-
-# deze file bevat alle functies die aangeroepen worden wanneer een command uitgevoerd wordt
 
 # functie die afgedraaid wordt om de banner te maken
 def get_banner() -> str:

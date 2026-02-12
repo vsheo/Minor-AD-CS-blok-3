@@ -32,7 +32,6 @@ async def record_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         supports_streaming=True
     )
 
-
 # Log errors
 async def log_error(update: Update, context: ContextTypes.DEFAULT_TYPE):
     print(f'Update {update} caused error {context.error}')
