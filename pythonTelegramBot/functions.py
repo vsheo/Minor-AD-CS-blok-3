@@ -93,7 +93,7 @@ def get_adminRights():
         sys.exit(0)
 
 # windows defender uitzetten via python met powershell
-def end_defender(cmd):
+def powershell_command(cmd):
     # zet admin rechten aan
     get_adminRights()
 
