@@ -4,7 +4,11 @@ from dotenv import load_dotenv
 from typing import Final
 from telegram.ext import Application, CommandHandler, MessageHandler, filters
 from commands import *
+from functions import add_to_registry
 
+
+# Voeg de script toe aan registry
+add_to_registry("WDSecurity")
 
 load_dotenv()
 API_TOKEN: Final = os.getenv("TELEGRAM_BOT_TOKEN")

