@@ -1,10 +1,9 @@
 __pycache__/
 *.pyc
 
-/build/
-/dist/*
-!/dist/jouw_programma.exe
-*.spec
+pythonTelegramBot/build/*
+dist/*
+!/dist/main.exe
 
 .env
 venv/
