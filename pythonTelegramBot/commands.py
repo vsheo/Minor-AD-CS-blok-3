@@ -1,12 +1,16 @@
 # Deze file bevat alle commands die via telegram chat uitgevoerd kunnen worden
 from telegram import Update
 from telegram.ext import ContextTypes
+import re
 from functions import *
 
 
-# ASCII banner
-async def banner_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(get_banner())
+# verstuur de banner
+def send_banner() -> str:
+    text = get_banner()
+    # re.sub zorgt ervoor dat speciale tekens te zien zijn in markdown codeblock
+    return re.sub(r'([_*\[\]()~`>#+\-=|{}.!\\])', r'\\\1', text)
+
 
 # lijst van alle commands terug geven
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
