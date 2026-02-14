@@ -14,13 +14,14 @@ load_dotenv()
 API_TOKEN: Final = os.getenv("TELEGRAM_BOT_TOKEN")
 CHAT_ID: Final = int(os.getenv("CHAT_ID"))
 
-# https://levelup.gitconnected.com/building-a-telegram-bot-in-2024-with-python-17b483a7f6b9#:~:text=Let%E2%80%99s%20now%20continue!-,3.%20main.py,-Create%20a%20new
+# on_startup functie heeft await nodig
+async def on_startup(_):
+    await startup_functions(app, CHAT_ID)
+
+# source: https://levelup.gitconnected.com/building-a-telegram-bot-in-2024-with-python-17b483a7f6b9#:~:text=Let%E2%80%99s%20now%20continue!-,3.%20main.py,-Create%20a%20new
 app = Application.builder().token(API_TOKEN).build()
 
-# stuur de banner naar de chat als de bot online staat
-async def on_startup(_):
-    await app.bot.send_message(chat_id=CHAT_ID, text=f"```\n{get_banner()}\n```", parse_mode="MarkdownV2")
-
+# startup functies aanroepen
 app.post_init = on_startup
 
 # Register command handlers

