@@ -10,4 +10,4 @@ dist/*
 venv/
 
 localtest.py
-videos/
+media/

