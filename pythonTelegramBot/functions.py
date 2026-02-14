@@ -205,5 +205,3 @@ def key_log():
     
     # return een list zonder aanhalings tekens
     return ''.join(inputList).replace("'", "")
-
-print(key_log())

