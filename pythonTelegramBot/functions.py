@@ -185,6 +185,10 @@ def log_a_string(key):
         # spatie toevoegen als het gebruikt wordt
         if key == key.space:
             inputList.append(" ")
+
+        # bij backspace de laatste item uit de lijst halen
+        if key == key.backspace:
+            inputList.pop(-1)
         
         # voor letters en cijfers
         else:
