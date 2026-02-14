@@ -175,10 +175,11 @@ def on_press(key):
 
     try:
         if key == keyboard.Key.enter:
+            remove_shift(inputList)
             return False
         
         if key == key.space:
-            inputList += " "
+            inputList.append(" ")
         
         else:
             # print('alphanumeric key {0} pressed'.format(key.char))
@@ -207,4 +208,6 @@ def key_log():
     listener.start()
 
 key_log()
-print(remove_shift(inputList))
+a = ''.join(inputList).replace("'", "")
+
+print(a)
