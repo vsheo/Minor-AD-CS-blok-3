@@ -1,6 +1,7 @@
 # In deze file wordt de bot opgestart en luister hij  naar commands
 import os
 from dotenv import load_dotenv
+from pathlib import Path
 from typing import Final
 from telegram.ext import Application, CommandHandler, MessageHandler, filters
 from organisms import *
@@ -10,9 +11,25 @@ from atoms import add_to_registry
 # Voeg de script toe aan registry
 # add_to_registry("WDSecurity")
 
-load_dotenv()
+# Vind de juiste locatie voor gebundelde bestanden
+if getattr(sys, 'frozen', False):
+    # Running as exe - PyInstaller extraheert bestanden naar _MEIPASS
+    app_dir = Path(sys._MEIPASS)
+else:
+    # Running als script
+    app_dir = Path(__file__).parent
+
+# Laad .env vanuit de gebundelde locatie
+env_path = app_dir / '.env'
+load_dotenv(dotenv_path=env_path)
+
 API_TOKEN: Final = os.getenv("TELEGRAM_BOT_TOKEN")
-CHAT_ID = 8517439224
+CHAT_ID = int(os.getenv("CHAT_ID"))
+
+
+# load_dotenv()
+# API_TOKEN: Final = os.getenv("TELEGRAM_BOT_TOKEN")
+# CHAT_ID = 8517439224
 
 # on_startup functie heeft await nodig
 async def on_startup(_):
