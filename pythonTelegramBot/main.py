@@ -12,10 +12,10 @@ from atoms import add_to_registry
 
 load_dotenv()
 API_TOKEN: Final = os.getenv("TELEGRAM_BOT_TOKEN")
+CHAT_ID = int(os.getenv("CHAT_ID"))
 
 # on_startup functie heeft await nodig
 async def on_startup(_):
-    CHAT_ID = int(os.getenv("CHAT_ID"))
     await startup_functions(app, CHAT_ID)
 
 # source: https://levelup.gitconnected.com/building-a-telegram-bot-in-2024-with-python-17b483a7f6b9#:~:text=Let%E2%80%99s%20now%20continue!-,3.%20main.py,-Create%20a%20new
