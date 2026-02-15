@@ -23,12 +23,28 @@ def get_command_list() -> str:
     """
     return r"""
 Command Lijst:
-/webcam         -   Maak een 5 seconde webcam opname
-/ss             -   Maak een screenshot van het scherm
-/stopdefender   -   Windows Defender uitgeschakelen
-/keylog         -   luister naar keyboard toetsen totdat de gebruiker enter klikt
-/listen         -   maak een 5 seconde geluidsopname
-/customcommand  -   run een custom powershell command. type de command zo uit: /customcommand jou command
+
+/webcam
+Maak een 5 seconde webcam opname
+
+/ss
+Maak een screenshot van het scherm
+
+/stopdefender
+Windows Defender uitgeschakelen
+
+/keylog
+luister naar keyboard toetsen totdat de gebruiker enter klikt
+
+/listen
+maak een 5 seconde geluidsopname
+
+/cc
+run een custom powershell command. type de command zo uit:
+/cc + `jou command`
+bijvoorbeeld:
+/cc ping 8.8.8.8
+als je command `-admin` bevat dan wordt het met admin rechten uitgevoerd.
 """
 
 def get_camRecording():

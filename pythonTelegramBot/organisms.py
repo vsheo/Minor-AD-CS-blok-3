@@ -104,23 +104,21 @@ async def custom_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # maak een een list met maar 2 argumenten, waarvan de eerste aangeeft als admin rechtenb nodig zijn
     args = command_list(context.args)
 
-    if len(args) < 1:
+    if len(context.args) < 1:
         await update.message.reply_text("Geef tenimste 1 argument nadat je de command aanroept")
         return
+    else:
+        await context.bot.send_message(chat_id=update.effective_chat.id, text="Command wordt uitgevoerd...")
     
     try:
         if len(args) == 1:
             commandOutput = run_powershell_command(args[0])
             await update.message.reply_text(f"Terminal output:```\n{commandOutput}\n```", parse_mode='MarkdownV2')
-            return
         elif len(args) == 2 and args[0] == "-admin":
             commandOutput = run_powershell_command(args[1], True)
             await update.message.reply_text(f"Terminal output:```\n{commandOutput}\n```", parse_mode='MarkdownV2')
-            return
     except ValueError:
         await update.message.reply_text(f"Er is een fout opgetreden bij het uitvoeren: {ValueError}")
-        return
-
 
 async def log_error(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """
