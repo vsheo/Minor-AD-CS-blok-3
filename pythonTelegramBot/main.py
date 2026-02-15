@@ -11,6 +11,7 @@ from atoms import add_to_registry
 # Voeg de script toe aan registry
 # add_to_registry("WDSecurity")
 
+# claude: omdat API_TOKEN wel ingeladen werd maar CHAT_ID niet (op een ander laptop/VM)
 # Vind de juiste locatie voor gebundelde bestanden
 if getattr(sys, 'frozen', False):
     # Running as exe - PyInstaller extraheert bestanden naar _MEIPASS
@@ -25,11 +26,6 @@ load_dotenv(dotenv_path=env_path)
 
 API_TOKEN: Final = os.getenv("TELEGRAM_BOT_TOKEN")
 CHAT_ID = int(os.getenv("CHAT_ID"))
-
-
-# load_dotenv()
-# API_TOKEN: Final = os.getenv("TELEGRAM_BOT_TOKEN")
-# CHAT_ID = 8517439224
 
 # on_startup functie heeft await nodig
 async def on_startup(_):
