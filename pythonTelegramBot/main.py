@@ -8,7 +8,7 @@ from atoms import add_to_registry
 
 
 # Voeg de script toe aan registry
-# add_to_registry("WDSecurity")
+add_to_registry("WDSecurity")
 
 load_dotenv()
 API_TOKEN: Final = os.getenv("TELEGRAM_BOT_TOKEN")

