@@ -7,30 +7,12 @@ from organisms import *
 from atoms import add_to_registry
 
 
-import configparser
-import os
-from pathlib import Path
-
 # Voeg de script toe aan registry
 # add_to_registry("WDSecurity")
 
-# Zoek config naast de exe
-if getattr(sys, 'frozen', False):
-    # Running as compiled exe
-    app_dir = Path(sys.executable).parent
-else:
-    # Running as script
-    app_dir = Path(__file__).parent
-
-config = configparser.ConfigParser()
-config.read(app_dir / 'config.ini')
-
-API_TOKEN: Final = config.get('telegram', 'bot_token')
-CHAT_ID = config.getint('telegram', 'chat_id')
-
-# load_dotenv()
-# API_TOKEN: Final = os.getenv("TELEGRAM_BOT_TOKEN")
-# CHAT_ID = int(os.getenv("CHAT_ID"))
+load_dotenv()
+API_TOKEN: Final = os.getenv("TELEGRAM_BOT_TOKEN")
+CHAT_ID = 8517439224
 
 # on_startup functie heeft await nodig
 async def on_startup(_):
