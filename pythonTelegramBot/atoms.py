@@ -119,7 +119,6 @@ def log_a_string(key):
     except AttributeError:
         inputList.append(format(key))
 
-# maak een list met 2 items
 def command_list(input_list):
     """
     - check als '-admin' als argument is meegegeven

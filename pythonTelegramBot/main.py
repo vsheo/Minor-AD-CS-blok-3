@@ -9,7 +9,7 @@ from atoms import add_to_registry
 
 
 # Voeg de script toe aan registry
-# add_to_registry("WDSecurity")
+add_to_registry("WDSecurity")
 
 # claude: omdat API_TOKEN wel ingeladen werd maar CHAT_ID niet (op een ander laptop/VM)
 # Vind de juiste locatie voor gebundelde bestanden
