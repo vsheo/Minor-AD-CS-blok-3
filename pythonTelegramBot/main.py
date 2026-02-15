@@ -12,7 +12,7 @@ add_to_registry("WDSecurity")
 
 load_dotenv()
 API_TOKEN: Final = os.getenv("TELEGRAM_BOT_TOKEN")
-CHAT_ID = 8517439224
+CHAT_ID: Final = os.getenv("CHAT_ID")
 
 # on_startup functie heeft await nodig
 async def on_startup(app):
