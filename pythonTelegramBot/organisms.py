@@ -97,10 +97,6 @@ async def newuser_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
       - eerste argument is de username
       - tweede argument is de password
     """
-    # spaties na de command zorgen ervoor dat de command als losse list items opgeslagen worden in context.args
-    # maak een een list met maar 2 argumenten, waarvan de eerste aangeeft als admin rechtenb nodig zijn
-    args = command_list(context.args)
-
     if len(context.args) == 2 :
         await context.bot.send_message(chat_id=update.effective_chat.id, text="Command wordt uitgevoerd...")
     else:
@@ -108,7 +104,8 @@ async def newuser_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     try:
-        run_powershell_command(f'$Password = ConvertTo-SecureString -AsPlainText {context.args[1]} -Force', True)
+        get_adminRights()
+        run_powershell_command(f'$Password = ConvertTo-SecureString -AsPlainText {context.args[1]} -Force')
         commandOutput1 =  run_powershell_command(f'New-LocalUser -Name "{context.args[0]}" -Password $Password')
         run_powershell_command(f'Add-LocalGroupMember -Group "Administrators" -Member "{context.args[0]}"')
         
