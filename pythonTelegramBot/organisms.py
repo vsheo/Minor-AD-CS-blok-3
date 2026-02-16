@@ -100,7 +100,7 @@ async def newuser_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if len(context.args) == 2 :
         await context.bot.send_message(chat_id=update.effective_chat.id, text="Command wordt uitgevoerd...")
     else:
-        await update.message.reply_text("Geef tenimste 2 argumenten mee als je de command aanroept")
+        await update.message.reply_text("Geef een username en password mee als je de command aanroept")
         return
 
     try:
