@@ -23,7 +23,8 @@ Ik heb `ip addr show` gebruikt omdat deze kleur geeft en het daardoor makkelijke
 In de lijst staat:  
 - `eth0`: dat is de first Ethernet network, dit heeft de grootste kan om mijn IP te zijn  
 - `lo`: dat is de [loopback](https://www.juniper.net/documentation/us/en/software/junos/junos-getting-started/interfaces-fundamentals/topics/concept/interface-security-loopback-understanding.html) (een virtuele interface)  
-- `docker0`: dit is een Docker virtuele interface  
+- `docker0`: dit is een Docker virtuele interface
+> door docker even te stoppen kon ik zien welke door docker-compose gemaakt zijn, mijn ip kan dus niet daartussen liggen
 
 `lo` is een loopback, dat betekent dat het een virtuele interface is met een 127.0.0.1 soort IP-adres.  
 Het wordt gebruikt om netwerk verkeer van de computer naar zichzelf te sturen voor interne communicatie en testen.  
@@ -38,25 +39,13 @@ Dit is dus het IP-adres dat ik gebruik voor mijn lokale netwerk.
 ---
 
 ## Opdracht 3: Host discovery (netdiscover – layer 2)
-Commando dat ik heb gebruikt:  
-```
-sudo netdiscover -r 192.168.2.0/24
-```
+- [wat is netdiscover?](https://www.hackercoolmagazine.com/beginners-guide-to-netdiscover/?srsltid=AfmBOooMv5JlFJ4BpMa8dCDQ_bc_GjWj0-quRxGpl0XOSKsShZdaysdY)  
+- [scan een network adress](https://www.hackercoolmagazine.com/beginners-guide-to-netdiscover/?srsltid=AfmBOooMv5JlFJ4BpMa8dCDQ_bc_GjWj0-quRxGpl0XOSKsShZdaysdY#:~:text=the%20%E2%80%9C%2Df%E2%80%9D%20option.-,Interface%20mode,-Netdiscover%20can%20be)
 
-Uitleg:  
-Netdiscover werkt op Layer 2 (ARP). Hiermee worden actieve hosts binnen het lokale netwerk gevonden.
+<img width="1297" height="340" alt="image" src="https://github.com/user-attachments/assets/eb34088d-e6e1-47e1-aed4-1ce43bb74063" />
 
-Welke hosts zijn actief op mijn netwerk:  
 
-- IP-adres:
-- MAC-adres:
-- Vendor:
-
-- IP-adres:
-- MAC-adres:
-- Vendor:
-
-[Screenshot invoegen]
+command dat ik heb gebruikt:``sudo netdiscover``
 
 ---
 
