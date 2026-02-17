@@ -54,5 +54,5 @@ app.add_handler(MessageHandler(filters.TEXT, no_command))
 app.add_error_handler(log_error)
 
 print('Bot is ready')
- # Run the bot
+# Run the bot
 app.run_polling(poll_interval=2)
