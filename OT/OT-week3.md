@@ -42,9 +42,8 @@ Dit is dus het IP-adres dat ik gebruik voor mijn lokale netwerk.
 - [wat is netdiscover?](https://www.hackercoolmagazine.com/beginners-guide-to-netdiscover/?srsltid=AfmBOooMv5JlFJ4BpMa8dCDQ_bc_GjWj0-quRxGpl0XOSKsShZdaysdY)  
 - [scan een network adress](https://www.hackercoolmagazine.com/beginners-guide-to-netdiscover/?srsltid=AfmBOooMv5JlFJ4BpMa8dCDQ_bc_GjWj0-quRxGpl0XOSKsShZdaysdY#:~:text=the%20%E2%80%9C%2Df%E2%80%9D%20option.-,Interface%20mode,-Netdiscover%20can%20be)
 
+Welke host zijn allemaal actief op jouw netwerk
 <img width="1297" height="340" alt="image" src="https://github.com/user-attachments/assets/eb34088d-e6e1-47e1-aed4-1ce43bb74063" />
-
-
 command dat ik heb gebruikt:``sudo netdiscover``
 
 ---
