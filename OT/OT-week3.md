@@ -5,45 +5,35 @@ We hebben nu onze OT-lab omgeving opgezet en werkend gekregen. Nu gaan we aan de
 ---
 
 ## Opdracht 1: Start de containers
-
 Start de containers als die niet zijn opgestart:  
 ```
 docker-compose up -d
 ```
+> Controleer welke containers draaien:`docker ps`
 
-Controleer welke containers draaien:
-```
-docker ps
-```
-
-Maak een screenshot van de containers die draaien.
-
-> [Screenshot invoegen]
+<img width="2697" height="832" alt="image" src="https://github.com/user-attachments/assets/cf379322-2936-4cf9-8f6e-6469569c87fe" />
 
 ---
 
 ## Opdracht 2: Netwerkadres
-
 Leg uit hoe jij jouw netwerkadres vindt.  
-Commando dat ik heb gebruikt:
-`ip a` of `ifconfig`
 
-Uitleg:  
-Met dit commando zie ik mijn IP-adres en subnetmask.  
-Voorbeeld:
-- `inet 192.168.2.15/24`  
+Met de command `ifconfig -a` of `ip addr show` krijg ik alle interfaces op mijn laptop te zien.  
+Ik heb `ip addr show` gebruikt omdat deze kleur geeft en het daardoor makkelijker te lezen is.  
+In de lijst staat:  
+- `eth0`: dat is de first Ethernet network, dit heeft de grootste kan om mijn IP te zijn  
+- `lo`: dat is de [loopback](https://www.juniper.net/documentation/us/en/software/junos/junos-getting-started/interfaces-fundamentals/topics/concept/interface-security-loopback-understanding.html) (een virtuele interface)  
+- `docker0`: dit is een Docker virtuele interface  
 
-Dit betekent:
-- IP-adres: 192.168.2.15  
-- Subnetmask: /24  
-- Netwerkadres: 192.168.2.0/24  
+`lo` is een loopback, dat betekent dat het een virtuele interface is met een 127.0.0.1 soort IP-adres.  
+Het wordt gebruikt om netwerk verkeer van de computer naar zichzelf te sturen voor interne communicatie en testen.  
+Dus dit kan niet mijn IP-adres zijn.  
 
-Mijn netwerkadres is:  
+`docker0` is [iets dat docker gebruikt voor networking](https://plaxidityx.com/blog/engineering-blog/docker-networking-behind-the-scenes/#:~:text=it%20works%20differently.-,Docker%20Networking,-Now%20that%20we),  
+dus dit is ook niet mijn netwerk-IP.  
 
-
-[Hier jouw netwerk invullen]
-
-[Screenshot invoegen]
+Daarom blijft `eth0` over, met een `192.168.*.*` IP-adres, wat wel lijkt op een IP-adres dat van mijn laptop kan zijn.  
+Dit is dus het IP-adres dat ik gebruik voor mijn lokale netwerk.
 
 ---
 
