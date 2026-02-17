@@ -54,11 +54,11 @@ command dat ik heb gebruikt:``sudo netdiscover``
 ip route
 ```
 Welke netwerken bestaan er achter de router:
--  [default via `192.168.58.2`](https://medium.com/infosecmatrix/understanding-routing-in-linux-configuring-routes-and-gateways-289bc67fe76a#:~:text=1.100-,default%20via%20192.168.1.1%20dev%20eth0,-%3A%20This%20shows%20the)
+-  [default via `192.168.58.2`](https://medium.com/infosecmatrix/understanding-routing-in-linux-configuring-routes-and-gateways-289bc67fe76a#:~:text=1.100-,default%20via%20192.168.1.1%20dev%20eth0,-%3A%20This%20shows%20the) de default route
 -  docker0 & br-00452fe8ed6f -> met ip adress: 172.17.0.0/16 & 172.18.0.0/16, zijn [zelf gegenereerd door docker](https://docs.docker.com/engine/network/?utm_source=chatgpt.com#automatic-subnet-allocation) om conflicten te voorkomen
 -  plc: `192.168.2.0/24`
 -  scada: `192.168.3.0/24`
--  [dev eth0](https://medium.com/infosecmatrix/understanding-routing-in-linux-configuring-routes-and-gateways-289bc67fe76a#:~:text=the%20eth0%20interface.-,192.168.1.0/24%20dev%20eth0,-%3A%20This%20indicates%20that)
+-  [192.168.58.0/24 dev eth0](https://medium.com/infosecmatrix/understanding-routing-in-linux-configuring-routes-and-gateways-289bc67fe76a#:~:text=the%20eth0%20interface.-,192.168.1.0/24%20dev%20eth0,-%3A%20This%20indicates%20that), indicates that traffic for the network
 
 ---
 
