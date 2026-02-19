@@ -79,3 +79,92 @@ met `show ip route` kan je zien welke ip adreress aan welke poort verbonden is (
 
 
 ---
+
+## Beveiligen 
+### privileged mode password
+binnen `conf t`  
+- `enable password 12345a`
+  - de password is in dit geval `12345a`
+
+met deze password kunnen mensen wel op de user mode komen, maar niet verder naar configure mode gaan.  
+Als iemand nu `enable` probeert dan moeten ze een wachtwoord invoeren.
+
+### console poort
+een router heeft maar 1 console poort, deze heet `console 0`.  
+als deze niet beveiligd is dan kan iemand een kabel inpluggen en ook naar de configure mode toe gaan.  
+
+beveiligen (binnen conf t):
+- `line console 0`
+- `login`, hiermee zeg je dat inloggen verplicht is
+- `password`, een password maken om in te loggen
+
+nu moet je inloggen voordat je op de user mode mag komen.  
+en omdat we eerder ook een password hadden gezet voor privilaged mode(conf t), moet je nu 2 keer inloggen voordat je toegang hebt naar dat.
+
+
+### telnet
+bij desktop -> command prompt  
+in de terminal bijvoorbeeld:  
+`telnet 192.1681.1` - > `192.1681.1` is de ip van de router.  
+met deze command krijg je remote toegang tot de cli van de router
+
+beveiligen (ook via conf t):
+- `line vty 0 4` -> virtual terminal line, dat is je telnet sessie. 0 4: geeft aan dat er maximaal 5 remote sessies mogen zijn.
+- `login local` -> dit zegt gebruik de lokaal gebuikers voor login (via telnet)
+  - lokaal gebruiker aanmaken(in config): `username bob password bob12345`
+
+als je nu `telnet 192.1681.1` probeert, dan wordt je gevraagd om in te loggen met een username en password.
+
+---
+
+### Show commands
+show commands worden binnen privileged mode uitgevoerd (enable)  
+als je het binnen configuration mode (conf t) wilt uitvoeren, dan moet je `Do` ervoor plaatsen
+> alle commands die alleen in privileged mode uitgevoerd kunnen worden, kan met `Do` ervoor in configuration mode uitgevoerd worden
+
+- `show version`
+- informatie van de switch ophalen (switch & router)
+  - IOS versie
+  - type switch
+  - aantal Fa verbindingen
+  - hoelang het online is
+  - system serial number
+
+- `show mac-address-table`
+  - tabel met alle mac addressen ( alleen op switch )
+    - DYNAMIC -> hij heeft het automatisch geleerd door verkeer op het netwerk
+  
+- `show arp`
+  - vertaalt ip address om naar mac address, en omgekeerd ook ( alleen op router )
+  - je ziet ook welke ip adress aan welke Fa verbonden is
+
+- `show ip intetrface brief`
+  - samenvatting van de interfaces op een apparaat ( switch & router )
+  - ip address
+  -  status en protocol: als het Up of Down is
+  - zonder `brief` krijg je meer info
+
+- `show history`
+  - de alle commands die je op het apparaat hebt uitgevoerd ( switch & router )
+
+- `show users`
+  -  zie je de gebruikers verbonden met het apparaat ( switch & router )
+    - ook remote users (telnet)
+
+- `show ip route`
+  -  overzicht van je routing table ( alleen op router )
+
+- `show tech-support`
+  - als iets stuk is, kan je hier info vinden over met wie je contact kan opnemen (switch & router)
+
+- `show ?`
+  - een lijst met alle show commands (switch & router)
+
+---
+
+## Back-up van de running-config maken
+- `enable`
+- `conf t`
+- `ip ftp username cisco`
+- `ip ftp password cisco`
+- `do copy running-config ftp:`
