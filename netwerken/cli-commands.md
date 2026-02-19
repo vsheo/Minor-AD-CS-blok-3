@@ -154,6 +154,10 @@ als je het binnen configuration mode (conf t) wilt uitvoeren, dan moet je `Do` e
 - `show ip route`
   -  overzicht van je routing table ( alleen op router )
 
+- `show ip dhcp binding`
+  - dan zie je alle ip addressen die uitgedeelt zijn ( alleen op router )
+  - ook de mac address van het device wie de ip heeft ontvangen
+
 - `show tech-support`
   - als iets stuk is, kan je hier info vinden over met wie je contact kan opnemen (switch & router)
 
@@ -162,9 +166,40 @@ als je het binnen configuration mode (conf t) wilt uitvoeren, dan moet je `Do` e
 
 ---
 
-## Back-up van de running-config maken
+## Back-up van de running-config
+### Back-up maken
 - `enable`
 - `conf t`
 - `ip ftp username cisco`
 - `ip ftp password cisco`
 - `do copy running-config ftp:`
+  - na enter wordt je gevraagd voor de Ip van de ftp
+  - en daarna een naam voor de backup, die mag je zelf bepalen
+
+### Back-up importeren
+- `enable`
+- `conf t`
+- `ip ftp username cisco`
+- `ip ftp password cisco`
+- `do copy running-config ftp:`
+- `copy running-config startup-config` of `write memory`
+
+---
+
+### PC vraagt DHCP server of router voor een IP
+dit gebeurt via een broadcast,  
+de laptop vraag op het netwerk voor een IP, dit berichty gaat naar alle decices op  het netwerk.  
+als het bij een router aankomt kan die een IP address terug sturen, maar alleen als de router is ingesteld om dat te doen.
+deze braodcast wordt door de router beantwoord maa rowrdt niet verder gestuurd naar de buiten wereld
+
+- `ip dhcp pool` `Ipvoorpc`
+  - `Ipvoorpc` is de pool naam deze mag je zelf instellen
+  - met deze command kom je in de `DHCP config` mode terecht
+- `default-router` `192.168.1.1`
+  - je eigen Ip address aangeven zodat deze niet gebruikt kan worden and de als antwoord op de broadcast
+- `network` `192.168.1.0` `255.255.255.0`
+
+> dit is voldoende voor een touter om ip addressen uit te delen
+als je op de PC van `static` naar `DHCP` veranderd krijgt het automatisch een Ip address en een subnet mask
+
+
