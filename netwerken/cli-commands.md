@@ -158,6 +158,13 @@ als je het binnen configuration mode (conf t) wilt uitvoeren, dan moet je `Do` e
   - dan zie je alle ip addressen die uitgedeelt zijn ( alleen op router )
   - ook de mac address van het device wie de ip heeft ontvangen
 
+- `show vlan`
+  - welke vlans er zijn
+  - en welke interfaces daarop ingesteld staan
+
+- `show flash:`
+  - kijken wat er allemaal in het flashgeheugen zit
+
 - `show tech-support`
   - als iets stuk is, kan je hier info vinden over met wie je contact kan opnemen (switch & router)
 
@@ -167,6 +174,8 @@ als je het binnen configuration mode (conf t) wilt uitvoeren, dan moet je `Do` e
 ---
 
 ## Back-up van de running-config
+backups worden gemaakt op de router, en daarna doorgestuurt naar de ftp server.  
+
 ### Back-up maken
 - `enable`
 - `conf t`
@@ -222,5 +231,26 @@ dhcp server
   - een static route zodat de dhcp server weet naar waar hij zijn antwoort moet sturen
   - alleen nodig als er een tussen router is
 
+---
 
+## 2. VLAN’s maken en interfaces koppelen
+- `vlan 10` -> VLAN 10 aanmaken
+- `name Inkoop` -> naam toewijzen
+- `interface Fa0/1` -> interface selecteren
+  - meerdere interfaces tegelijk op een vlan zetten
+  - `interface range fa0/1-20` -> fa0/1 t/m fa0/20
+- `switchport access vlan 10` -> interface in VLAN 10 zetten
+
+**Access vs Trunk:**
+- Access: laat 1 VLAN door
+- Trunk: laat al het VLAN-verkeer door
+  - als je wilt dat dezelfde vlan's over 2 switches kunnen communiceren.  
+  dan moet je de verbinding tussen de switches op trunk zetten
+
+- VLAN worden lokaal opgeslagen in `vlan.dat`
+  - verwijderen met `delete flash:vlan.dat`
+    - nu zie je met `show vlan` nogsteeds de vlan die je verwijderdt hebt
+    - dat blijft zo totdat je `reload` uitvoert
+
+---
 

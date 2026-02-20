@@ -5,18 +5,33 @@
 - **Distributielaag:** Verbindt accesslagen, redundant, routers als gateways.
 - **Corelaag:** Verbindt distributielagen, “zware” switches, redundantie via EtherChannel.
 
+---
+
 ## 2. VLAN’s
 - Virtuele scheiding van netwerkverkeer per groep.
+
+broadcast bericht nadoen, door een ping te sturen naar het laatste ip adress op het netwerk: `ping 192.168.1.255`  
+alle machines binnen de lan reageren op de ping.  
+dit gebeurt in de achtergrond steeds, maar dit wil je niet omdat het teveel data verkeer kost.
+
+dit kan je voorkomen door vlans aan te maken, als een pc nu een broadcast bericht verstuurt dan gaat die niet buiten het vlan netwerk
+
 - **Commando’s:**
-  - `vlan 10` → VLAN 10 aanmaken
-  - `name Inkoop` → naam toewijzen
-  - `interface Fa0/1` → interface selecteren
-  - `switchport access vlan 10` → interface in VLAN 10 zetten
+  - `vlan 10` -> VLAN 10 aanmaken
+  - `name Inkoop` -> naam toewijzen
+  - `interface Fa0/1` -> interface selecteren
+    - meerdere interfaces tegelijk op een vlan zetten
+    - `interface range fa0/1-20` -> fa0/1 t/m fa0/20
+  - `switchport access vlan 10` -> interface in VLAN 10 zetten
+
 - **Access vs Trunk:**
   - Access: 1 VLAN, native VLAN standaard 1
   - Trunk: alle VLAN-verkeer, gebruikt voor switch-to-switch verbindingen
 - VLAN opslaan in `vlan.dat`; verwijderen met `delete flash:vlan.dat`
 - Show-commando’s: `show vlan`, `show ip interface brief`, `show interface switchport`
+
+
+---
 
 ## 3. InterVLAN Routing
 - VLAN’s in verschillende subnetten hebben router nodig.
