@@ -210,13 +210,17 @@ Als er een router tussen jouw DHCP router en de client zit, zal deze standaard g
 Om ervoor te zorgen dat de DHCP client toch een IP adres kan krijgen, moet je op deze tussenliggende router instellen:  
 dat `DHCP broadcasts` worden doorgestuurd als `unicast berichten` naar de `DHCP server`
 
+tussen router
 - `interface fa0/0`
 - `ip helper-address 192.168.2.2`
+> luister op poort fa0/0 naar broadcast berichten  
+als je die ontvangt  
+stuur het door naar 192.168.2.2 - ip van de dhcp server
+
+dhcp server
 - `ip route 192.168.1.0 255.255.255.0 192.168.2.1`
   - een static route zodat de dhcp server weet naar waar hij zijn antwoort moet sturen
   - alleen nodig als er een tussen router is
-> luister op poort fa0/0 naar broadcast berichten  
-als je die ontvangt  
-stuur het door naar 192.168.2.2
+
 
 
