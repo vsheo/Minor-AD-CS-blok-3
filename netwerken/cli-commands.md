@@ -196,10 +196,27 @@ deze braodcast wordt door de router beantwoord maa rowrdt niet verder gestuurd n
   - `Ipvoorpc` is de pool naam deze mag je zelf instellen
   - met deze command kom je in de `DHCP config` mode terecht
 - `default-router` `192.168.1.1`
-  - je eigen Ip address aangeven zodat deze niet gebruikt kan worden and de als antwoord op de broadcast
+  - je eigen Ip address aangeven zodat deze niet gebruikt kan worden als antwoord op de broadcast
+  - als deze router verder weg is van de PC bijvoorbeeld er een ander router ertussen, dan moet je hier de `first hop ip` plaatsen
 - `network` `192.168.1.0` `255.255.255.0`
+  - Hiermee geef je het netwerk op waarvoor de DHCP-pool IP-adressen mag uitdelen
+  - `192.168.1.0` `255.255.255.0`: betekent dat de pool adressen binnen dat subnet kan toewijzen (192.168.1.1 t/m 192.168.1.254)
 
-> dit is voldoende voor een touter om ip addressen uit te delen
+> dit is voldoende voor een router om ip addressen uit te delen
 als je op de PC van `static` naar `DHCP` veranderd krijgt het automatisch een Ip address en een subnet mask
+
+
+Als er een router tussen jouw DHCP router en de client zit, zal deze standaard geen broadcast berichten doorsturen.  
+Om ervoor te zorgen dat de DHCP client toch een IP adres kan krijgen, moet je op deze tussenliggende router instellen:  
+dat `DHCP broadcasts` worden doorgestuurd als `unicast berichten` naar de `DHCP server`
+
+- `interface fa0/0`
+- `ip helper-address 192.168.2.2`
+- `ip route 192.168.1.0 255.255.255.0 192.168.2.1`
+  - een static route zodat de dhcp server weet naar waar hij zijn antwoort moet sturen
+  - alleen nodig als er een tussen router is
+> luister op poort fa0/0 naar broadcast berichten  
+als je die ontvangt  
+stuur het door naar 192.168.2.2
 
 
