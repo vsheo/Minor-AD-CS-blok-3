@@ -165,6 +165,10 @@ als je het binnen configuration mode (conf t) wilt uitvoeren, dan moet je `Do` e
 - `show flash:`
   - kijken wat er allemaal in het flashgeheugen zit
 
+- `show vtp status`
+  - hoeveel vlans er aanwezig zijn
+  - configuration revision -> als je wil dat alle switches dezelfde vlan database hebben, dan moeten ze dezelfde configuration revision nummer hebben
+
 - `show tech-support`
   - als iets stuk is, kan je hier info vinden over met wie je contact kan opnemen (switch & router)
 
@@ -233,12 +237,13 @@ dhcp server
 
 ---
 
-## 2. VLAN’s maken en interfaces koppelen
+## VLAN’s maken en interfaces koppelen
 - `vlan 10` -> VLAN 10 aanmaken
 - `name Inkoop` -> naam toewijzen
 - `interface Fa0/1` -> interface selecteren
   - meerdere interfaces tegelijk op een vlan zetten
   - `interface range fa0/1-20` -> fa0/1 t/m fa0/20
+- `switchport mode access` -> zet dew switch in access mode (niet nodig tussen switch->switch)
 - `switchport access vlan 10` -> interface in VLAN 10 zetten
 
 **Access vs Trunk:**
@@ -253,4 +258,41 @@ dhcp server
     - dat blijft zo totdat je `reload` uitvoert
 
 ---
+
+## InterVLAN Routing
+als je een bericht van de ene vlan naar de andere wilt versturen, kan dan via de router.  
+Om geen extra fysieke kabel per VLAN te gebruiken, laat je meerdere VLANs over een fysieke kabel lopen via trunking.  
+dit noemen we ook Router-on-a-stick
+
+- **Router-on-a-stick:**  
+Subinterfaces aanmaken:
+- `interface fa0/0`
+- `no shutdown`
+- `interface fa0/0.10` -> sub interface maken `.10` de naam van de vlan (zonder `.10` was het de hoofd interface)
+- `encapsulation dot1q 10` -> truking voor vlan 10 instellen
+- IP-adres instellen: `ip address 192.168.1.1 255.255.255.0` -> ip van het subnet dat bij het vlan hoort
+- op de Switch interface naar trunk: `switchport mode trunk`
+> dit is nu voor vlan 10 gedaan maar je moet het ook voor vlan 20 doen anders heeft dit geen zin
+
+---
+
+## VTP (VLAN Trunking Protocol)
+**S0 (Server):** beheer de vlan database
+- `vtp mode server` -> switch tot een vlan server maken
+- `vtp domain` `Packettracer` -> domain waarin deze switches zitten en vlan data deelen
+- `vtp password Welkom01`
+- VLAN aanmaken:
+  - `vlan 10`, `name Tien`
+  - `vlan 20`, `name Twintig`
+
+**S1 (Transparent):** stuurt vlan data door
+- `vtp mode transparent`
+- `vtp domain` `Packettracer` -> ook hier aangeven voor welke vlan domain doorgestuurd wordt
+- `vtp password Welkom01` -> dezelfde pw als op de server
+- debug: `debug sw-vlan vtp events`
+
+**S2 (Client):** gebruik de vlan data uit de vlan server
+- `vtp mode client`
+- `vtp domain` `Packettracer` -> moet hetzelfde VTP domain hebben om VLAN updates van de server te ontvangen
+- `vtp password Welkom01` -> dezelfde pw als op de server
 

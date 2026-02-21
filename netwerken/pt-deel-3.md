@@ -36,21 +36,56 @@ dit kan je voorkomen door vlans aan te maken, als een pc nu een broadcast berich
 ## 3. InterVLAN Routing
 - VLAN’s in verschillende subnetten hebben router nodig.
 - **Router-on-a-stick:**
-  - Subinterfaces aanmaken: `interface fa0/0.10`, `encapsulation dot1q 10`
-  - IP-adres instellen: `ip address 192.168.1.1 255.255.255.0`
-  - Switchinterface naar trunk: `switchport mode trunk`
+  - Subinterfaces aanmaken:
+    - `interface fa0/0.10` -> sub interface maken `.10` de naam van de vlan (zonder `.10` was het de hoofd interface)
+    - `no shutdown` -> aanzetten
+    - `encapsulation dot1q 10` -> truking voor vlan 10 instellen
+  - IP-adres instellen:
+    - `ip address 192.168.1.1 255.255.255.0`
+  - op de Switch interface naar trunk:
+    - `switchport mode trunk`
+
+---
 
 ## 4. VTP (VLAN Trunking Protocol)
-- VLAN-gegevens centraliseren via VTP.
-- **S0 (Server):**
-  - `vtp mode server`
-  - `vtp domain Packettracer.nl`
-  - `vtp password Welkom01`
-  - VLAN aanmaken: `vlan 10`, `name Tien`, `vlan 20`, `name Twintig`
-- **S1 (Transparent):** alleen doorgeven, geen lokale database
-- **S2 (Client):** ontvangt VLAN-data van Server
-- **Debug commando:** `debug sw-vlan vtp events`
-- Show-commando: `show vlan`
+VLAN-gegevens centraliseren via VTP.  
+VTP synchroniseert de VLAN database tussen switches binnen hetzelfde VTP-domein
+
+**S0 (Server):** beheer de vlan database
+- `vtp mode server` -> switch tot een vlan server maken
+- `vtp domain` `Packettracer` -> domein waarin deze switches zitten en vlan data deelen
+- `vtp password Welkom01`
+- VLAN aanmaken:
+  - `vlan 10`, `name Tien`
+  - `vlan 20`, `name Twintig`
+
+**S1 (Transparent):** stuurt vlan data door
+- `vtp mode transparent`
+- `vtp domain` `Packettracer` -> ook hier aangeven voor welke vlan domain doorgestuurd wordt
+- `vtp password Welkom01` -> dezelfde pw als op de server
+
+**S2 (Client):** gebruik de vlan data uit de vlan server
+- `vtp mode client`
+- `vtp domain` `Packettracer` -> moet hetzelfde VTP domain hebben om VLAN updates van de server te ontvangen
+- `vtp password Welkom01` -> dezelfde pw als op de server
+
+**Verbinding tussen deze switches moet op trunk staan**
+
+> als je nu op een client switch een vlan probeert aan te maken dan krijg je een bericht dat dat niet kan.  
+Vlan's kunnnen nu alleen op de server switch aangemaakt worden
+
+**Debug commando:**
+- `debug sw-vlan vtp events`
+  - We zullen nu periodiek meldingen zien verschijnen in onze terminal. Als de gegevens op switches niet met elkaar overeenkomen
+    - laat zien wat er op de achtergrond gebeurt (wat normaal niet op de cli komt)
+    - eerst deze command uit voeren op de transparent switch
+    - daarna een nieuwe vlan aan maken in de vlan server switch
+    - daarna terug gaan naar de transparent switch. nu zie je vtp berichten door de switch gaan
+> Show-commando:  
+`show vlan`  
+`show vtp status`
+
+---
 
 ## 5. Netwerkberichten
 - **Unicast:** 1 apparaat → 1 apparaat
