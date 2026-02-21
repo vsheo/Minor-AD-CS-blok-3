@@ -169,6 +169,15 @@ als je het binnen configuration mode (conf t) wilt uitvoeren, dan moet je `Do` e
   - hoeveel vlans er aanwezig zijn
   - configuration revision -> als je wil dat alle switches dezelfde vlan database hebben, dan moeten ze dezelfde configuration revision nummer hebben
 
+-  `show spanning-tree`
+  - toont per VLAN welke switch de `rootswitch` is
+  - laat zien hoe switches de root bereiken (cost)
+  - toont welke poorten actief zijn en welke uitgeschakeld zijn om loops te voorkomen
+
+- `show spanning-tree summary`
+  - geeft een overzicht van in welke `STP-mode/rollen` poorten zich bevinden
+  - toont hoeveel poorten actief, alternatief of uitgeschakeld zijn
+
 - `show tech-support`
   - als iets stuk is, kan je hier info vinden over met wie je contact kan opnemen (switch & router)
 
@@ -295,4 +304,23 @@ Subinterfaces aanmaken:
 - `vtp mode client`
 - `vtp domain` `Packettracer` -> moet hetzelfde VTP domain hebben om VLAN updates van de server te ontvangen
 - `vtp password Welkom01` -> dezelfde pw als op de server
+
+---
+
+## Spanning-Tree Protocol
+Loops voorkomen met **STP**
+- Verkiezing root: als een switch opstart/ aan en uit gaat, dan start een verkiezing voor welke de switch de `root bridge` wordt
+  - bepaald door: `priority + MAC-address`
+  - dit kan je beinvloeden door de priority aan te passen
+    - `spanning-tree` `vlan 1` `root primary`
+      - `root primary` zorgt ervoor dat de priority verlaagd wordt
+      - met `show spanning-tree` zie je dat de priority verlaagd is
+    - `spanning-tree` `vlan 1` `priority 61440`
+      - priority veranderen naar `61440`
+- Poort mode: Root, Alternative, Designated, Disabled
+- Show: `show spanning-tree`, `show spanning-tree summary`
+- Root aanpassen: `spanning-tree vlan 1 root primary/secondary`
+
+> `RSTP` Rapid Spanning-Tree Protocol: snellere versie van STP
+---
 

@@ -89,19 +89,36 @@ Vlan's kunnnen nu alleen op de server switch aangemaakt worden
 
 ## 5. Netwerkberichten
 - **Unicast:** 1 apparaat → 1 apparaat
+  - Een bericht van het ene apparaat naar het andere. Bestemmingsadres is een uniek MAC-adres
 - **Multicast:** 1 → groep apparaten
+  - Een bericht naar een groep geïnteresseerde apparaten. Deze ‘delen’ een gemeenschappelijk adres
 - **Broadcast:** 1 → alle apparaten
-- Loops voorkomen met **STP** (Spanning-Tree Protocol)
-  - Verkiezing root: laagste `priority + MAC-address`
-  - Poortmodi: Root, Alternative, Designated, Disabled
-  - Show: `show spanning-tree`, `show spanning-tree summary`
-  - Cost per link: 10Mbit=100, 100Mbit=19, 1Gbit=4
-  - Root aanpassen: `spanning-tree vlan 1 root primary/secondary`
+  - Een bericht naar iedereen binnen het interne netwerk. Een router is het apparaat dat dit soort berichten tegenhoudt
+
+Loops voorkomen met **STP** (Spanning-Tree Protocol)
+- Verkiezing root: als een switch opstart/ aan en uit gaat, dan start een verkiezing voor welke de switch de `root bridge` wordt
+  - bepaald door: `priority + MAC-address`
+    - de priority is standaard `32769`
+    - de laagste MAC address
+    - dit wordt tot 1 getal gemaakt, de priority staat vooraan
+  - dit kan je beinvloeden door de priority aan te passen
+    - `spanning-tree` `vlan 1` `root primary`
+      - `root primary` zorgt ervoor dat de priority verlaagd wordt
+      - met `show spanning-tree` zie je dat de priority verlaagd is
+
+- Poortmodi: Root, Alternative, Designated, Disabled
+- Show: `show spanning-tree`, `show spanning-tree summary`
+- Cost per link: 10Mbit=100, 100Mbit=19, 1Gbit=4
+- Root aanpassen: `spanning-tree vlan 1 root primary/secondary`
+
+---
 
 ## 6. Netwerksnelheden
 - Standaard: 10Mbit, 100Mbit, 1Gbit, 10Gbit
 - Bottlenecks door te weinig capaciteit tussen switches
 - **Oplossing:** EtherChannel
+
+---
 
 ## 7. EtherChannel
 - Combineert meerdere lijnen tot één logische verbinding
@@ -116,12 +133,16 @@ Vlan's kunnnen nu alleen op de server switch aangemaakt worden
 - Show: `show etherchannel summary`, `show etherchannel load-balance`
 - Load balancing: `port-channel load-balance <optie>`
 
+---
+
 ## 8. Multilayer Switch (MLS)
 - Combineert router en switch functionaliteit
 - Poort als switchpoort of routingpoort
 - Geen seriële verbinding
 - IP-adres instellen: `no switchport` + `ip address <ip> <mask>`
 - Routing inschakelen: `ip routing`
+
+---
 
 ## 9. Beveiliging Accesslaag
 - Risico’s: eigen switch aansluiten, loops, root switch worden, VLAN-database lek, sniffing
@@ -135,6 +156,8 @@ Vlan's kunnnen nu alleen op de server switch aangemaakt worden
   - `switchport port-security maximum <aantal>`
   - `switchport port-security mac-address <adres>` of `sticky`
 
+---
+
 ## 10. Show-commando’s Belangrijk
 - `show version` → IOS-versie
 - `show mac address-table` → verbonden apparaten
@@ -145,6 +168,8 @@ Vlan's kunnnen nu alleen op de server switch aangemaakt worden
 - `show users` → ingelogde gebruikers
 - `show ip route` → routing table
 - Show commando in config-mode: `do <show commando>`
+
+---
 
 ## 11. Samengevat
 - VLAN’s scheiden netwerkverkeer per afdeling/subnet
