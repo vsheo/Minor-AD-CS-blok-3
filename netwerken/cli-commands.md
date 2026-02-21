@@ -178,6 +178,14 @@ als je het binnen configuration mode (conf t) wilt uitvoeren, dan moet je `Do` e
   - geeft een overzicht van in welke `STP-mode/rollen` poorten zich bevinden
   - toont hoeveel poorten actief, alternatief of uitgeschakeld zijn
 
+- `show etherchannel summary`
+  - toont welke interfaces deel uitmaken van een EtherChannel
+  - laat zien of het EtherChannel actief is en correct werkt
+  - geeft de gebruikte channel-groep en protocol weer
+
+- `show etherchannel load-balance`
+  - toont op basis van welke informatie het verkeer over de EtherChannel-links wordt verdeeld (load balancing methode)
+
 - `show tech-support`
   - als iets stuk is, kan je hier info vinden over met wie je contact kan opnemen (switch & router)
 
@@ -322,5 +330,35 @@ Loops voorkomen met **STP**
 - Root aanpassen: `spanning-tree vlan 1 root primary/secondary`
 
 > `RSTP` Rapid Spanning-Tree Protocol: snellere versie van STP
+---
+
+## 7. EtherChannel
+- Combineert meerdere fysieke verbindingen tot één logische link
+- Meer bandbreedte + redundantie
+
+### EtherChannel configuratie
+LACP (standaard IEEE)
+- `interface port-channel 1`
+- `channel-protocol lacp`
+- `interface range Fa0/1-5`
+- `channel-group 1 mode active` -> andere kant: passive
+> active  -> start LACP onderhandelingen  
+passive -> wacht op LACP
+
+PAgP (Cisco proprietary)
+- `interface port-channel 1`
+- `channel-protocol pagp`
+- `interface range Fa0/1-5`
+- `channel-group 1 mode desirable` -> andere kant: auto
+> desirable -> start PAgP onderhandelingen  
+auto      -> wacht op PAgP
+
+
+ON (zonder protocol)
+- `interface port-channel 1`
+- `interface range Fa0/1-5`
+- `channel-group 1 mode on`
+> beide kanten moeten mode on gebruiken
+
 ---
 

@@ -123,15 +123,34 @@ Loops voorkomen met **STP** (Spanning-Tree Protocol)
 ## 7. EtherChannel
 - Combineert meerdere lijnen tot één logische verbinding
 - Drie typen:
-  - **LACP:** `channel-protocol lacp`, `mode active/passive`
-  - **PAgP:** `channel-protocol pagp`, `mode desirable/auto`
+  - **LACP:** Link aggregation Control Protocol
+    - `channel-protocol lacp`, `mode active/passive`
+  - **PAgP:** Port Aggregation Protocol
+    - `channel-protocol pagp`, `mode desirable/auto`
   - **On:** geen overleg, direct bundelen
-- Commando’s:
-  - `interface port-channel 1`
-  - `interface range Fa0/1-5`
-  - `channel-group 1 mode <type>`
-- Show: `show etherchannel summary`, `show etherchannel load-balance`
-- Load balancing: `port-channel load-balance <optie>`
+
+LACP Commands:
+- `interface port-channel 1` -> nieuwe EtherChannel groep maken
+- `channel-protocol lacp` -> maak gebruik van LACP
+- `interface range Fa0/1-5`
+- `channel-group 1 mode active`
+  - Deze poorten gaan nu actief LACP-berichten versturen om met de overkant een LACP-verbinding op te stellen. Als we aan de andere kant Channel-group 1 mode passive instellen, dan wordt een EtherChannel gevormd.
+
+PAgP Commands:
+- `interface port-channel 1`
+- `channel-protocol PAgP`
+- `interface range Fa0/1-5`
+- `channel-group 1 mode desirable`
+  - Deze poorten gaan nu actief PAgP-berichten versturen om met de overkant een PAgP-verbinding op te stellen. Als we aan de andere kant Channel-group 1 mode auto instellen, dan wordt een EtherChannel gevormd
+
+On Commands:
+- `interface port-channel 1`
+- `interface range Fa0/1-5`
+- `channel-group 1 mode on`
+  - Deze poorten zijn nu gebundeld. Als we aan de andere kant Channel-group 1 mode ON instellen, dan wordt een EtherChannel gevormd
+
+Show: `show etherchannel summary`, `show etherchannel load-balance`
+Load balancing: `port-channel load-balance <optie>`
 
 ---
 
