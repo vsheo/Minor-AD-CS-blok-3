@@ -332,7 +332,7 @@ Loops voorkomen met **STP**
 > `RSTP` Rapid Spanning-Tree Protocol: snellere versie van STP
 ---
 
-## 7. EtherChannel
+## EtherChannel
 - Combineert meerdere fysieke verbindingen tot één logische link
 - Meer bandbreedte + redundantie
 
@@ -360,9 +360,12 @@ ON (zonder protocol)
 - `channel-group 1 mode on`
 > beide kanten moeten mode on gebruiken
 
+Load balancing: `port-channel load-balance <optie>`  
+Show: `show etherchannel summary`, `show etherchannel load-balance`
+
 ---
 
-## 7. Multilayer Switch (MLS)
+## Multilayer Switch (MLS)
 IP op een interface instellen:
 - `int fa0/1`
 - `no switchport` -> geeft aan dat je op deze interface een ip wilt instellen
@@ -371,3 +374,22 @@ IP op een interface instellen:
 
 ---
 
+## Beveiliging Accesslaag
+**VTP beveiliging:**
+- `vtp mode server`
+- `VTP domain packettracer`
+- `vtp password Welkom01`
+
+**STP beveiliging:**
+- `Switchport mode access`
+- `spanning-tree bpduguard enable` -> BPDU-berichten uitschakelen
+- `spanning-tree guard root` -> poort mag geen root worden
+> Het is overigens gebruikelijk om interfaces die niet gebruikt worden, standaard uit te zetten `shutdown`
+
+**Port-security:**
+- `switchport mode access`
+- `switchport port-security`
+- `switchport port-security maximum` `<aantal>`
+- `switchport port-security mac-address` `<adres>` of `sticky`
+  - bij `<adres>` de mac address invoren
+  - bij `sticky` alleen sticky toevoegen

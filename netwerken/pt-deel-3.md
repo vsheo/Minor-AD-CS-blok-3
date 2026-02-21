@@ -170,9 +170,14 @@ op een ML-switch gaat het zo:
   - `spanning-tree guard root` → poort mag geen root worden
 - **Port-security:**
   - `switchport mode access`
+    - poort moet een accesspoort zijn, anders werkt port-security niet
   - `switchport port-security`
+    - schakelt port-security in op de interface
   - `switchport port-security maximum <aantal>`
+    - bepaalt hoeveel MAC-adressen toegestaan zijn op de poort
   - `switchport port-security mac-address <adres>` of `sticky`
+    - `<adres>`: alleen dit MAC-adres mag de poort gebruiken (anders wordt de poort uitgeschakeld)
+    - `sticky`: MAC-adressen worden automatisch geleerd en opgeslagen
 
 ---
 
