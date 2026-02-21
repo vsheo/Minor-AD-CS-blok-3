@@ -362,3 +362,12 @@ ON (zonder protocol)
 
 ---
 
+## 7. Multilayer Switch (MLS)
+IP op een interface instellen:
+- `int fa0/1`
+- `no switchport` -> geeft aan dat je op deze interface een ip wilt instellen
+- `ip address` `192.168.1.1` `255.255.255.0`
+- `ip routing` -> routing in zodat de ML-switch verkeer tussen netwerken/VLANs kan routeren
+
+---
+

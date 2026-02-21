@@ -113,14 +113,7 @@ Loops voorkomen met **STP** (Spanning-Tree Protocol)
 
 ---
 
-## 6. Netwerksnelheden
-- Standaard: 10Mbit, 100Mbit, 1Gbit, 10Gbit
-- Bottlenecks door te weinig capaciteit tussen switches
-- **Oplossing:** EtherChannel
-
----
-
-## 7. EtherChannel
+## 6. EtherChannel
 - Combineert meerdere lijnen tot één logische verbinding
 - Drie typen:
   - **LACP:** Link aggregation Control Protocol
@@ -154,16 +147,22 @@ Load balancing: `port-channel load-balance <optie>`
 
 ---
 
-## 8. Multilayer Switch (MLS)
+## 7. Multilayer Switch (MLS)
 - Combineert router en switch functionaliteit
 - Poort als switchpoort of routingpoort
 - Geen seriële verbinding
-- IP-adres instellen: `no switchport` + `ip address <ip> <mask>`
-- Routing inschakelen: `ip routing`
+
+hierop kan je niet net als een switch een ip instellen op een poort.  
+op een ML-switch gaat het zo:
+- `int fa0/1`
+- `no switchport` -> geeft aan dat je op deze interface een ip wilt instellen
+- `ip address` `192.168.1.1` `255.255.255.0`
+- `ip routing` -> routing in zodat de ML-switch verkeer tussen netwerken/VLANs kan routeren
+
 
 ---
 
-## 9. Beveiliging Accesslaag
+## 8. Beveiliging Accesslaag
 - Risico’s: eigen switch aansluiten, loops, root switch worden, VLAN-database lek, sniffing
 - **VTP beveiliging:** `vtp password Welkom01`, `vtp mode server`
 - **STP beveiliging:**
@@ -177,7 +176,7 @@ Load balancing: `port-channel load-balance <optie>`
 
 ---
 
-## 10. Show-commando’s Belangrijk
+## 9. Show-commando’s Belangrijk
 - `show version` → IOS-versie
 - `show mac address-table` → verbonden apparaten
 - `show arp` → IP ↔ MAC
@@ -190,7 +189,7 @@ Load balancing: `port-channel load-balance <optie>`
 
 ---
 
-## 11. Samengevat
+## 10. Samengevat
 - VLAN’s scheiden netwerkverkeer per afdeling/subnet
 - InterVLAN routing nodig voor communicatie tussen VLAN’s
 - VTP centraliseert VLAN-configuratie
