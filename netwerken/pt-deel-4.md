@@ -15,7 +15,7 @@ Routing is complex en heeft impact op grote delen van de infrastructuur. Dit dee
 3. R2 ontvangt het pakket en stuurt het direct naar PC1 via zijn FastEthernet-poort.
 4. PC1 ontvangt het pakket.
 
-**Tracert** laat zien hoeveel hops een bericht aflegt. Alternatieve paden kunnen worden ingesteld door routing-tables anders te vullen.
+`Tracert` laat zien hoeveel hops een bericht aflegt. Alternatieve paden kunnen worden ingesteld door routing-tables anders te vullen.
 
 ---
 
@@ -23,6 +23,14 @@ Routing is complex en heeft impact op grote delen van de infrastructuur. Dit dee
 ### 2.1 Static Routing
 - Handmatig routes instellen: `ip route <network-id> <subnet-mask> <next-hop-ip>`
 - Geschikt voor kleine netwerken, tijdrovend bij veel routers
+
+#### static routing
+tot nu toe hebben we static routing gedaan. bij elke router aangeven waar het bericht naar toe verstuurt moet worden.  
+maar als 1 router kapot gaat moet je nu handmatig alles opnieuw gaan instellen.  
+- dit is eenvoudig om in te stellen
+- het is heel moeilijk om dit te beheren
+- je kan geen redunante paden instellen
+> dit is handig voor een paar router, niert voor een grote omgeving.
 
 ### 2.2 Dynamische Routing protocollen
 **Categorieën:**
@@ -32,6 +40,25 @@ Routing is complex en heeft impact op grote delen van de infrastructuur. Dit dee
 | Distance Vector | RIP, RIP v2 | Beste pad op basis van aantal hops |
 | Link-State | OSPF | Berekening op basis van kosten (cost), selecteert pad met laagste cost |
 | Hybrid | EIGRP | Combinatie van beide; snel detecteren netwerkveranderingen, minder CPU-intensief |
+
+#### Distance Vector Routing
+`RIP` of `RIP v2` (Routing Internet Protocoll)  
+Dit is een dynamische routing protocoll, waarbij je op alle routers binnen je omgeving opgeeft dat ze `Rip` moeten gebruiken en met welk netwerk ze verbonden zijn.  
+`Rip` achterhaald zelf wat de korste pad is, afhankelijk van de aantal hops die hij moet maken.  
+als een route niet meer mogelijk is dan berekend hij zelf opnieuw de korste route.  
+`Rip` kijk niet naar wat de snelste verbinding is. het kan zijn dat 1 kabel 1mb/s is maar een ander glasezel is. `Rip` gaat de glasvezel kabel geen voorkeur geven.
+
+#### Link-state Routing
+`OSPF`: Open Shortest Path First  
+deze kijkt naar de capaciteit van een lijn.  
+`OSPF` maakt eerst een kaart van hety netwerk,  
+Geeft een "cost" aan de lijnen tussen routers,  
+en berekend daarna de snelste pad.
+
+#### Hybrid Routing
+`EIGRP`: Enhanced Interior Gateway Routing Protocol  
+Hybride routing-protocollen maken gebruik van beide soorten routing en proberen de negatieve aspecten te elimineren.  
+Zo is EIGRP ontwikkeld door Cisco en kent het ten opzichte van Distance Vector Routing-protocollen het voordeel dat netwerkveranderingen sneller worden gedetecteerd en dat het ten opzichte van Link-state minder CPU-intensief is.
 
 ---
 

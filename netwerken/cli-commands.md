@@ -393,3 +393,10 @@ IP op een interface instellen:
 - `switchport port-security mac-address` `<adres>` of `sticky`
   - bij `<adres>` de mac address invoren
   - bij `sticky` alleen sticky toevoegen
+
+---
+
+## Routring table
+`Tracert` `192.168.3.2`
+  - dit is de tracing route van deze PC naar PC met IP `192.168.3.2`
+  - laat zien hoeveel hops een bericht aflegt. Alternatieve paden kunnen worden ingesteld door routing-tables anders te vullen.
