@@ -415,9 +415,43 @@ Ip addressering:
 - aantal Host-bits min 32 = je network deel (subnetmask)
 - Netwerken uitrekenen
 
-1bit -> 2 combinaties
-2bits -> 4 combinaties
-3bits -> 8 combinaties
-4bits -> 16 combinaties
+### Subnetmask berekenen
+- `255.255.255.0`
+- `/24`
 
-<img width="825" height="527" alt="image" src="https://github.com/user-attachments/assets/91ab5cef-9813-42f8-82bb-edd9893bd6f5" />
+`11111111`.`11111111`.`11111111`.`00000000` = 24 = `255.255.255.0`
+> 3 keer 8 de 1tjes is het netwerk deel  
+de 8 0tje is het host deel
+
+Voorbeeld
+- 2 bits voor host deel
+  - dus `32-2=30` voor netwerk deel
+
+`11111111`.`11111111`.`11111111`.`11111100` = 30 = `255.255.255.252`
+> host deel is `00`  
+252 berekendf door:
+  - 6 keer 1 van hier -> `11111100`
+  - van rechts naar links alleen de 1 optellen
+    - `128 64 32 16 8 4 2 1`
+  - 4+8+16+32+64+128=252
+
+### Ip addressering invullen
+1bit -> 2 combinaties  
+2bits -> 4 combinaties  
+3bits -> 8 combinaties  
+4bits -> 16 combinaties  
+
+4 combinaties nodig pr netwerk  
+dus per netwerk:  
+- netwerk 1: `192.168.0.0/30`
+- netwerk 2: `192.168.0.4/30` -> +4 opdat de eertse 4 voor netwerk 1 zijn
+- netwerk 3: `192.168.0.8/30` -> weer +4
+
+Network id mag je niet uitreiken -> `192.168.0.0`, `192.168.0.4` & `192.168.0.8`  
+Broadcast id mag je ook niet uitreiken -> `192.168.0.3`, `192.168.0.7` & `192.168.0.12`
+
+default gateway ip `192.168.0.1`  
+de PC krijgt dan ip `192.168.0.2`  
+
+Cheat sheet
+<img width="893" height="661" alt="image" src="https://github.com/user-attachments/assets/dc2673da-78c3-4272-9cbe-af78ace64726" />
