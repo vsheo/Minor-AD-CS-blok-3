@@ -64,7 +64,6 @@ in de cli:
   - bijvoorbeeld `ip route` `192.168.5.0` `255.255.255.0` `192.168.2.2`
 
 
-
 nu dat je static routes hebt gemaakt kan je met `ping` testen als ze goed verbonden zijn.  
 Bijvoorbeeld:  
 op een `PC` -> `Desktop` -> `Command prompt`, daarin de ping command:  
@@ -429,7 +428,8 @@ Voorbeeld
 
 `11111111`.`11111111`.`11111111`.`11111100` = 30 = `255.255.255.252`
 > host deel is `00`  
-252 berekendf door:
+
+252 berekend door:
   - 6 keer 1 van hier -> `11111100`
   - van rechts naar links alleen de 1 optellen
     - `128 64 32 16 8 4 2 1`
@@ -441,7 +441,14 @@ Voorbeeld
 3bits -> 8 combinaties  
 4bits -> 16 combinaties  
 
-4 combinaties nodig pr netwerk  
+>**berekenen van combinaties voorbeeld:**  
+Nodig: 4 bruikbare IP's per subnet, 6 subnets  
+Formule: `Aantal hosts + 2 = 2^N` → 4 + 2 = 6 -> 2^3 = 8  
+omdat 2^2=4 en dat is 2 te weinig  
+exponent 3 is hoeveel 0tjes je overlaat bij subnet mask berkenen
+
+
+`256-252=4` dan is heb je 4 ip addressen nodig per netwerk  
 dus per netwerk:  
 - netwerk 1: `192.168.0.0/30`
 - netwerk 2: `192.168.0.4/30` -> +4 opdat de eertse 4 voor netwerk 1 zijn
@@ -453,5 +460,17 @@ Broadcast id mag je ook niet uitreiken -> `192.168.0.3`, `192.168.0.7` & `192.16
 default gateway ip `192.168.0.1`  
 de PC krijgt dan ip `192.168.0.2`  
 
-Cheat sheet
+**Subnettabel:**  
+| Netwerk | Netwerk-ID | Start IP | Eind IP | Broadcast |  
+|---------|------------|----------|---------|-----------|  
+| 1       | 192.168.1.0 | 192.168.1.1 | 192.168.1.6 | 192.168.1.7 |  
+| 2       | 192.168.1.8 | 192.168.1.9 | 192.168.1.14 | 192.168.1.15 |  
+| 3       | 192.168.1.16 | 192.168.1.17 | 192.168.1.22 | 192.168.1.23 |  
+
+
+Cheat sheet  
 <img width="893" height="661" alt="image" src="https://github.com/user-attachments/assets/dc2673da-78c3-4272-9cbe-af78ace64726" />
+
+---
+
+## RIP & RIP v2
