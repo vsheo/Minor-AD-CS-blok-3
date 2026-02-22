@@ -64,8 +64,8 @@ Zo is EIGRP ontwikkeld door Cisco en kent het ten opzichte van Distance Vector R
 
 ## 3. IP-adressering & Subnetting
 ### Classfull vs Classless
-- Classfull: inefficiënt, grote broadcastomgevingen
-- Classless (CIDR/VLSM): flexibel, efficiënter gebruik van IP-adressen
+- `Classfull`: inefficiënt, grote broadcastomgevingen
+- `Classless` (CIDR/VLSM): flexibel, efficiënter gebruik van IP-adressen
 
 **Voorbeeld subnetting:**
 - Nodig: 4 bruikbare IP's per subnet, 6 subnets

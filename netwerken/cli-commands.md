@@ -400,3 +400,24 @@ IP op een interface instellen:
 `Tracert` `192.168.3.2`
   - dit is de tracing route van deze PC naar PC met IP `192.168.3.2`
   - laat zien hoeveel hops een bericht aflegt. Alternatieve paden kunnen worden ingesteld door routing-tables anders te vullen.
+
+---
+
+## Subnetten
+Ip addressering:  
+- nummer je netwerk van groot naar klein
+- uitrekenen hoe groot je grootste netwerk is
+  - Laag 3 apparaten tellen
+  - +2 doen voor netwerk id en broadcast ip
+- Nagaan hoeveel bits je nodig hebt
+  - stel je hebt 4 ip addressen nodig, met 2 bits kan ik 4 combinaties maken
+  - 00=0, 01=1, 10=2, 11=3
+- aantal Host-bits min 32 = je network deel (subnetmask)
+- Netwerken uitrekenen
+
+1bit -> 2 combinaties
+2bits -> 4 combinaties
+3bits -> 8 combinaties
+4bits -> 16 combinaties
+
+![1771773878238](image/cli-commands/1771773878238.png)
