@@ -185,6 +185,9 @@ als je het binnen configuration mode (conf t) wilt uitvoeren, dan moet je `Do` e
 - `show etherchannel load-balance`
   - toont op basis van welke informatie het verkeer over de EtherChannel-links wordt verdeeld (load balancing methode)
 
+- `show ip ospf neighbor`
+  - welke buren de router heeft
+
 - `show tech-support`
   - als iets stuk is, kan je hier info vinden over met wie je contact kan opnemen (switch & router)
 
@@ -528,4 +531,41 @@ extra RIP commands
   - Als je een default route gebruikt op een router en wil je dat dit wordt opgenomen in je RIP updates naar de overige routers
 
 ---
+
+## OSPF
+- `router ospf 1`
+  - 1 -> process id, maakt niet uit wat je invoert
+- aangeven met welke networks hij verbonden is
+  - `network 192.168.0.0` `0.0.0.7` `area 1`
+    - subnetmask was `255.255.255.248` dan is wild card het omgekeerde: `0.0.0.7`
+  - cli accepteerd ook: `network 192.168.0.0` `255.255.255.248` `area 1`
+    - wordt automatisch tot een wild card gemaakt
+  > doe dit voor elke netwerk  
+  verbindingen tssen routers krijgen `area 0` -> backbone area  
+  alle areas moeten hiermee verbonden zijn
+  `area 0` is de hoofd weg, alle andere areas zijn zijstraten
+- als je een sub area wilt maken, bv `area 2` -> sub area:
+  - volg dezelfde stappen
+  - daarna `area 2 stub`
+    > `Area 2 stub no-summary`: Hiermee geven we aan dat Area 2 een stub-area is en een default route vanuit de ABR(Area Border Router) moet krijgen.  
+    het commando no-summary aan dat slechts de default route doorgegeven moet worden en niet de overige inter-arearoutes
+
+als de router verbonden is met een static router:
+- `ip route 192.168.0.16 255.255.255.248 192.168.0.38`
+- `router ospf 1`
+- `network 192.168.0.32` `0.0.0.3` `area 0`
+- `network 192.168.0.28` `0.0.0.7` `area 1`
+- `redistrubute static` `subnets`
+  - zodat hij rekening houd met subnets
+
+> `show ip ospf neighbor`
+
+
+
+
+
+
+
+
+
 

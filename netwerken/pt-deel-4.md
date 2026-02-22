@@ -93,11 +93,11 @@ Zo is EIGRP ontwikkeld door Cisco en kent het ten opzichte van Distance Vector R
 - RIP v1: classful, broadcast updates
 - RIP v2: ondersteunt subnetten, multicast updates
 - RIPNG: IPv6
-- Configuratie voorbeeld R0:
-Router Rip
-Network 192.168.1.0
-Network 192.168.2.0
-Version 2
+- Configuratie voorbeeld R0:  
+Router Rip  
+Network 192.168.1.0  
+Network 192.168.2.0  
+Version 2  
 
 - Show: `show ip route`
 - Administrative Distance (AD): belangrijk bij meerdere protocollen
@@ -120,6 +120,8 @@ Version 2
 
 ### 4.2 OSPF
 - Werkt met **areas**, DR/BDR kiezen op basis van router-ID
+  - niet meer dan 50 routers per area -> een conventie.
+  - meer dan 50 routers -> nieuwe area creeren
 - Backbone: Area 0
 - Configuratie voorbeeld:
 Router OSPF 1
