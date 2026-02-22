@@ -420,4 +420,4 @@ Ip addressering:
 3bits -> 8 combinaties
 4bits -> 16 combinaties
 
-![1771773878238](image/cli-commands/1771773878238.png)
+<img width="825" height="527" alt="image" src="https://github.com/user-attachments/assets/91ab5cef-9813-42f8-82bb-edd9893bd6f5" />
