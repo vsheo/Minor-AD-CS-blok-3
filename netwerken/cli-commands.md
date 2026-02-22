@@ -474,3 +474,58 @@ Cheat sheet
 ---
 
 ## RIP & RIP v2
+RIP  niet meer gebruiken, die is verouderd
+
+### RIP v2
+- `router rip`
+- `version 2`
+- `network` `192.168.0.0`
+  - netwerk opgeven waarmee hij verbonden is
+  - als je ook `network 192.168.0.24` aangeeft, en daarna `show run` dan zie je alleen `192.168.0.0`, RIP gaat zelf uitvogelen hoe hij per interface ingesteld staat
+    - als je router verbonden is aan `network 192.168.2.0` dan komt die wel erbij te staan
+> op de volgende router dezelfde commands uitvoren.  
+als ze met elkaar verbonden zijn dan is network ip ook hetzelfde.
+
+### Passive Interface
+als de router met RIP v2 verbonden is maar overgaat naar een static router.  
+passive interface zorgt ervoor dat de router gegevens maar 1 richting gaan.
+
+- `router rip`
+- `version 2`
+- `network` `192.168.0.0`
+
+Passive interface opgeven  
+- `passive-interface` `fa0/0`
+  - `fa0/0` op die poort wordt het supressed, dus de RIP gegevens gaan niet verder die kant op
+  - Hij ontvangt wel alle RIP berichten die binnenkomen, maar zendt zelf niets uit
+
+### static route delen met de RIP routes
+op de Rip router, die verbonden is aan de static router:  
+een static route aanmaken
+- `ip route 192.168.0.16 255.255.255.248 192.168.0.38`
+  - `192.168.0.16` gaat naar het static netwerk toe (even R2 noemen)
+  - `192.168.0.38` -> de router op het static netwerk (even R4 noemen)
+> `do sh ip route` op alle routers  
+dan zie je: router `R2` heeft een static route naar `R4`.  
+maar de andere routers zullen `R4` niet kunnen vinden, omdat die nog niet zijn ingesteld (RIP kan het niet automatisch vinden)
+
+op `R2`:
+- `router rip`
+- `redistribute static`
+  - metric kan je meegeven, voor korste route berekening, maar je kan dit ook leeg laten
+> `do sh ip route` op alle routers, dan zie je dat ze een route hebben naar `R4`
+
+op `R4`:  
+deze heeft ook een static route nodig.  
+default route ( ander zou je alle netwerken 1 voor 1 moeten opgeven)
+- `ip route 0.0.0.0 0.0.0.0 192.168.0.37`
+
+extra RIP commands
+- `Distance 1`
+  - Hiermee geven we aan dat routes die hij via RIP heeft geleerd, een Administrative Distance van 1 krijgen
+  - Als je meerdere routingprotocollen gebruikt, kun je ervoor zorgen dat deze verkozen wordt boven andere
+- `Default-information originate`
+  - Als je een default route gebruikt op een router en wil je dat dit wordt opgenomen in je RIP updates naar de overige routers
+
+---
+
