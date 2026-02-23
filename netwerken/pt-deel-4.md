@@ -144,9 +144,10 @@ Network 192.168.1.0 0.0.0.3
   - `show ip eigrp neighbors`
   - `show ip eigrp interfaces`
   - `passive-interface`
-  - `variance <waarde>` → load-balancing
+  - `variance <waarde>` -> load-balancing
 
 - Redistribute commando: routes tussen AS’en uitwisselen
+  - je moet Redistribute gebruiken als je wilt dat EIGRP gegevens uitwisselt tussen AS 1 en AS 2
 
 ---
 
@@ -170,21 +171,32 @@ Network 192.168.1.0 0.0.0.3
 **Static IPv6 route:**
 Router0(config)# ipv6 route 2003::/64 2002::2
 
+### IPv6 inkorten
+- voluit:
+  - `2001:ABCD:ABCD:0000:A123:79A4:0000:0001/64`
+- optie 1:
+  - `2001:ABCD:ABCD::A123:79A4:0000:0001/64`
+- optie 2:
+  - `2001:ABCD:ABCD:0000:A123:79A4::1/64`
+- optie 3:
+  - `2001:ABCD:ABCD:0:A123:79A4::1/64`
+- optie 4:
+  - `2001:ABCD:ABCD::A123:79A4:0:1/64`
+
 ---
 
 ### 5.3 IPv6 Dynamische protocollen
 
 #### RIPNG (IPv6)
-- Configuratie per interface, niet op routerniveau
-Router0(config)# interface fa0/0
-Router0(config)# ipv6 rip <NAAM> enable
+- Configuratie per interface, niet op routerniveau  
+  - `Router0(config)# interface fa0/0`  
+  - `Router0(config)# ipv6 rip <NAAM> enable`  
 
 #### OSPFv3 (IPv6)
-Router0(config)# ipv6 router ospf 1
-Router0(config-rtr)# router-id 1.1.1.1
-Router0(config-if)# ipv6 ospf 1 area 0
-
-- Zelfde principes als IPv4 OSPF: DR/BDR, areas, backbone area 0
+- `Router0(config)# ipv6 router ospf 1`  
+- `Router0(config-rtr)# router-id 1.1.1.1`  
+- `Router0(config-if)# ipv6 ospf 1 area 0`  
+> Zelfde principes als IPv4 OSPF: DR/BDR, areas, backbone area 0
 
 #### EIGRP for IPv6
 - Vergelijkbaar met OSPF configuratie

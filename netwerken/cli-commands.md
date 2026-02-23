@@ -188,6 +188,14 @@ als je het binnen configuration mode (conf t) wilt uitvoeren, dan moet je `Do` e
 - `show ip ospf neighbor`
   - welke buren de router heeft
 
+- `show ip eigrp neighbors`
+  - toont welke EIGRP buren verbonden zijn en waarmee routinginformatie wordt uitgewisseld
+
+- `show ip eigrp interfaces`
+  - toont op welke interfaces EIGRP actief is en deelneemt aan het EIGRP proces
+
+- Show command voor `ipv6` zijn hetzelfde als voorheen, maar i.p.v `ip` zeg je nu `ipv6`
+
 - `show tech-support`
   - als iets stuk is, kan je hier info vinden over met wie je contact kan opnemen (switch & router)
 
@@ -560,8 +568,126 @@ als de router verbonden is met een static router:
 
 > `show ip ospf neighbor`
 
+---
+
+## EIGRP
+- autonomous systems is een gebied die je zelf bepaalt, waarvan alle routers dezelfde routingtabel met elkaar delen.
+- ieder pad krijgt ook een alternatief pad. Indien het voorkeurspad faalt, wordt direct overgeschakeld op dit alternatief
+- EIGRP kan met de variance tool load-balancen over verbindingen die niet gelijkwaardig zijn aan elkaar
+  - Als je een 10Mbit-verbinding hebt en een 100Mbit-verbinding, dan kun je ervoor zorgen dat EIGRP gaat load-balancen over beide lijnen. OSPF kan dit bijvoorbeeld niet.
 
 
+EIGRP instellen
+- `router eigrp` `1`
+  - 1 is de Autonomous System nummer
+- `network 192.168.0.0` `0.0.0.7`
+  - ook hier de wild card bits opgeven
+  - geen areas opgeven bij EIGRP
+- ook hier de alle netwerken waarmee de router verbonden is opgeven
+
+een 2de Autonomous System instellen
+- `router eigrp` `1`
+- `network 192.168.0.24` `0.0.0.3`
+  - weer voor elke netwerk waarmee de router verbonden is behalve wat `AS2` moet worden
+- `exit`
+- `router eigrp` `2`
+  - hier plaast je het netwerk van `AS2`
+- `network 192.168.0.8` `0.0.0.7`
+- `exit`
+- `router eigrp` `1`
+  - ga terug naar `AS1` en redistribute de gegevens van `AS2`
+- `redistribute eigrp 2`
+  - nu zijn de gegevens van `AS2` in `AS1` geplaatst
+  - redistribute doen we op de router, die een interface in beide AS’en heeft.
+
+EIGRP instellen op een router die verbonden is aan een static netwerk
+- `router eigrp` `1`
+- `network 192.168.0.32` `0.0.0.3`
+  - weer voor elke netwerk waarmee de router verbonden
+- `ip route` `192.168.0.16` `255.255.255.248` `192.168.0.38`
+- `router eigrp` `1`
+- `redistribute` `static`
+  - metric meegeven als packet tracer lastig doet ( de key values)
+    - `redistribute static` `metric 10 1000 11 1 1`
+
+
+- Belangrijke commando’s:
+  - `show ip eigrp neighbors`
+  - `show ip eigrp interfaces`
+  - `passive-interface`
+  - `variance <waarde>` -> load-balancing
+
+---
+
+## IPv6 Routing
+configuratie  
+
+Cient side
+- auto configuratie
+  - combinatie network address + FF:FE + mac address
+
+Router side
+
+OSPF:
+- `IP` vervangen door `IPv6`
+- `ipv6 unicast-routing`
+  - deze moet je eerst aanzetten anders krijg je een fout melding
+- routing op interface
+  - `routing ospf 1`
+    - de process id opgeeft
+  - `router-id 1.1.1.1`
+    - je moet een router id opgeven
+  - `int fa0/1`
+  - `ipv6 ospf 1 area 0`
+    - je moet aangeven dat de interface gekoppeld is aan de process id
+    - en in welke area fa0/1 valt
+    - ip address pakt hij zelf van de interface waarop hij zit
+
+> op IPv4  
+`router ospf`  
+`network` `192.168.0.0` `0.0.0.255` `area 0`
+
+RIP:
+- `int fa0/0`
+- `ipv6 rip <naam> enable`
+
+> op IPv4  
+`router rip`  
+`network 192.168.1.1`
+
+voorbeeld:  
+- `ipv6 unicast-routing`
+- `int fa0/0`
+- `ipv6 address 2001::1/64`
+  - de `0` die ertussen zijn mag vervangen worden met `::`
+  - je mag maar 1 keer `::` gebruiken in de ipv6
+- `no shutdown`
+> `show ipv6 route`
+
+voorbeld rip:
+- `int fa0/0`
+- `ipv6 rip abc enable`
+  - abc is een naam die je zelf mag opgeven
+- `int fa0/1`
+- `ipv6 rip abc enable`
+  - de name blijf hetzelfde voor alle interfaces op een router
+  - op een ander router wel een ander naam aangeven, en die weer op alle interfaces van die router gebruiken
+
+voorbeeld ospf:
+- `ipv6 unicast-routing`
+- `ipv6 router ospf 1`
+  - schakel OSPF in
+- `router-id 1.1.1.1`
+- `int fa0/0`
+- `ipv6 ospf 1 area 0`
+  - aan geven dat OSPF voor deze interface is ingeschakeld
+
+voorbeeld static route:
+- `ipv6 unicast-routing`
+  - activeer IPv6 unicast routing op de router
+  - zonder dit kunnen IPv6-pakketten niet gerouteerd worden
+- `ipv6 route` `2003::/64` `2002::2`
+  - route naar het netwerk `2003::/64` met als next-hop `2002::2`
 
 
 
