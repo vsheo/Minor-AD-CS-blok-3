@@ -655,7 +655,7 @@ RIP:
 `router rip`  
 `network 192.168.1.1`
 
-voorbeeld:  
+voorbeeld default routing:  
 - `ipv6 unicast-routing`
 - `int fa0/0`
 - `ipv6 address 2001::1/64`
