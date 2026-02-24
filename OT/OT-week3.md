@@ -163,33 +163,47 @@ geen modbusd apparaten gevonden
 ---
 
 ## Opdracht 7: Enumeratie met modbuscripts
-Zoeken naar modbus scripts voor de Nmap Scripting Engine (.nse):
+Zoeken naar modbus scripts voor de Nmap Scripting Engine (.nse):  
+Typ de volgende commando in:
 ```
-ls /usr/share/nmap/scripts/ | grep modbus
+find /usr/share/nmap/scripts/ -name modbus*.nse
 ```
+> `/usr/share/nmap/scripts/modbus-discover.nse`
+
 We gaan nu het gevonden script gebruiken in combinatie met NMAP.  
 Commando dat ik heb gebruikt:
 ```
 sudo nmap -Pn [ip-adres] -p [poortnummer] --script [naam van het script].nse
 ```
+> zorg ervoor dat je de juiste parameters tussen[] kiest (volgens mij de modbus van opdr 6)  
+> ip-adres -> `192.168.2.10`  
+> [poortnummer] -> `502`  
+>  [naam van het script] -> ``  
 
-Voorbeeld:
+command:
 ```
 sudo nmap -Pn 192.168.2.10 -p 502 --script modbus-discover.nse
 ```
+<img width="1196" height="504" alt="image" src="https://github.com/user-attachments/assets/b043f70b-c920-4ce1-8585-3683de3f0a71" />
 
-Wat voor output krijg ik te zien:
-
-- Bevestiging dat poort 502 open staat  
-- Device informatie  
-- Mogelijke slave ID  
-- Eventuele foutmeldingen  
-
-[Screenshot invoegen]
+Ik zie eerst:  
+```
+modbus-discover: 
+|   sid 0x1:
+```
+dus ik denk dat het apparaat gevonden is.   
+daarna zie ik:  
+```
+error: ILLEGAL FUNCTION
+```
+Waarschijnlijk mag het script niet op het apparaat uitgevoerd worden, omdat het beveiligd is
 
 ---
 
 ## Opdracht 8: Metasploit
+We zullen de modbus poort verder onderzoeken met Metasploit. Maar eerst moeten we de
+juiste modules opzoeken in Metasploit.  
+
 Start Metasploit:
 ```
 msfconsole
@@ -200,29 +214,21 @@ Zoek naar modbus modules:
 search modbus
 ```
 
-Noteer en omschrijf de modules die je ziet:
+Selecteer de modbusdetect module en zet de rhosts op `192.168.2.0/24` en run deze module
 
-- auxiliary/scanner/scada/modbusdetect  
-- auxiliary/scanner/scada/modbusclient  
+<img width="2368" height="942" alt="image" src="https://github.com/user-attachments/assets/ced31ac6-ee12-44a4-9315-680e1a72f268" />  
 
-Selecteer de modbusdetect module:
-```
-use auxiliary/scanner/scada/modbusdetect
-```
+### Gevonden Modbus modules in Metasploit
+
+- **modbus_zip** -> een zip file is hier geopent
+- **modbus_banner_grabbing** -> Banner grabbing is a technique used to collect software, service, and version information from network hosts
+  - [banner grabbing](https://www.recordedfuture.com/threat-intelligence-101/tools-and-techniques/banner-grabbing)
+- **modbusclient** -> main purpose of this utility is to use Modbus devices as a debugging or configuration tool
+  - [Modbus client](https://wiki.wirenboard.com/wiki/index.php?title=Modbus-client/en&mobileaction=toggle_view_desktop)
+- **modbus_findunitid** -> This module sends a command (0x04, read input register) to the modbus endpoint. If this command is sent to the correct unit-id, it returns with the same function-id
+  - [Modbus Unit ID](https://www.rapid7.com/db/modules/auxiliary/scanner/scada/modbus_findunitid/)
+- **modbusdetect** -> This module detects the Modbus service, tested on a SAIA PCD1.M2 system
+  - [modbus detect](https://www.rapid7.com/db/modules/auxiliary/scanner/scada/modbusdetect/)
 
 
-Zet de RHOSTS op 192.168.2.0/24:
 
-set RHOSTS 192.168.2.0/24
-
-Run de module:
-
-run
-
-Resultaat van de modbusdetect module:
-
-- IP-adressen met open Modbus poort  
-- Bevestiging dat poort 502 open staat  
-- Eventuele device informatie  
-
-[Screenshot invoegen]
