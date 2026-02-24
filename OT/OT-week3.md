@@ -53,6 +53,9 @@ command dat ik heb gebruikt:``sudo netdiscover``
 ```
 ip route
 ```
+
+<img width="1409" height="287" alt="image" src="https://github.com/user-attachments/assets/12f865e1-2e96-45e7-8f96-334c1a3f5579" />
+
 Welke netwerken bestaan er achter de router:
 -  [default via `192.168.58.2`](https://medium.com/infosecmatrix/understanding-routing-in-linux-configuring-routes-and-gateways-289bc67fe76a#:~:text=1.100-,default%20via%20192.168.1.1%20dev%20eth0,-%3A%20This%20shows%20the) de default route
 -  docker0 & br-00452fe8ed6f -> met ip adress: `172.17.0.0/16` & `172.18.0.0/16`, zijn [zelf gegenereerd door docker](https://docs.docker.com/engine/network/?utm_source=chatgpt.com#automatic-subnet-allocation) om conflicten te voorkomen
