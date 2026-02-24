@@ -69,56 +69,96 @@ Welke netwerken bestaan er achter de router:
 Bij network discovery heb ik verschillende netwerken gevonden.  
 Maak en overzicht van apparaten op de verschillende netwerke.  
 
-
-plc:
+> sudo nmap -sn IP address -> sn = alleen host discovery 
+sudo nmap -sV IP address -> sV = service detectie  
+### plc:
 ```
 sudo nmap -sn 192.168.2.0/24
 ```
+<img width="1166" height="454" alt="image" src="https://github.com/user-attachments/assets/d15b315a-ad8d-40ad-9677-2255634669fe" />  
 
-scada:
+gevonden IP adressen:  
+- `192.168.2.10`  
+- `192.168.2.254`
+- `192.168.2.1`
+256 Ip adressen -> 3 hosts up
+
 ```
-sudo nmap -sV 192.168.2.0/24
+sudo nmap -sV 192.168.2.10 192.168.2.254 192.168.2.1
+```  
+<img width="1692" height="952" alt="image" src="https://github.com/user-attachments/assets/7cb2bc67-79e5-4e76-b6a7-0bde50108506" />
+
+| IP-adres      | Port     | State    | Service     | Versie                                 | MAC-adres           |
+|---------------|----------|----------|-------------|----------------------------------------|---------------------|
+| 192.168.2.10  | 8080/tcp | open     | http        | Werkzeug httpd 2.3.7 (Python 3.11.2)   | 02:42:C0:A8:02:0A   |
+| 192.168.2.254 | 8000/tcp | open     | http        | aiohttpd 3.12.13 (Python 3.11.2)       | 02:42:C0:A8:02:FE   |
+| 192.168.2.1   | 443/tcp  | filtered | https       |                                        |                     |
+| 192.168.2.1   | 8080/tcp | filtered | http-proxy  |                                        |                     |
+
+
+### scada:
 ```
+sudo nmap -sn 192.168.3.0/24
+```
+<img width="1190" height="422" alt="image" src="https://github.com/user-attachments/assets/833a4262-e778-415d-b4c3-4f754e30ad2b" />
 
-Uitleg:  
-- sn = alleen host discovery  
-- sV = service detectie  
+gevonden IP adressen:  
+- `192.168.3.20`  
+- `192.168.3.254`
+- `192.168.3.1`
+256 Ip adressen -> 3 hosts up
 
-Overzicht van apparaten:
 
-- IP-adres:  
-- Open poorten:  
-- Services:  
+```
+sudo nmap -sV 192.168.3.20 192.168.3.254 192.168.3.1
+```  
+<img width="1673" height="919" alt="image" src="https://github.com/user-attachments/assets/f840b2c7-2760-41ec-8b63-4b04da7b667b" />
 
-- IP-adres:  
-- Open poorten:  
-- Services:  
-
-[Screenshot invoegen]
+| IP-adres      | Port     | State    | Service     | Versie                                 | MAC-adres           |
+|---------------|----------|----------|-------------|----------------------------------------|---------------------|
+| 192.168.3.20  | 8080/tcp |      |         |    | 02:42:C0:A8:02:14   |
+| 192.168.3.254 | 8000/tcp | open     | http        | aiohttpd 3.12.13 (Python 3.11.2)       | 02:42:C0:A8:03:FE   |
+| 192.168.3.1   | 443/tcp  | filtered | https       |                                        |                     |
+| 192.168.3.1   | 8080/tcp | filtered | http-proxy  |                                        |                     |
+> 192.168.3.20 -> geen open ports gevonden
 
 ---
 
-## Opdracht 6: Protocol enumeratie (specifieke poort en service – PLCSCAN)
+## Opdracht 6: Protocol enumeratie (specifieke poort en service – [PLCSCAN](https://ot-pentesting.readthedocs.io/en/latest/plcscan/))
 Zoek naar apparaten (IP) met modbus protocol/service.  
-Commando dat ik heb gebruikt:
-```
-plcscan 192.168.2.0/24
-```
-of specifiek:
-```
-plcscan -m modbus 192.168.2.0/24
-```
 
-Uitleg: 
-PLCSCAN zoekt naar PLC-apparaten en industriële protocollen zoals Modbus (poort 502).
+Uit de ReadME van `plcscan/README.md`
+## Usage examples:
+```
+sudo python2 plcscan.py 192.168.0.1
+plcscan.py --timeout 2 192.168.0.1:102 10.0.0.0/24
+plcscan.py --hosts-list hosts.txt'
+```
+result van `sudo python2 plcscan.py 192.168.0.1` geeft modbus apparaten terug
 
-Gevonden Modbus apparaten:
+### plc
+```
+sudo python2 plcscan.py 192.168.2.1
+sudo python2 plcscan.py 192.168.2.10
+sudo python2 plcscan.py 192.168.2.254
+```
+<img width="765" height="682" alt="image" src="https://github.com/user-attachments/assets/3d0e9bed-356b-40d0-ae63-09b0a80d6492" />
 
-- IP-adres:  
-- Poort: 502  
-- Protocol: Modbus  
+| IP-adres     | Protocol    | Port | PLC/Device gevonden |
+|--------------|-------------|------|---------------------|
+| 192.168.2.1  | -           | -    | Nee                 |
+| 192.168.2.10 | Modbus/TCP  | 502  | Ja                  |
+| 192.168.2.254| -           | -    | Nee                 |
 
-[Screenshot invoegen]
+### scada
+```
+sudo python2 plcscan.py 192.168.3.1
+sudo python2 plcscan.py 192.168.3.20
+sudo python2 plcscan.py 192.168.3.254
+```
+<img width="756" height="514" alt="image" src="https://github.com/user-attachments/assets/00bdd465-0a36-4044-b37c-6f50f5cd6acd" />
+
+geen modbusd apparaten gevonden
 
 ---
 
