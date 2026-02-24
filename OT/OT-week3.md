@@ -219,8 +219,9 @@ Selecteer de modbusdetect module en zet de rhosts op `192.168.2.0/24` en run dez
 <img width="2368" height="942" alt="image" src="https://github.com/user-attachments/assets/ced31ac6-ee12-44a4-9315-680e1a72f268" />  
 
 ### Gevonden Modbus modules in Metasploit
+> [modbus protocoll](https://www.ni.com/en/shop/seamlessly-connect-to-third-party-devices-and-supervisory-system/the-modbus-protocol-in-depth.html?srsltid=AfmBOopPgjr327CP4AnSc7yvKa-O0g880hFT4U-MEoOzNFhY9dprszar)
 
-- **modbus_zip** -> een zip file is hier geopent
+- **modbus_zip** -> een zip file is hier extract
 - **modbus_banner_grabbing** -> Banner grabbing is a technique used to collect software, service, and version information from network hosts
   - [banner grabbing](https://www.recordedfuture.com/threat-intelligence-101/tools-and-techniques/banner-grabbing)
 - **modbusclient** -> main purpose of this utility is to use Modbus devices as a debugging or configuration tool
