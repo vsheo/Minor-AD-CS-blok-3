@@ -67,12 +67,15 @@ Welke netwerken bestaan er achter de router:
 
 ## Opdracht 5: Overzicht van apparaten op de verschillende netwerken (nmap)
 Bij network discovery heb ik verschillende netwerken gevonden.  
-Commando voor host discovery:
+Maak en overzicht van apparaten op de verschillende netwerke.  
+
+
+plc:
 ```
 sudo nmap -sn 192.168.2.0/24
 ```
 
-Commando voor service scan:
+scada:
 ```
 sudo nmap -sV 192.168.2.0/24
 ```
