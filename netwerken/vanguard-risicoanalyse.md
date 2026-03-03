@@ -4,23 +4,20 @@ hier hou ik de volgorde bij van wat ik gedaan heb.
 
 ## Router
 ### R1
-- `en`
-  - password protected
+- `en` -> password protected
 
 ### R2
-- `en`
-  - password protected
+- `en` -> password protected
 
 
 ## SwitchS1
 ### S1
-- `en`
-  - password protected
+- `en` -> password protected
 
 ### S2
-- `en`
-  - password protected
+- `en`-> password protected
 
+---
 
 ## AccessPoint
 ### wifi Medewerkers
@@ -31,6 +28,7 @@ hier hou ik de volgorde bij van wat ik gedaan heb.
 - geen WEP key, PSK pass phrase, user ID en ook geen password
 - encryption type disabled
 
+---
 
 ## Server PT
 ### File Server
@@ -51,6 +49,7 @@ desktop > command prompt
 - ping PC0 & PC1  
 `ping 192.168.20.3` & `ping 192.168.20.1` -> request timed out
 
+---
 
 ## PC
 ### PC0
@@ -84,6 +83,7 @@ op PC0 heb ik verschillende IP adresses geprobeert met telnet:
 connectie gevonden op:
 - `telnet 192.168.20.2`
 
+---
 
 ## Subnetmask berekenen
 S0 is verbonden met;
