@@ -35,8 +35,8 @@ hier hou ik de volgorde bij van wat ik gedaan heb.
 desktop > command prompt
 - `ipconfig`
   - <img width="826" height="332" alt="1" src="https://github.com/user-attachments/assets/a52b4f8b-6d28-41c5-9080-3708a0ad4d3a" />
-- ping default gateway
-  - <img width="756" height="313" alt="2" src="https://github.com/user-attachments/assets/e2f38449-9097-4ec6-a074-84250909e494" />
+- ping default gateway: `ping 192.168.10.1`
+  - <img width="581" height="140" alt="image" src="https://github.com/user-attachments/assets/cefc975c-4dd4-4526-b029-29f610f60dc3" />
 - ping PC0 & PC1  
 `ping 192.168.20.3` & `ping 192.168.20.1` -> request timed out
 
@@ -45,7 +45,7 @@ desktop > command prompt
 - `ipconfig`
   - <img width="817" height="303" alt="3" src="https://github.com/user-attachments/assets/84678f98-0ae3-4c08-a47f-5aadec488935" />
 - ping default gateway
-  - <img width="774" height="298" alt="4" src="https://github.com/user-attachments/assets/b824495c-6d18-4abc-9397-2cb553b81aaa" />
+  - <img width="618" height="151" alt="image" src="https://github.com/user-attachments/assets/03124a9c-6077-4a1f-9698-69e62e7631c9" />
 - ping PC0 & PC1  
 `ping 192.168.20.3` & `ping 192.168.20.1` -> request timed out
 
