@@ -48,7 +48,7 @@ opzet:
 2. Stel interfaces en IP's in via pfSense setup wizard
 3. System → Package Manager → installeer Snort
 4. Services → Snort → Interface: LAN
-5. Kies modus: IDS (alleen log) of IPS (log + block)
+5. Kies modus: IDS (alleen log) of IPS (log + block) -> noteer wat gebeurt
 ```
 
 Noteer alvast:

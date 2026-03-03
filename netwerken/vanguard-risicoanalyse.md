@@ -148,9 +148,10 @@ deze waren het ook niet
 
 ---
 
-### Hulpmiddel uit week 2 slide
+## Hulpmiddel uit week 2 slide
 in de powerpoint slides van week 2 stond dit:  
 <img width="980" height="357" alt="image" src="https://github.com/user-attachments/assets/36dc216e-7b0b-4847-bedc-21d0e0ea6942" />
 
 nu zal ik gericht op deze dingen gaan zoeken/testen in packettracer
 
+### CDP (Cisco Discovery Protocol)
