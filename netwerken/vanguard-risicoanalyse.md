@@ -154,4 +154,289 @@ in de powerpoint slides van week 2 stond dit:
 
 nu zal ik gericht op deze dingen gaan zoeken/testen in packettracer
 
-### CDP (Cisco Discovery Protocol)
+## CDP (Cisco Discovery Protocol)
+### R1
+- `show cdp`
+  - <img width="694" height="152" alt="image" src="https://github.com/user-attachments/assets/1105924b-019e-4e9e-9a4e-95010a11cda1" />
+- `show cdp neighbors` & `show cdp neighbors detail` laten niks zien
+  - <img width="1198" height="214" alt="image" src="https://github.com/user-attachments/assets/987e08fc-80f5-46fe-8ff1-46665dd2b6d4" />
+
+
+### R2
+- `show cdp`
+  - <img width="719" height="158" alt="image" src="https://github.com/user-attachments/assets/4315b9ae-8bb3-4bdb-81ca-ded2c57ae62d" />
+- `show cdp neighbors`
+  - <img width="1175" height="212" alt="image" src="https://github.com/user-attachments/assets/e1de4d98-5430-417e-b926-0dde82ad844d" />
+- `show cdp neighbors detail`
+  - <img width="1203" height="1029" alt="image" src="https://github.com/user-attachments/assets/51a461f1-f7de-4add-ac1d-04c3b5815628" />
+
+
+
+## S0
+- `show cdp`
+  - <img width="694" height="148" alt="image" src="https://github.com/user-attachments/assets/19410522-fb48-475e-a393-09d1d7fd1309" />
+- `show cdp neighbors`
+  - <img width="1216" height="394" alt="image" src="https://github.com/user-attachments/assets/716675b0-5f01-44ae-b757-39427ab02a25" />
+- `show cdp neighbors detail`
+  - werkt
+
+### S1
+- `show cdp`
+  - <img width="707" height="137" alt="image" src="https://github.com/user-attachments/assets/a093b640-8b93-431d-906d-890152173717" />
+- `show cdp neighbors`
+  - <img width="1170" height="276" alt="image" src="https://github.com/user-attachments/assets/087f3f24-6dc5-4746-b4c2-f41c95f0161b" />
+- `show cdp neighbors detail`
+  - werkt
+
+> **Risico:** CDP staat aan en lekt netwerkinformatie (IP's, IOS-versie, platform). Een aanvaller kan hiermee de topologie achterhalen.
+
+---
+
+## LLDP (Link Layer Discovery Protocol)
+[lldp commands](https://www.cisco.com/c/en/us/td/docs/routers/nfvis/switch_command/b-nfvis-switch-command-reference/b-nfvis-switch-command-reference_chapter_010000.html)
+
+### R1
+- `show lldp`
+  - <img width="1091" height="490" alt="image" src="https://github.com/user-attachments/assets/7fec850b-c6a3-453d-af30-3b7272762daa" />
+
+### R2
+- `show lldp`
+  - <img width="1084" height="513" alt="image" src="https://github.com/user-attachments/assets/6160e3a9-32d9-4815-a35a-78317da980f6" />
+
+### S0
+- `show lldp`
+  - <img width="1093" height="573" alt="image" src="https://github.com/user-attachments/assets/8d44fe24-495e-46d8-a4a1-6847180140c2" />
+
+### S1
+- `show lldp`
+  - <img width="1092" height="567" alt="image" src="https://github.com/user-attachments/assets/4c25232f-90db-4b23-b41b-521ef03aed93" />
+
+> **Risico:** Zelfde als CDP, lekt netwerkinformatie naar aanvallers.
+
+---
+
+## SNMP
+### R1
+`show running-config | include snmp`, `show snmp` & `show snmp community` kunnen niet uitgevoerd worden.  
+met `show ?` heb ik gecontroleerd, deze commands staan niet in de lijst
+
+### R2
+`show running-config | include snmp`, `show snmp` & `show snmp community` kunnen niet uitgevoerd worden.  
+met `show ?` heb ik gecontroleerd, deze commands staan niet in de lijst
+
+### S0
+`show running-config | include snmp`, `show snmp` & `show snmp community` kunnen niet uitgevoerd worden.  
+met `show ?` heb ik gecontroleerd, deze commands staan niet in de lijst
+
+### S1
+`show running-config | include snmp`, `show snmp` & `show snmp community` kunnen niet uitgevoerd worden.  
+met `show ?` heb ik gecontroleerd, deze commands staan niet in de lijst
+
+---
+
+## STP (Spanning Tree Protocol)
+### S0
+- `show spanning-tree`
+  - werkt
+- `show spanning-tree summary`
+  - <img width="1137" height="648" alt="image" src="https://github.com/user-attachments/assets/ffb61988-e4fb-4b04-90fb-afffd7ebc0af" />
+
+### S1
+- `show spanning-tree`
+  - werkt
+- `show spanning-tree summary`
+  - <img width="1150" height="640" alt="image" src="https://github.com/user-attachments/assets/3af099d3-faa3-43f1-9676-14e85c829d12" />
+
+
+---
+
+## DTP (Dynamic Trunking Protocol)
+### S0
+- `show interfaces switchport` (check per poort of mode "dynamic auto/desirable" is)
+  - werkt
+- `show interfaces trunk`
+  - <img width="1047" height="497" alt="image" src="https://github.com/user-attachments/assets/0ef79185-d452-4bcb-a7b7-ab36473108f5" />
+
+### S1
+- `show interfaces switchport`
+  - werkt
+- `show interfaces trunk`
+  - <img width="1063" height="605" alt="image" src="https://github.com/user-attachments/assets/9946aa95-c694-4012-9be0-1845ff56980e" />
+
+
+---
+
+## VLAN
+### S0
+- `show vlan`
+  - werkt
+- `show vlan brief`
+  - <img width="1254" height="456" alt="image" src="https://github.com/user-attachments/assets/bc1029dd-49e4-4685-bc75-bc978f50c9b6" />
+
+
+### S1
+- `show vlan`
+  - werkt
+- `show vlan brief`
+  - <img width="1240" height="458" alt="image" src="https://github.com/user-attachments/assets/7557b0fe-a822-4dd2-8733-bb5a7e51da14" />
+
+
+---
+
+## VTP (VLAN Trunking Protocol)
+### S0
+- `show vtp status`
+  - <img width="1419" height="539" alt="image" src="https://github.com/user-attachments/assets/9149c0c9-2c33-4ca4-9169-2bc20eed9591" />
+- `show vtp password`
+  - Invalid input
+
+### S1
+- `show vtp status`
+  - <img width="1191" height="512" alt="image" src="https://github.com/user-attachments/assets/96f8f853-256c-4c8e-9afe-1f19a046e1af" />
+- `show vtp password`
+  - Invalid input
+
+---
+
+## BPDU Guard
+### S0 & S1
+SNMP had ik al gezien dat de `show running-config` commands niet werken, dus deze zijn niet mogelijk:
+- `show running-config | include bpduguard`
+- `show running-config | include guard`
+
+---
+
+## EtherChannel
+### S0
+- `show etherchannel summary`
+  - <img width="903" height="547" alt="image" src="https://github.com/user-attachments/assets/99917747-3c85-4f50-b44d-92a77cbfad99" />
+- `show etherchannel load-balance`
+  - Invalid input
+
+### S1
+- `show etherchannel summary`
+  - <img width="900" height="550" alt="image" src="https://github.com/user-attachments/assets/5f1488f3-272d-4136-bf9e-c9e0fcc510f3" />
+- `show etherchannel load-balance`
+  - Invalid input
+
+---
+
+## DOT1Q / Trunking
+### S0
+- `show interfaces trunk`
+  - <img width="1074" height="489" alt="image" src="https://github.com/user-attachments/assets/02801693-dee1-470e-9157-4fa6c69d66db" />
+- `show running-config | include encapsulation`
+  - Invalid input
+
+### S1
+- `show interfaces trunk`
+  - <img width="1074" height="604" alt="image" src="https://github.com/user-attachments/assets/10805d18-fbd3-46a1-bb2f-e532da2fd177" />
+- `show running-config | include encapsulation`
+  - Invalid input
+
+### R1
+- `show running-config | include dot1q`
+  - Invalid input
+- `show ip interface brief`
+  - <img width="1266" height="278" alt="image" src="https://github.com/user-attachments/assets/9419e9c4-fe6d-4033-9aea-78acba35ee0d" />
+
+
+### R2
+- `show running-config | include dot1q`
+  - Invalid input
+- `show ip interface brief`
+  - <img width="1262" height="274" alt="image" src="https://github.com/user-attachments/assets/7ce3db4f-415a-4baa-9d36-09196ed0bb92" />
+
+
+---
+
+## Telnet vs SSH
+### R1, R2, S0 & S1
+`show running-config` werkt niet dus deze command kunnen niet uigevoerd worden:
+- `show running-config | section line vty`
+- `show running-config | include transport`
+
+
+---
+
+## HSRP (Hot Standby Router Protocol)
+`show standby` werkt niet dus deze command kunnen niet uigevoerd worden:
+### R1 & R2
+- `show standby`
+- `show standby brief`
+
+---
+
+## OSPF
+### R1
+- `show ip ospf`
+  - <img width="996" height="706" alt="image" src="https://github.com/user-attachments/assets/b8bfcaf1-e3b8-4699-8546-f9ab634380ee" />
+- `show ip ospf neighbor`
+  - <img width="1390" height="160" alt="image" src="https://github.com/user-attachments/assets/78d5fe4e-1059-4039-8a95-bf27a7521410" />
+- `show running-config | section router ospf`
+  - Invalid input
+
+### R2
+- `show ip ospf`
+  - <img width="981" height="697" alt="image" src="https://github.com/user-attachments/assets/35e0859f-876a-4873-a9f7-e94be9782283" />
+- `show ip ospf neighbor`
+  - wordt uitgevoerd maar laat niets zien
+- `show running-config | section router ospf`
+  - Invalid input
+
+
+---
+
+## UDLD (Unidirectional Link Detection)
+### S0 & S1
+- `show udld`
+  - Invalid input
+
+---
+
+## Routing
+### R1
+- `show ip route`
+  - <img width="1254" height="526" alt="image" src="https://github.com/user-attachments/assets/65683ae5-ad31-4943-a40a-ebd8f149480e" />
+- `show running-config | include ip route`
+  - Invalid input
+
+### R2
+- `show ip route`
+  - <img width="1236" height="512" alt="image" src="https://github.com/user-attachments/assets/613cf001-55c9-4cd9-93fa-1656262ad242" />
+- `show running-config | include ip route`
+  - Invalid input
+
+
+---
+
+## HTTP
+### R1, R2, S0 & S1
+- `show running-config | include ip http`
+  - Invalid input
+
+---
+
+## DHCP
+### R1
+- `show ip dhcp pool`
+  - <img width="1271" height="765" alt="image" src="https://github.com/user-attachments/assets/4254d80a-3080-4421-b26e-4f6c420e9c00" />
+- `show ip dhcp binding`
+  - DHCPD: No such pool: binding
+- `show running-config | section dhcp`
+  - Invalid input
+
+### R2
+- `show ip dhcp pool`
+  - <img width="1251" height="755" alt="image" src="https://github.com/user-attachments/assets/4b22621f-0bf4-487c-83db-4114cd0b4fec" />
+- `show ip dhcp binding`
+  - DHCPD: No such pool: binding
+- `show running-config | section dhcp`
+  - Invalid input
+
+
+
+
+
+
+
