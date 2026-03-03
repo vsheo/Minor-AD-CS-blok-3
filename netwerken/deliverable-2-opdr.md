@@ -44,14 +44,11 @@ opzet:
 # Stap 2 – Snort configureren in pfSense
 # (via GUI: geen CLI-commando's)
 
-1. Package Manager → installeer Snort
-2. Services → Snort → Interface: LAN
-3. Kies modus: IDS (alert/log) of IPS (blokkeren)
-
-Noteer:
-- Interface: LAN / WAN?
-- Modus: IDS of IPS?
-- Welke rulesets staan aan?
+1. Start pfSense VM → Adapter 1: NAT, Adapter 2: Host-Only
+2. Stel interfaces en IP's in via pfSense setup wizard
+3. System → Package Manager → installeer Snort
+4. Services → Snort → Interface: LAN
+5. Kies modus: IDS (alleen log) of IPS (log + block)
 ```
 
 Noteer alvast:
