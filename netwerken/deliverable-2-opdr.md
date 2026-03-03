@@ -14,10 +14,10 @@
 > *Mijn laptop*
 
 opzet:  
-```
-Stap 1 – Kali VM opzetten + UFW
-Adapter 1: NAT (WAN) – verbonden met hotspot
-Adapter 2: Host-Only of Internal Network (LAN)
+```bash
+# Stap 1 – Kali VM opzetten + UFW
+# Adapter 1: NAT (WAN) – verbonden met hotspot
+# Adapter 2: Host-Only of Internal Network (LAN)
 
 sudo apt update
 sudo apt install ufw -y
@@ -40,9 +40,10 @@ Noteer alvast:
 > *Muazma's laptop*
 
 opzet:  
-```
-Stap 2 – Snort configureren in pfSense
-(via GUI: geen CLI-commando's)
+```bash
+# Stap 2 – Snort configureren in pfSense
+# (via GUI: geen CLI-commando's)
+
 1. Package Manager → installeer Snort
 2. Services → Snort → Interface: LAN
 3. Kies modus: IDS (alert/log) of IPS (blokkeren)
