@@ -44,7 +44,7 @@ desktop > command prompt
 desktop > command prompt
 - `ipconfig`
   - <img width="817" height="303" alt="3" src="https://github.com/user-attachments/assets/84678f98-0ae3-4c08-a47f-5aadec488935" />
-- ping default gateway
+- ping default gateway: `ping 192.168.10.1`
   - <img width="618" height="151" alt="image" src="https://github.com/user-attachments/assets/03124a9c-6077-4a1f-9698-69e62e7631c9" />
 - ping PC0 & PC1  
 `ping 192.168.20.3` & `ping 192.168.20.1` -> request timed out
