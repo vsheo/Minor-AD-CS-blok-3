@@ -1,8 +1,7 @@
-Hier is de gestylede Markdown:
+# Deliverable 2 — IDS/IPS vs Firewall (pfSense + Snort vs Kali + UFW)
+[workshop](https://dlo.mijnhva.nl/d2l/le/lessons/691484/topics/2855833)
 
-# 🛡️ Week 5 Workshop — IDS/IPS
-
-## 📦 Benodigdheden (per duo)
+## Benodigdheden (per duo)
 
 | | **Laptop 1 (mijn laptop)** | **Laptop 2 (Muazma's laptop)** | **Target** |
 |---|---|---|---|
@@ -13,7 +12,8 @@ Hier is de gestylede Markdown:
 
 ## Stap 1 — UFW controleren
 > *Mijn laptop*
-stappen:  
+
+opzet:  
 ```
 Stap 1 – Kali VM opzetten + UFW
 Adapter 1: NAT (WAN) – verbonden met hotspot
@@ -39,6 +39,7 @@ Noteer alvast:
 ## Stap 2 — Snort controleren
 > *Muazma's laptop*
 
+opzet:  
 ```
 Stap 2 – Snort configureren in pfSense
 (via GUI: geen CLI-commando's)
