@@ -162,8 +162,7 @@ nu zal ik gericht op deze dingen gaan zoeken/testen in packettracer
   - <img width="694" height="152" alt="image" src="https://github.com/user-attachments/assets/1105924b-019e-4e9e-9a4e-95010a11cda1" />
 - `show cdp neighbors` & `show cdp neighbors detail` laten niks zien
   - <img width="1198" height="214" alt="image" src="https://github.com/user-attachments/assets/987e08fc-80f5-46fe-8ff1-46665dd2b6d4" />
-
-
+  
 ### R2
 - `show cdp`
   - <img width="719" height="158" alt="image" src="https://github.com/user-attachments/assets/4315b9ae-8bb3-4bdb-81ca-ded2c57ae62d" />
@@ -172,9 +171,7 @@ nu zal ik gericht op deze dingen gaan zoeken/testen in packettracer
 - `show cdp neighbors detail`
   - <img width="1203" height="1029" alt="image" src="https://github.com/user-attachments/assets/51a461f1-f7de-4add-ac1d-04c3b5815628" />
 
-
-
-## S0
+### S0
 - `show cdp`
   - <img width="694" height="148" alt="image" src="https://github.com/user-attachments/assets/19410522-fb48-475e-a393-09d1d7fd1309" />
 - `show cdp neighbors`
@@ -190,7 +187,6 @@ nu zal ik gericht op deze dingen gaan zoeken/testen in packettracer
 - `show cdp neighbors detail`
   - werkt
 
-> **Risico:** CDP staat aan en lekt netwerkinformatie (IP's, IOS-versie, platform). Een aanvaller kan hiermee de topologie achterhalen.
 
 ---
 
