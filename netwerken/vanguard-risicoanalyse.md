@@ -171,6 +171,15 @@ nu zal ik gericht op deze dingen gaan zoeken/testen in packettracer
 - `show cdp neighbors detail`
   - <img width="1203" height="1029" alt="image" src="https://github.com/user-attachments/assets/51a461f1-f7de-4add-ac1d-04c3b5815628" />
 
+> gevonden:
+> - R2 heeft is verbonden met S0 en S1
+> - poort S1 poort gig0/1 gaat naar fa0/2
+> - poort S1 poort gig0/0 gaat naar fa0/2
+> - S1 ip: `192.168.10.253`
+> - S0 ip: `192.168.10.254`
+>   - telnet geprobeer naar deze 2 ip's via server en pc's -> connection timed out; host not respponding
+> - IOS versie 15.0(2)SE4
+
 ### S0
 - `show cdp`
   - <img width="694" height="148" alt="image" src="https://github.com/user-attachments/assets/19410522-fb48-475e-a393-09d1d7fd1309" />
@@ -178,6 +187,11 @@ nu zal ik gericht op deze dingen gaan zoeken/testen in packettracer
   - <img width="1216" height="394" alt="image" src="https://github.com/user-attachments/assets/716675b0-5f01-44ae-b757-39427ab02a25" />
 - `show cdp neighbors detail`
   - werkt
+
+> gevonden:
+> - ik zie hier terug dat S0 verbonden is met R2 via fa0/2
+> - ik zie ook dat R1 en R2 subinterfaces hebben (gig0/0.10, gig0/0.20)
+> - R2 is router on a stick (dot1q encapsulation)
 
 ### S1
 - `show cdp`
@@ -187,6 +201,8 @@ nu zal ik gericht op deze dingen gaan zoeken/testen in packettracer
 - `show cdp neighbors detail`
   - werkt
 
+> gevonden:
+> - beide switches laten info van de neighbors zien
 
 ---
 
