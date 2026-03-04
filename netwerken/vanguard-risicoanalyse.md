@@ -405,9 +405,9 @@ nadat password had gevonden:
 
 
 > gevonden
-> - zonder bpdu guard kan een aanvaller eigen switches aansluiten op ongebruikte poorten
-> - aanvaller kan met ... en ... al achterhalen welke poorten ongebruikt zijn
-> - aanvaller kan zijn eigen switch dan naar root bridge maken
+> - `show running-config | include bpduguard` toont niets op S0 en S1 → geen BPDU Guard
+> - `show running-config | include guard` toont op beide switches: `username Vanguard privilege 1 password 0 Vanguard`
+>   - gebruikersaccount: username "Vanguard", password "Vanguard" in plain text
 
 ---
 
@@ -417,12 +417,18 @@ nadat password had gevonden:
   - <img width="903" height="547" alt="image" src="https://github.com/user-attachments/assets/99917747-3c85-4f50-b44d-92a77cbfad99" />
 - `show etherchannel load-balance`
   - Invalid input
+  - <img width="888" height="164" alt="image" src="https://github.com/user-attachments/assets/e2e42a82-8858-4adc-b5f3-98d56d8f9fcd" />
 
 ### S1
 - `show etherchannel summary`
   - <img width="900" height="550" alt="image" src="https://github.com/user-attachments/assets/5f1488f3-272d-4136-bf9e-c9e0fcc510f3" />
 - `show etherchannel load-balance`
   - Invalid input
+  - <img width="891" height="166" alt="image" src="https://github.com/user-attachments/assets/b792128b-24fb-4ff3-952c-996387931880" />
+
+> gevonden
+> - EtherChannel is geconfigureerd tussen S0 en S1 via PAgP
+> - Load-balancing methode = src-mac -> dit is de standaard instelling en niet optimaal
 
 ---
 
@@ -442,15 +448,22 @@ nadat password had gevonden:
 ### R1
 - `show running-config | include dot1q`
   - Invalid input
+  - <img width="714" height="122" alt="image" src="https://github.com/user-attachments/assets/10523450-bf2e-47ea-a71d-32c4eee2aa59" />
 - `show ip interface brief`
   - <img width="1266" height="278" alt="image" src="https://github.com/user-attachments/assets/9419e9c4-fe6d-4033-9aea-78acba35ee0d" />
-
 
 ### R2
 - `show running-config | include dot1q`
   - Invalid input
+  - <img width="733" height="107" alt="image" src="https://github.com/user-attachments/assets/8ab30e99-f701-4dc4-ac48-09ac6ce62297" />
 - `show ip interface brief`
   - <img width="1262" height="274" alt="image" src="https://github.com/user-attachments/assets/7ce3db4f-415a-4baa-9d36-09196ed0bb92" />
+
+> gevonden
+> - S0 & S1: `show running-config | include encapsulation` toont niets — switches doen automatisch 802.1q
+> - R1& R2: `encapsulation dot1Q 10` en `encapsulation dot1Q 20` — router-on-a-stick bevestigd
+> - native VLAN = 1 op alle trunk poorten (S0, S1) — standaard en onveilig
+> - VLANs allowed on trunk: 1-1005 — veel meer dan nodig, alleen 1, 10 en 20 zijn actief
 
 
 ---
@@ -461,6 +474,27 @@ nadat password had gevonden:
 - `show running-config | section line vty`
 - `show running-config | include transport`
 
+- R1
+  - <img width="686" height="310" alt="image" src="https://github.com/user-attachments/assets/670571f0-6251-4c67-ac74-32525c887e2b" />
+- R2
+  - <img width="704" height="238" alt="image" src="https://github.com/user-attachments/assets/bc65afde-7f99-4d13-b320-e5532d4a7ea2" />
+- S0
+  - <img width="688" height="302" alt="image" src="https://github.com/user-attachments/assets/1fd5e444-d924-4bb6-aa98-d1dd689f21b6" />
+- S1
+  - <img width="695" height="303" alt="image" src="https://github.com/user-attachments/assets/21a83973-397e-403e-a03a-91fd3e75d045" />
+
+op PC0 `telnet 192.168.20.2` -> username & password: Vanguard  
+<img width="937" height="403" alt="image" src="https://github.com/user-attachments/assets/0f00309b-692e-4e43-a62d-c3064f2b4ca0" />
+
+> gevonden
+> - alle apparaten hebben SSH version 1 -> heeft bekende kwetsbaarheden en is onveilig
+> - R1 en R2: line vty 0 4 met `login local` — gebruiken lokale gebruikersdatabase
+> - S0: line vty 0 4 en line vty 5 15 met `login` (zonder "local")
+>   - `login` zonder "local" = alleen een line password, geen username vereist. dit is minder veilig dan `login local`
+> - S1: line vty 0 4 met `login local`, line vty 5 15 met `login`
+>   - inconsistent: eerste 5 sessies vereisen username, de rest alleen een password
+> - console poort: geen password geconfigureerd op alle apparaten
+>   - iemand met fysieke toegang kan direct de CLI openen zonder wachtwoord
 
 ---
 
@@ -469,6 +503,21 @@ nadat password had gevonden:
 ### R1 & R2
 - `show standby`
 - `show standby brief`
+
+- R1
+  - <img width="1167" height="213" alt="image" src="https://github.com/user-attachments/assets/ad916bba-e2aa-46e6-870c-350631f8bb4b" />
+- R2
+  - <img width="1199" height="662" alt="image" src="https://github.com/user-attachments/assets/f8d3129d-9e44-4e5a-bdb3-0166c278fa09" />
+
+> gevonden
+> - HSRP is ALLEEN geconfigureerd op R2, voor VLAN 20 (Gig0/0.20)
+> - Virtual IP: 192.168.20.1 — dit zou de default gateway voor de PC's moeten zijn
+> - zonder R1 als standby is er geen failover — als R2 uitvalt, werkt 192.168.20.1 niet meer
+> - HSRP is NIET geconfigureerd voor VLAN 10 (servers)
+> - geen HSRP authenticatie geconfigureerd
+> - Preemption is disabled -> als R2 uitvalt en later terugkomt, neemt hij niet automatisch de Active rol terug
+> - PC0 en PC1 hebben default gateway 0.0.0.0 — ze gebruiken het virtual IP 192.168.20.1 niet
+>   - de HSRP configuratie is er wel, maar de PC's zijn er niet op ingesteld
 
 ---
 
@@ -480,6 +529,7 @@ nadat password had gevonden:
   - <img width="1390" height="160" alt="image" src="https://github.com/user-attachments/assets/78d5fe4e-1059-4039-8a95-bf27a7521410" />
 - `show running-config | section router ospf`
   - Invalid input
+  - <img width="702" height="189" alt="image" src="https://github.com/user-attachments/assets/1e7bef0b-da51-45c0-9e9c-d1961d80969c" />
 
 ### R2
 - `show ip ospf`
@@ -488,7 +538,18 @@ nadat password had gevonden:
   - wordt uitgevoerd maar laat niets zien
 - `show running-config | section router ospf`
   - Invalid input
+  - <img width="718" height="194" alt="image" src="https://github.com/user-attachments/assets/e89a70c4-5968-44d4-87e6-ef71f7c61d33" />
 
+> gevonden
+> - OSPF process 1 actief op beide routers -> in Area 0
+> - R1 netwerken: 10.1.1.0/30, 192.168.10.0/24, 192.168.20.0/24
+> - R2 netwerken: 10.1.2.0/30, 192.168.10.0/24, 192.168.20.0/24
+> - R1 WAN-link: 10.1.1.0/30 (Gig0/1/0 = 10.1.1.2, maar interface is DOWN)
+> - R2 WAN-link: 10.1.2.0/30 (Gig0/0/0 = 10.1.2.2, maar interface is DOWN)
+> - Area has no authentication op beide routers
+> - wildcard masks:
+>   - 10.1.1.0 met 0.0.0.3 = /30 subnet (correct voor point-to-point WAN)
+>   - 192.168.10.0 en 192.168.20.0 met 0.0.0.255 = /24 subnet (de berekening van in het begin was goed)
 
 ---
 
@@ -497,6 +558,9 @@ nadat password had gevonden:
 - `show udld`
   - Invalid input
 
+> gevonden
+> - UDLD wordt niet ondersteund in deze Packet Tracer versie
+
 ---
 
 ## Routing
@@ -504,21 +568,26 @@ nadat password had gevonden:
 - `show ip route`
   - <img width="1254" height="526" alt="image" src="https://github.com/user-attachments/assets/65683ae5-ad31-4943-a40a-ebd8f149480e" />
 - `show running-config | include ip route`
-  - Invalid input
+  - leeg
 
 ### R2
 - `show ip route`
   - <img width="1236" height="512" alt="image" src="https://github.com/user-attachments/assets/613cf001-55c9-4cd9-93fa-1656262ad242" />
 - `show running-config | include ip route`
-  - Invalid input
+  - leeg
 
+> gevonden
+> - er is geen default route geconfigureerd
 
 ---
 
 ## HTTP
 ### R1, R2, S0 & S1
 - `show running-config | include ip http`
-  - Invalid input
+  - alles leeg
+
+> gevonden
+> - er is geen HTTP-server actief op de routers en switches
 
 ---
 
@@ -528,24 +597,38 @@ nadat password had gevonden:
   - <img width="1271" height="765" alt="image" src="https://github.com/user-attachments/assets/4254d80a-3080-4421-b26e-4f6c420e9c00" />
 - `show ip dhcp binding`
   - DHCPD: No such pool: binding
+  - <img width="1180" height="345" alt="image" src="https://github.com/user-attachments/assets/ff8018fc-1d2e-49c8-a6aa-a796b400ded4" />
 - `show running-config | section dhcp`
   - Invalid input
+  - <img width="616" height="162" alt="image" src="https://github.com/user-attachments/assets/3db114c5-739d-4a17-8dce-961fb2f9e19e" />
 
 ### R2
 - `show ip dhcp pool`
   - <img width="1251" height="755" alt="image" src="https://github.com/user-attachments/assets/4b22621f-0bf4-487c-83db-4114cd0b4fec" />
 - `show ip dhcp binding`
   - DHCPD: No such pool: binding
+  - <img width="1110" height="90" alt="image" src="https://github.com/user-attachments/assets/f3abc094-7bbb-4b90-9448-8bcfd2c3bfde" />
 - `show running-config | section dhcp`
   - Invalid input
- 
+  - <img width="867" height="303" alt="image" src="https://github.com/user-attachments/assets/30e7b9f2-1b13-4f1c-9127-9bba80072d4b" />
+
+> gevonden
+> - beide routers zijn DHCP-servers voor dezelfde netwerken -> kan conflicten veroorzaken
+> - R1 DHCP configuratie is INCOMPLEET -> geen `default-router` en geen `excluded-address`
+> - R2 DHCP configuratie is WEL compleet
+>   - default-router 192.168.10.1 voor VLAN10, default-router 192.168.20.1 voor VLAN20
+>   - excluded-addresses: 192.168.10.1-11, 192.168.10.253-254, 192.168.20.1-3
+> - R1 heeft 2 adressen uitgedeeld: 192.168.20.1 en 192.168.20.3 -> PC1 en PC1
+> - R2 heeft 0 adressen uitgedeeld
+> - geen DHCP snooping geconfigureerd op de switches
+>   - een aanvaller kan een eigen DHCP-server opzetten
 
 ---
 
 ## ik heb toevalig dit gezien in DLO
-<img width="1122" height="389" alt="image" src="https://github.com/user-attachments/assets/b5eca17b-7084-4f05-bb7a-757a23955c84" />
+<img width="1122" height="389" alt="image" src="https://github.com/user-attachments/assets/b5eca17b-7084-4f05-bb7a-757a23955c84" />  
 ... ...
-<img width="214" height="122" alt="image" src="https://github.com/user-attachments/assets/596b4908-9510-4970-948e-9c15d6d07054" />
+<img width="214" height="122" alt="image" src="https://github.com/user-attachments/assets/596b4908-9510-4970-948e-9c15d6d07054" />  
 ...
 
 ---
