@@ -309,9 +309,7 @@ nu dat ik de password heb gevonden kan ik `show running-config` wel uit voeren m
 
 
 > gevonden
-> - op beide stitcher staan alle beveiligings opties (die te zijn zijn met `show spannin-tree`) uit
-
-
+> - op beide stitcher staan alle beveiligings opties (die te zijn zijn met `show spannin-tree`) staan uit
 
 ---
 
@@ -322,12 +320,23 @@ nu dat ik de password heb gevonden kan ik `show running-config` wel uit voeren m
 - `show interfaces trunk`
   - <img width="1047" height="497" alt="image" src="https://github.com/user-attachments/assets/0ef79185-d452-4bcb-a7b7-ab36473108f5" />
 
+> gevonden
+> - poort Po1 en fa0/1 hebben trunking op default vlan
+> - Actieve VLANs: default, 0010 en 0020
+
 ### S1
 - `show interfaces switchport`
   - werkt
 - `show interfaces trunk`
   - <img width="1063" height="605" alt="image" src="https://github.com/user-attachments/assets/9946aa95-c694-4012-9be0-1845ff56980e" />
 
+> gevonden
+> - poort Po1, fa0/1 en fa0/6 hebben trunking op default vlan
+> - Actieve VLANs: default, 0010 en 0020
+
+> gevonden
+> - S1 Fa0/6: staat op auto. dit betekent dat deze poort automatisch een trunk vormt als de andere kant DTP-berichten stuurt
+> - fa0/5, fa0/9 - 24, gig0/1 en gig0/2 staan ook op auto
 
 ---
 
@@ -345,6 +354,12 @@ nu dat ik de password heb gevonden kan ik `show running-config` wel uit voeren m
 - `show vlan brief`
   - <img width="1240" height="458" alt="image" src="https://github.com/user-attachments/assets/7557b0fe-a822-4dd2-8733-bb5a7e51da14" />
 
+> gevonden
+> - overzicht van welke poorten op welke vlan zit
+> - vlan 10 -> 1 poort -> fa0/2
+> - vlan 20 -> 2 poorten -> fa0/3 en fa0/4
+> - vlan 1 -> heeft alle andere poorten -> waarschijnlijk ongebruikt
+
 
 ---
 
@@ -354,12 +369,21 @@ nu dat ik de password heb gevonden kan ik `show running-config` wel uit voeren m
   - <img width="1419" height="539" alt="image" src="https://github.com/user-attachments/assets/9149c0c9-2c33-4ca4-9169-2bc20eed9591" />
 - `show vtp password`
   - Invalid input
+  - <img width="567" height="81" alt="image" src="https://github.com/user-attachments/assets/1c78d599-c04b-4a27-aa4b-725b5f56d584" />
+
 
 ### S1
 - `show vtp status`
   - <img width="1191" height="512" alt="image" src="https://github.com/user-attachments/assets/96f8f853-256c-4c8e-9afe-1f19a046e1af" />
 - `show vtp password`
   - Invalid input
+  - <img width="582" height="90" alt="image" src="https://github.com/user-attachments/assets/304a17bb-a26a-4e4a-bcb2-8838e1001041" />
+
+
+> gevonden
+> - S0 -> VTP Server, S1 -> VTP Client
+> - VTP Pruning: Disabled — alle VLANs worden over alle trunks gestuurd
+> - geen vtp password -> aanvaller kan een eigen switch aansluiten
 
 ---
 
@@ -368,6 +392,22 @@ nu dat ik de password heb gevonden kan ik `show running-config` wel uit voeren m
 SNMP had ik al gezien dat de `show running-config` commands niet werken, dus deze zijn niet mogelijk:
 - `show running-config | include bpduguard`
 - `show running-config | include guard`
+
+`show running-config | include guard`
+<img width="792" height="65" alt="image" src="https://github.com/user-attachments/assets/4f993906-2d75-4052-ad43-931c4fa462d8" />  
+
+nadat password had gevonden:  
+<img width="806" height="90" alt="image" src="https://github.com/user-attachments/assets/f703f056-4dfb-449a-a07b-acd0bda12143" />  
+<img width="805" height="89" alt="image" src="https://github.com/user-attachments/assets/afae3288-22c6-4a60-82c4-d22992b250ed" />
+
+<img width="690" height="71" alt="image" src="https://github.com/user-attachments/assets/450aa1e2-feee-4766-8823-a85fd816eb73" />  
+<img width="657" height="59" alt="image" src="https://github.com/user-attachments/assets/9b040c72-72f0-4a62-8cce-021243fbb415" />
+
+
+> gevonden
+> - zonder bpdu guard kan een aanvaller eigen switches aansluiten op ongebruikte poorten
+> - aanvaller kan met ... en ... al achterhalen welke poorten ongebruikt zijn
+> - aanvaller kan zijn eigen switch dan naar root bridge maken
 
 ---
 
