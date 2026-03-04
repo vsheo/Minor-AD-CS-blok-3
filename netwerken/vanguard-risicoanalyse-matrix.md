@@ -165,3 +165,9 @@
 | Nr | Component/Service | Kwetsbaarheid / Foutconfiguratie | Mogelijke Impact | Waarschijnlijkheid | Impactniveau | Risicoscore | Mitigatie / Advies |
 |----|-------------------|----------------------------------|------------------|---------------------|--------------|-------------|---------------------|
 | 19 | PC0, PC1 — Default Gateway | Default gateway = 0.0.0.0 op beide PC's. DHCP van R1 geeft geen gateway mee | PC's kunnen niet communiceren buiten hun subnet | 5 | 4 | 20 | Default gateway instellen op 192.168.20.1 (HSRP virtual IP), of DHCP op R1 fixen |
+
+### Algemene beveiliging — Configure Terminal
+
+| Nr | Component/Service | Kwetsbaarheid / Foutconfiguratie | Mogelijke Impact | Waarschijnlijkheid | Impactniveau | Risicoscore | Mitigatie / Advies |
+|----|-------------------|----------------------------------|------------------|---------------------|--------------|-------------|---------------------|
+| 20 | R1, R2, S0, S1 — Configure Terminal | Vanuit enable mode (password "cisco") kan direct `conf t` worden uitgevoerd. Geen extra authenticatie of autorisatie vereist voor configuratiewijzigingen | Aanvaller met enable toegang kan volledige configuratie wijzigen: VLANs verwijderen, routes aanpassen, wachtwoorden wijzigen, interfaces uitschakelen, backdoor accounts aanmaken | 4 | 5 | 20 | Sterk enable secret instellen. AAA autorisatie configureren met privilege levels. `login local` met sterke wachtwoorden. Logging van configuratiewijzigingen inschakelen |
