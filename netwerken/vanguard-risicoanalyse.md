@@ -273,6 +273,7 @@ met `show ?` heb ik gecontroleerd, deze commands staan niet in de lijst
 
 ### met password cisco
 nu dat ik de password heb gevonden kan ik `show running-config` wel uit voeren maar als ik `| include snmp` erbij zet zie ik niets.
+<img width="658" height="605" alt="image" src="https://github.com/user-attachments/assets/79d5b2f6-7bee-4631-bde7-e1de4c2776c3" />
 
 > gevonden
 
