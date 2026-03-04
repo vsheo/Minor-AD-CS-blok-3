@@ -272,10 +272,13 @@ met `show ?` heb ik gecontroleerd, deze commands staan niet in de lijst
 met `show ?` heb ik gecontroleerd, deze commands staan niet in de lijst
 
 ### met password cisco
-nu dat ik de password heb gevonden kan ik `show running-config` wel uit voeren maar als ik `| include snmp` erbij zet zie ik niets.
+nu dat ik de password heb gevonden kan ik `show running-config` wel uit voeren maar als ik `| include snmp` erbij zet zie ik niets.  
+
 <img width="658" height="605" alt="image" src="https://github.com/user-attachments/assets/79d5b2f6-7bee-4631-bde7-e1de4c2776c3" />
 
 > gevonden
+> - `show running-config | include snmp` laat niks zien, waarschijnlijk is die niet geconfigureerd
+
 
 ---
 
@@ -286,11 +289,28 @@ nu dat ik de password heb gevonden kan ik `show running-config` wel uit voeren m
 - `show spanning-tree summary`
   - <img width="1137" height="648" alt="image" src="https://github.com/user-attachments/assets/ffb61988-e4fb-4b04-90fb-afffd7ebc0af" />
 
+> gevonden
+> - heeft toegang tot de vlan default, vlan0010 en vlan 0020
+> - vlan default heeft 6 ips om het subnet
+> - vlan0010 heeft 5 ips om het subnet
+> - vlan 0020 heeft 6 ips om het subnet
+
 ### S1
 - `show spanning-tree`
   - werkt
 - `show spanning-tree summary`
   - <img width="1150" height="640" alt="image" src="https://github.com/user-attachments/assets/3af099d3-faa3-43f1-9676-14e85c829d12" />
+
+> gevonden
+> - heeft toegang tot de vlan default, vlan0010 en vlan 0020
+> - vlan default heeft 4 ip's om het subnet maar 2 worden geblokeert
+> - vlan0010 heeft 5 ip's om het subnet maar 2 worden geblokeert
+> - vlan 0020 heeft 6 ip's om het subnet maar 2 worden geblokeert
+
+
+> gevonden
+> - op beide stitcher staan alle beveiligings opties (die te zijn zijn met `show spannin-tree`) uit
+
 
 
 ---
