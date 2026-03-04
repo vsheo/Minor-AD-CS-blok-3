@@ -1,6 +1,6 @@
 # Risicoanalyse Vanguard
-hier hou ik de volgorde bij van wat ik gedaan heb.
-
+Hier houd ik de volgorde bij van wat ik heb gedaan.
+de CLI commando om te controleren welke kwetsbaarheden er zijn
 
 ## Router
 ### R1
