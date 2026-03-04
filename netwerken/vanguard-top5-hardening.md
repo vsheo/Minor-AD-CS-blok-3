@@ -53,3 +53,4 @@
 | 17 | Vervang `enable password` door `enable secret` | ✗ | Risico 18: `enable password cisco` plain text |
 | 18 | Default gateway instellen op PC's | ✗ | Risico 19: gateway = 0.0.0.0 |
 | 19 | `login local` op alle VTY lines | ✗ | Risico 10: S0 en S1 vty 5-15 met `login` zonder "local" |
+| 20 | Enable password beschermen tegen `conf t` toegang | ✗ | Vanuit enable mode (password "cisco") kan een aanvaller direct `conf t` gebruiken om de volledige configuratie te wijzigen, VLANs te verwijderen, routes aan te passen, etc. |
