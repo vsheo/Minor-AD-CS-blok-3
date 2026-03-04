@@ -213,20 +213,45 @@ nu zal ik gericht op deze dingen gaan zoeken/testen in packettracer
 - `show lldp`
   - <img width="1091" height="490" alt="image" src="https://github.com/user-attachments/assets/7fec850b-c6a3-453d-af30-3b7272762daa" />
 
+> gevonden:
+> - LLDP status: active
+> - neighbor is S0 via poort fa0/1
+
 ### R2
 - `show lldp`
   - <img width="1084" height="513" alt="image" src="https://github.com/user-attachments/assets/6160e3a9-32d9-4815-a35a-78317da980f6" />
+
+> gevonden:
+> - LLDP status: active
+> - neighbor is S0 via poort fa0/2 (vanuit Gig0/0 op R2)
+> - neighbor is ook S1 via poort fa0/2 (vanuit Gig0/1 op R2)
 
 ### S0
 - `show lldp`
   - <img width="1093" height="573" alt="image" src="https://github.com/user-attachments/assets/8d44fe24-495e-46d8-a4a1-6847180140c2" />
 
+> gevonden:
+> - LLDP status: active
+> - S1 Fa0/8 -> S0 Fa0/6
+> - S1 Po1 -> S0 Fa0/8
+> - R2 Fa0/2 -> S0 Gig
+> - R1 Fa0/1 -> S0 Gig
+
 ### S1
 - `show lldp`
   - <img width="1092" height="567" alt="image" src="https://github.com/user-attachments/assets/4c25232f-90db-4b23-b41b-521ef03aed93" />
 
-> **Risico:** Zelfde als CDP, lekt netwerkinformatie naar aanvallers.
+> gevonden:
+> - LLDP status: active
+> - R2 Fa0/2 -> S1 Gig0/1
+> - R1 Fa0/1 -> S1 Gig0/1
+> - S0 pO1 -> S1 Fa0/7
+> - S0 Fa0/6 -> S1 Fa0/8
 
+
+> - LLDP is active op R!, R2, S0 & S1
+> - met `sh lldp neighbors` kunnen we zien via welke poort de routers en switcher verbonden zijn
+> - een aanvaller kan hiermee het heel nbetwerk structuur achterhalen
 ---
 
 ## SNMP
@@ -245,6 +270,11 @@ met `show ?` heb ik gecontroleerd, deze commands staan niet in de lijst
 ### S1
 `show running-config | include snmp`, `show snmp` & `show snmp community` kunnen niet uitgevoerd worden.  
 met `show ?` heb ik gecontroleerd, deze commands staan niet in de lijst
+
+### met password cisco
+nu dat ik de password heb gevonden kan ik `show running-config` wel uit voeren maar als ik `| include snmp` erbij zet zie ik niets.
+
+> gevonden
 
 ---
 
