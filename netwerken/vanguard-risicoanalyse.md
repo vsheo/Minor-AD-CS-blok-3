@@ -451,6 +451,14 @@ SNMP had ik al gezien dat de `show running-config` commands niet werken, dus dez
 
 ---
 
+## ik heb toevalig dit gezien in DLO
+<img width="1122" height="389" alt="image" src="https://github.com/user-attachments/assets/b5eca17b-7084-4f05-bb7a-757a23955c84" />
+... ...
+<img width="214" height="122" alt="image" src="https://github.com/user-attachments/assets/596b4908-9510-4970-948e-9c15d6d07054" />
+...
+
+---
+
 
 # Samenvatting Bevindingen Risicoanalyse Vanguard
 
