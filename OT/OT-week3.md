@@ -271,3 +271,9 @@ Selecteer de modbusdetect module en zet de rhosts op `192.168.2.0/24` en run dez
   - [Modbus Unit ID](https://www.rapid7.com/db/modules/auxiliary/scanner/scada/modbus_findunitid/)
 - **modbusdetect** -> This module detects the Modbus service, tested on a SAIA PCD1.M2 system
   - [modbus detect](https://www.rapid7.com/db/modules/auxiliary/scanner/scada/modbusdetect/)
+ 
+```
+modbus detect
+```
+<img width="2324" height="232" alt="image" src="https://github.com/user-attachments/assets/315434ac-b51f-4156-bc8e-fe3210c4dd20" />
+
