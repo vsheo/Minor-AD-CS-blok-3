@@ -626,95 +626,14 @@ op PC0 `telnet 192.168.20.2` -> username & password: Vanguard
 ---
 
 ## ik heb toevalig dit gezien in DLO
-<img width="1122" height="389" alt="image" src="https://github.com/user-attachments/assets/b5eca17b-7084-4f05-bb7a-757a23955c84" />  
-... ...
-<img width="214" height="122" alt="image" src="https://github.com/user-attachments/assets/596b4908-9510-4970-948e-9c15d6d07054" />  
+<img width="1122" height="389" alt="image" src="https://github.com/user-attachments/assets/b5eca17b-7084-4f05-bb7a-757a23955c84" />
+
+... ...  
+
+<img width="214" height="122" alt="image" src="https://github.com/user-attachments/assets/596b4908-9510-4970-948e-9c15d6d07054" />
+
 ...
 
 ---
-
-
-# Samenvatting Bevindingen Risicoanalyse Vanguard
-
-## Netwerk overzicht
-- 2 subnetten: `192.168.10.0/24` (VLAN10 - servers) en `192.168.20.0/24` (VLAN20 - PC's)
-- R1: Gig0/0.10 = `192.168.10.2`, Gig0/0.20 = `192.168.20.2`, Gig0/1/0 = `10.1.1.2` (down)
-- R2: Gig0/0.10 = `192.168.10.3`, Gig0/0.20 = `192.168.20.3`, Gig0/0/0 = `10.1.2.2` (down)
-- Beide routers gebruiken router-on-a-stick (subinterfaces)
-- S0 = VTP Server, S1 = VTP Client, domain "LAB"
-
----
-
-## Gevonden risico's per protocol
-
-| Nr | Component/Service | Kwetsbaarheid / Foutconfiguratie | Mogelijke Impact | Waarschijnlijkheid | Impactniveau | Risicoscore | Mitigatie / Advies |
-|----|-------------------|----------------------------------|------------------|---------------------|--------------|-------------|---------------------|
-| 1 | R1, R2, S0, S1 — CDP | CDP staat aan op alle apparaten. Lekt IP-adressen, IOS-versie (15.0(2)SE4), platform (2960/C1900) en poortinfo | Aanvaller kan volledige netwerktopologie achterhalen | 4 | 3 | 12 | `no cdp run` globaal, of `no cdp enable` per interface |
-| 2 | R1, R2, S0, S1 — LLDP | LLDP staat actief op alle apparaten, toont neighbors met platform en poortinfo | Dubbele informatielekkage naast CDP | 4 | 3 | 12 | `no lldp run` globaal uitschakelen |
-| 3 | S0, S1 — STP/BPDU Guard | PortFast BPDU Guard Default = disabled, Root Guard = disabled, Loopguard = disabled op beide switches | Aanvaller kan eigen switch aansluiten en root bridge overnemen, netwerk loops veroorzaken | 3 | 5 | 15 | `spanning-tree portfast bpduguard default`, `spanning-tree guard root` op trunk poorten |
-| 4 | S1 — DTP | Fa0/6 staat op mode **auto** (DTP negotiation actief), vormt automatisch trunk | Aanvaller kan via DTP een trunk opzetten en alle VLAN-verkeer onderscheppen (VLAN hopping) | 4 | 5 | 20 | `switchport mode access` + `switchport nonegotiate` op alle access poorten |
-| 5 | S0, S1 — VLAN | Veel ongebruikte poorten zitten in VLAN 1 (default) en staan nog aan | Geen segmentatie, onbevoegde toegang via ongebruikte poorten | 3 | 4 | 12 | Ongebruikte poorten in apart VLAN plaatsen + `shutdown` |
-| 6 | S0, S1 — VTP | VTP domain "LAB" zonder password (show vtp password = invalid). S0=Server, S1=Client | Aanvaller kan switch aansluiten met hogere revision number en volledige VLAN-database overschrijven/wissen | 3 | 5 | 15 | `vtp password <sterk_wachtwoord>` instellen, of `vtp mode transparent` gebruiken |
-| 7 | S0, S1 — Trunking/DOT1Q | Native VLAN = 1 op alle trunk poorten (Po1, Fa0/1, Fa0/6) | VLAN hopping via double-tagging aanval op native VLAN 1 | 3 | 5 | 15 | Native VLAN wijzigen naar ongebruikt VLAN (bv. VLAN 999) |
-| 8 | S0-S1 — EtherChannel | PAgP EtherChannel: S0 Fa0/8 = stand-alone (I), S1 Fa0/7 = desirable (D). Mismatch in bundeling | Verminderde redundantie en bandbreedte, niet alle links actief | 2 | 3 | 6 | EtherChannel opnieuw configureren zodat alle poorten (P) status krijgen |
-| 9 | R1 — Telnet | Telnet actief op 192.168.20.2, plain text protocol | Wachtwoorden en commando's kunnen worden afgeluisterd op het netwerk | 4 | 5 | 20 | Vervang Telnet door SSH: `transport input ssh` op VTY lines |
-| 10 | R1, R2 — OSPF | OSPF actief in Area 0, **geen authenticatie** ("Area has no authentication"). Neighbor state = INIT/DROTHER (niet FULL) | Aanvaller kan valse routes injecteren. OSPF adjacency niet volledig = routing werkt niet correct | 3 | 5 | 15 | OSPF authenticatie instellen: `ip ospf authentication message-digest` |
-| 11 | R1, R2 — Routing | Geen default route ingesteld ("Gateway of last resort is not set"), alleen connected routes zichtbaar | Geen internetverbinding, verkeer tussen subnetten faalt | 5 | 5 | 25 | Default route instellen: `ip route 0.0.0.0 0.0.0.0 <next-hop>` |
-| 12 | R1, R2 — HSRP | HSRP niet geconfigureerd (show standby niet beschikbaar) | Geen gateway redundantie: als één router uitvalt, verliezen alle clients op dat subnet connectiviteit (single point of failure) | 3 | 4 | 12 | HSRP configureren met authenticatie op beide routers |
-| 13 | R1, R2 — DHCP | DHCP pools actief (VLAN10 + VLAN20), geen excluded addresses op R1, geen DHCP snooping | DHCP spoofing: aanvaller kan valse DHCP-server opzetten en verkeer omleiden (man-in-the-middle) | 3 | 5 | 15 | `ip dhcp snooping` inschakelen, trusted ports instellen |
-| 14 | AP Medewerkers + Gasten — Wi-Fi | Encryption type = **disabled** op beide access points. Geen WEP/WPA/WPA2, geen wachtwoord | Iedereen kan verbinden met het netwerk en al het draadloze verkeer afluisteren | 5 | 5 | 25 | WPA2-PSK of WPA2-Enterprise instellen met sterk wachtwoord |
-| 15 | R1, R2 — Wachtwoorden | `enable password` gebruikt i.p.v. `enable secret`. Onbekend of `service password-encryption` actief is | Wachtwoord mogelijk in plain text zichtbaar in configuratie | 4 | 4 | 16 | Vervang door `enable secret`, activeer `service password-encryption` |
-| 16 | PC0, PC1 — Default Gateway | Default gateway = `0.0.0.0` op beide PC's | PC's kunnen niet communiceren buiten hun subnet (verklaart waarom pings naar servers falen) | 5 | 4 | 20 | Default gateway instellen op `192.168.20.2` of `192.168.20.3`, of DHCP gebruiken |
-| 17 | S0, S1 — UDLD | UDLD niet beschikbaar/niet geconfigureerd | Unidirectionele links kunnen onopgemerkt blijven en loops of black holes veroorzaken | 2 | 3 | 6 | `udld enable` of `udld aggressive` op relevante interfaces |
-
----
-
-## Top 5 Kritieke Risico's
-
-1. **Wi-Fi zonder encryptie** (Risicoscore: 25)
-   - **Impact:** Iedereen kan verbinden en verkeer afluisteren, inclusief gevoelige bedrijfsdata
-   - **Oplossing:** WPA2-PSK of WPA2-Enterprise configureren op beide access points
-
-2. **Geen default route / routing faalt** (Risicoscore: 25)
-   - **Impact:** Geen internetverbinding, subnetten kunnen niet met elkaar communiceren
-   - **Oplossing:** Default route instellen en OSPF adjacency fixen (INIT → FULL)
-
-3. **Telnet in gebruik (plain text)** (Risicoscore: 20)
-   - **Impact:** Inloggegevens en commando's afluisterbaar op het netwerk
-   - **Oplossing:** SSH configureren, Telnet uitschakelen met `transport input ssh`
-
-4. **DTP actief op access poorten** (Risicoscore: 20)
-   - **Impact:** Aanvaller kan trunk opzetten en alle VLAN-verkeer zien
-   - **Oplossing:** `switchport mode access` + `switchport nonegotiate` op alle access poorten
-
-5. **PC's zonder default gateway** (Risicoscore: 20)
-   - **Impact:** PC's zijn geïsoleerd van de rest van het netwerk
-   - **Oplossing:** Gateway instellen of DHCP correct configureren
-
----
-
-## Hardening Checklist
-
-| Nr | Maatregel | Status (✓/✗) | Opmerkingen |
-|----|-----------|--------------|-------------|
-| 1 | Vervang `enable password` door `enable secret` | ✗ | Beide routers + switches |
-| 2 | `service password-encryption` activeren | ✗ | Niet te verifiëren zonder privileged access |
-| 3 | CDP uitschakelen (`no cdp run`) | ✗ | Staat aan op alle 4 apparaten |
-| 4 | LLDP uitschakelen (`no lldp run`) | ✗ | Staat aan op alle 4 apparaten |
-| 5 | SSH i.p.v. Telnet (`transport input ssh`) | ✗ | Telnet actief op R1 |
-| 6 | BPDU Guard inschakelen op access poorten | ✗ | Disabled op S0 en S1 |
-| 7 | DTP uitschakelen (`switchport nonegotiate`) | ✗ | S1 Fa0/6 op auto |
-| 8 | Native VLAN wijzigen naar ongebruikt VLAN | ✗ | Native VLAN = 1 overal |
-| 9 | Ongebruikte poorten uitschakelen (`shutdown`) | ✗ | Veel poorten actief in VLAN 1 |
-| 10 | VTP password instellen | ✗ | Geen password geconfigureerd |
-| 11 | OSPF authenticatie configureren | ✗ | "Area has no authentication" |
-| 12 | DHCP snooping inschakelen | ✗ | Niet geconfigureerd |
-| 13 | WPA2 instellen op beide access points | ✗ | Encryption disabled |
-| 14 | Default gateway instellen op PC's | ✗ | Gateway = 0.0.0.0 |
-
-
-
-
-
 
 
