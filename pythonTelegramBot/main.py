@@ -26,7 +26,7 @@ load_dotenv(dotenv_path=env_path)
 
 API_TOKEN: Final = os.getenv("TELEGRAM_BOT_TOKEN")
 # CHAT_ID = int(os.getenv("CHAT_ID"))
-CHAT_ID = int(os.getenv("CHAT_ID"))
+CHAT_ID = os.getenv("CHAT_ID")
 
 # on_startup functie heeft await nodig
 async def on_startup(_):
