@@ -121,9 +121,9 @@ async def custom_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """
     - run een custom powershell command
     - custom commands moet je zelf typen via telegram chat
-    - return de powershell output om te zien als de command wel of niet was uitgevoerd\n
-    als er geen output is was het waarschijnlijk successvol\n
-    run deze command opnieuw met een command die kan controleren als dat wel zo was\n
+    - return de powershell output om te zien als de command wel of niet was uitgevoerd
+    - als er '-admin' is in de string wordt er eerst een nieuwe terminal aangemaakt met powershell rechten
+    - er wordt in de chat gemeld dat de command dan opnieuw uitgevoerd moet worden
     """
     # spaties na de command zorgen ervoor dat de command als losse list items opgeslagen worden in context.args
     # maak een een list met maar 2 argumenten, waarvan de eerste aangeeft als admin rechtenb nodig zijn
@@ -139,9 +139,18 @@ async def custom_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if len(args) == 1:
             commandOutput = run_powershell_command(args[0])
             await update.message.reply_text(f"Terminal output:```\n{commandOutput}\n```", parse_mode='MarkdownV2')
+
         elif len(args) == 2 and args[0] == "-admin":
+            # controleer als er admin rechten zijn. zo niet zet die aan.
+            admin_check = check_adminRights()
+            if admin_check is not True:
+                await update.message.reply_text(admin_check)
+                get_adminRights()
+                return
+
             commandOutput = run_powershell_command(args[1], True)
             await update.message.reply_text(f"Terminal output:```\n{commandOutput}\n```", parse_mode='MarkdownV2')
+
     except ValueError:
         await update.message.reply_text(f"Er is een fout opgetreden bij het uitvoeren: {ValueError}")
 

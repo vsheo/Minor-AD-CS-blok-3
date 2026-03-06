@@ -156,17 +156,11 @@ def get_audioFile():
 
     return audioPath
 
-def run_powershell_command(cmd, is_admin=False):
+def run_powershell_command(cmd):
     """
-    - gebruikt get_adminRights() om een powershell terminal met admin rechten op te starten
     - cmd: is de command die binnen die powershel terminal uitgevoerd moet worden
-    - is_admin: is standaard op false als je de functie aanroept en als 2de argument 'True' zegt, dan wordeen admin rights toegevoegd
     - return is de resultaat van de powershell command die uitgevoerd is
     """
-    # zet admin rechten aan als de functie is aangeroepen met admin rechten
-    if is_admin:
-        get_adminRights()
-
     # https://www.phillipsj.net/posts/executing-powershell-from-python/
     # dit is de powershell command die uitgevoerd moet worden (deze command heeft adim rights nodig)
     runCommand = subprocess.run(

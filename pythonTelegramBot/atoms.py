@@ -61,6 +61,16 @@ def get_adminRights():
         ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, params, None, 1)
         sys.exit(0)
 
+def check_adminRights():
+    """
+    - Check of de bot admin rechten heeft
+    - Zo niet,return melding als dat een admin powershel geopent wordt
+    """
+    if ctypes.windll.shell32.IsUserAnAdmin():
+        return True
+
+    return "Geen admin rechten. Nieuwe admin terminal wordt gestart.\nProbeer de command opnieuw na de herstart."
+
 def add_to_registry(program_name):
     """
     Voegt een programma toe aan de Windows-opstartitems via het register.

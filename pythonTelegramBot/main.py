@@ -21,10 +21,11 @@ else:
     app_dir = Path(__file__).parent
 
 # Laad .env vanuit de gebundelde locatie
-env_path = app_dir / '.env'
+env_path = app_dir.parent / '.env'
 load_dotenv(dotenv_path=env_path)
 
 API_TOKEN: Final = os.getenv("TELEGRAM_BOT_TOKEN")
+# CHAT_ID = int(os.getenv("CHAT_ID"))
 CHAT_ID = int(os.getenv("CHAT_ID"))
 
 # on_startup functie heeft await nodig
