@@ -1,5 +1,5 @@
 # In deze file wordt de bot opgestart en luister hij  naar commands
-import os
+import os, sys
 from dotenv import load_dotenv
 from pathlib import Path
 from typing import Final
@@ -18,10 +18,10 @@ if getattr(sys, 'frozen', False):
     app_dir = Path(sys._MEIPASS)
 else:
     # Running als script
-    app_dir = Path(__file__).parent
+    app_dir = Path(__file__).parent.parent
 
 # Laad .env vanuit de gebundelde locatie
-env_path = app_dir.parent / '.env'
+env_path = app_dir / '.env'
 load_dotenv(dotenv_path=env_path)
 
 API_TOKEN: Final = os.getenv("TELEGRAM_BOT_TOKEN")
