@@ -141,8 +141,20 @@ Industrial web control. Ondersteun dit met een screenshot. Omschrijf ook wat je 
 <img width="2146" height="1216" alt="image" src="https://github.com/user-attachments/assets/913bfddd-1b1e-4c41-ba42-8b14bbdedf67" />
 
 <img width="3652" height="763" alt="image" src="https://github.com/user-attachments/assets/b20cff1d-65fd-40eb-867b-6a4ead0d2f0a" />  
-<img width="1161" height="344" alt="image" src="https://github.com/user-attachments/assets/2f20f86d-869f-477e-b604-abc1e8c21b5c" />
+<img width="1161" height="344" alt="image" src="https://github.com/user-attachments/assets/2f20f86d-869f-477e-b604-abc1e8c21b5c" />  
+<img width="2849" height="1028" alt="image" src="https://github.com/user-attachments/assets/4a8bd752-6269-413f-be61-a4ad22fcb358" />
 
+ik heb `site: OLOROn opgezocht` daar zag ik dat het een locatie was: `oloron-sainte-marie`, dus oloron is volgens mij de locatie van waar de device is.  
+dus de `H-4 MAP S.A` is de locatie van de andere3  
+
+ik heb daarna deze gevonden:  
+<img width="2840" height="886" alt="image" src="https://github.com/user-attachments/assets/8fbea045-7bd9-42c4-bf5c-64e13af76d66" />  
+met site `RAPALE` een locatie in italie
+
+wat ik zie is een inlog pagina en de locatie van waar het apparaat zit.  
+
+
+---
 
 #### De rest
 alles bahalve `intitle:"Schneider Electric Telecontrol` gaf resultaten over producten die schneider verkoopt en documentatie.  
