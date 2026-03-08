@@ -75,14 +75,14 @@ de opdracht was om Schneider Electric op poort 502 te zoeken
 > port:"502" org:Schneider Electric, org:Schneider Electric port:"502", port:502 vendor:"Schneider Electric" -> geen results
 
 Met `port:502 "Schneider Electric"` zie je wel alle aparaten die port 502 open hebben met Schneider Electric als Device Identification
-`<img width="1287" height="1812" alt="image" src="https://github.com/user-attachments/assets/afd73136-2903-4c94-816d-30be3f0ed538" />`
+<img width="1287" height="1812" alt="image" src="https://github.com/user-attachments/assets/afd73136-2903-4c94-816d-30be3f0ed538" />
 
 in totaal 2.737 Schneider Electric apparaten met poort 502 open op het internet.
 
 open ports:
-`<img width="1287" height="522" alt="image" src="https://github.com/user-attachments/assets/3c544867-c3f4-42e8-bd17-0b59aa8df423" />`
-`<img width="1287" height="526" alt="image" src="https://github.com/user-attachments/assets/7fc0cd11-d450-4937-a82a-95a761e8feb3" />`
-`<img width="1287" height="1067" alt="image" src="https://github.com/user-attachments/assets/c463320d-10a7-4015-88ab-52b5f0a9ad3b" />`
+<img width="1287" height="522" alt="image" src="https://github.com/user-attachments/assets/3c544867-c3f4-42e8-bd17-0b59aa8df423" />
+<img width="1287" height="526" alt="image" src="https://github.com/user-attachments/assets/7fc0cd11-d450-4937-a82a-95a761e8feb3" />
+<img width="1287" height="1067" alt="image" src="https://github.com/user-attachments/assets/c463320d-10a7-4015-88ab-52b5f0a9ad3b" />
 
 uit de lijst hebben alle devices 1 of meerdere poorten open, waarvan 1 open port 502 is
 
@@ -94,7 +94,7 @@ Zoek op poort 502 (modbus protocol poort), vendor: Schneider Electric en een gek
 screenshot waar duidelijk je zoek term zichtbaar is. Leg verder uit wat je te zien krijgt.
 
 van claude heb ik begrepen dat de moddelnummer naast de rodr Schneider electric staat:
-`<img width="1287" height="814" alt="image" src="https://github.com/user-attachments/assets/2faf0018-57a5-44dc-94e8-c2d7aa3e0fcf" />`
+<img width="1287" height="814" alt="image" src="https://github.com/user-attachments/assets/2faf0018-57a5-44dc-94e8-c2d7aa3e0fcf" />
 
 search naar:
 
@@ -135,8 +135,8 @@ Leg uit hoe je dit hebt gevonden. Ondersteun dit met een screenshot.
 Shneider electric in ICS-OSINT.xlsx:
 
 ctrl + f op: `Schneider Electric`
-`<img width="1287" height="670" alt="image" src="https://github.com/user-attachments/assets/50f0bf92-ac5f-4d83-b18e-232b9a35da61" />`
-`<img width="1287" height="434" alt="image" src="https://github.com/user-attachments/assets/a2f1f3dd-5c29-4555-b3e8-f6a8f9fd096f" />`
+<img width="1287" height="670" alt="image" src="https://github.com/user-attachments/assets/50f0bf92-ac5f-4d83-b18e-232b9a35da61" />
+<img width="687" height="434" alt="image" src="https://github.com/user-attachments/assets/a2f1f3dd-5c29-4555-b3e8-f6a8f9fd096f" />
 
 ---
 
@@ -156,7 +156,7 @@ ik heb `site: OLOROn opgezocht` daar zag ik dat het een locatie was: `oloron-sai
 dus de `H-4 MAP S.A` is de locatie van de andere3
 
 ik heb daarna deze gevonden:
-`<img width="1287" height="886" alt="image" src="https://github.com/user-attachments/assets/8fbea045-7bd9-42c4-bf5c-64e13af76d66" />`
+<img width="1287" height="886" alt="image" src="https://github.com/user-attachments/assets/8fbea045-7bd9-42c4-bf5c-64e13af76d66" />
 met site `RAPALE` een locatie in italie
 
 wat ik zie is een inlog pagina en de locatie van waar het apparaat zit.
@@ -167,7 +167,7 @@ wat ik zie is een inlog pagina en de locatie van waar het apparaat zit.
 
 alles bahalve `intitle:"Schneider Electric Telecontrol` gaf resultaten over producten die schneider verkoopt en documentatie.
 deze hadden geen url naar inlog paginas
-`<img width="1287" height="1911" alt="image" src="https://github.com/user-attachments/assets/0edb3dce-4845-46df-a87c-b0215a374c3a" />`
+<img width="1287" height="1911" alt="image" src="https://github.com/user-attachments/assets/0edb3dce-4845-46df-a87c-b0215a374c3a" />
 
 #### ik ging verkeerd zoeken
 
@@ -175,9 +175,9 @@ ik moest nog `inurl` of `intitle` erbij zetten
 ik ben terug gegaan bijna alles van Schneider geprobeerd met `inurl` en `intitle` maar weer hetzelfde gevonden
 
 daarna vroeg ik aan claude wat ik nog meer zou kunnen testen en: `inurl:/portal/portal.mwsl` was 1 van de opties
-`<img width="1287" height="1356" alt="image" src="https://github.com/user-attachments/assets/cc1cfc88-8bc5-4bd6-9762-046960e56d58" />`
-`<img width="1287" height="1582" alt="image" src="https://github.com/user-attachments/assets/b0396645-11a3-4b6d-8be7-bae86ecd2a64" />`
-`<img width="1287" height="1598" alt="image" src="https://github.com/user-attachments/assets/354527b6-9b07-44ca-adab-17b36534fc5e" />`
+<img width="1287" height="1356" alt="image" src="https://github.com/user-attachments/assets/cc1cfc88-8bc5-4bd6-9762-046960e56d58" />
+<img width="1287" height="1582" alt="image" src="https://github.com/user-attachments/assets/b0396645-11a3-4b6d-8be7-bae86ecd2a64" />
+<img width="1287" height="1598" alt="image" src="https://github.com/user-attachments/assets/354527b6-9b07-44ca-adab-17b36534fc5e" />
 
 ---
 
