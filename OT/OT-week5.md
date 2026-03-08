@@ -118,12 +118,58 @@ We gaan nu een GOOGLE DORKS zoekopdracht uitvoeren.
 In jouw ICS OSINT spreadsheet (ICS-OSINT.xlsx, zie DLO voor de file) vind je heel veel zoektermen voor alle mogelijke vendors.  
 Ga naar Google en gebruik de zoekterm uit de ICS OSINT spreadsheet om te zoeken naar webservers van Schneider Electric apparaten die publiekelijk zijn blootgesteld.
 
+
 ---
 
 ### Vraag 2A: Welke zoekterm heb je in het document (ICS-OSINT.xlsx) gevonden?
 Leg uit hoe je dit hebt gevonden. Ondersteun dit met een screenshot.
 
+Shneider electric in ICS-OSINT.xlsx:  
+
+ctrl + f op: `Schneider Electric`
+<img width="912" height="670" alt="image" src="https://github.com/user-attachments/assets/50f0bf92-ac5f-4d83-b18e-232b9a35da61" />  
+<img width="454" height="434" alt="image" src="https://github.com/user-attachments/assets/a2f1f3dd-5c29-4555-b3e8-f6a8f9fd096f" />
+
+
 ---
 
 ### Vraag 2B: Kies uit de google-resultaat een gevonden Schneider Electric
 Industrial web control. Ondersteun dit met een screenshot. Omschrijf ook wat je ziet.
+
+
+#### intitle:"Schneider Electric Telecontrol
+<img width="2146" height="1216" alt="image" src="https://github.com/user-attachments/assets/913bfddd-1b1e-4c41-ba42-8b14bbdedf67" />
+
+<img width="3652" height="763" alt="image" src="https://github.com/user-attachments/assets/b20cff1d-65fd-40eb-867b-6a4ead0d2f0a" />  
+<img width="1161" height="344" alt="image" src="https://github.com/user-attachments/assets/2f20f86d-869f-477e-b604-abc1e8c21b5c" />
+
+
+#### De rest
+alles bahalve `intitle:"Schneider Electric Telecontrol` gaf resultaten over producten die schneider verkoopt en documentatie.  
+deze hadden geen url naar inlog paginas
+<img width="1918" height="1911" alt="image" src="https://github.com/user-attachments/assets/0edb3dce-4845-46df-a87c-b0215a374c3a" />  
+
+
+#### ik ging verkeerd zoeken
+ik moest nog `inurl` of `intitle` erbij zetten  
+ik ben terug gegaan bijna alles van Schneider geprobeerd met `inurl` en `intitle` maar weer hetzelfde gevonden
+
+
+daarna vroeg ik aan claude wat ik nog meer zou kunnen testen en: `inurl:/portal/portal.mwsl` was 1 van de opties  
+<img width="2810" height="1356" alt="image" src="https://github.com/user-attachments/assets/cc1cfc88-8bc5-4bd6-9762-046960e56d58" />  
+<img width="2840" height="1582" alt="image" src="https://github.com/user-attachments/assets/b0396645-11a3-4b6d-8be7-bae86ecd2a64" />  
+<img width="2795" height="1598" alt="image" src="https://github.com/user-attachments/assets/354527b6-9b07-44ca-adab-17b36534fc5e" />
+
+---
+
+<img width="2818" height="1182" alt="image" src="https://github.com/user-attachments/assets/a8470816-5085-4515-a5cd-0ae2a6032fec" />  
+<img width="2866" height="1586" alt="image" src="https://github.com/user-attachments/assets/9c732773-1de4-4e8c-9e33-f564558d573d" />  
+<img width="2896" height="1295" alt="image" src="https://github.com/user-attachments/assets/7e84a990-e9c9-457f-a79e-141dd4a91e97" />
+
+---
+
+<img width="2863" height="1605" alt="image" src="https://github.com/user-attachments/assets/f6e61987-a6e2-4030-b7f3-9edbb4df4644" />
+
+
+
+
