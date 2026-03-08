@@ -27,8 +27,6 @@ Ik zie `top results 388,162` dus er zijn 388,164 modbus devices die verbonden zi
 Zoek op poort 502 (modbus protocol poort) en op vendor: Schneider Electric
 screenshot waar duidelijk je zoek term zichtbaar is. Leg verder uit wat je te zien krijgt.  
 
-> port:502 Schneider Electric
-
 #### crt.sh
 op de website van Schneider electric heb ik bij certificate dit gevonden:  
 <img width="2833" height="1506" alt="image" src="https://github.com/user-attachments/assets/e80fadd2-6ed8-4ab0-8aa5-69af3bee8231" />
@@ -57,6 +55,20 @@ Dus dit is wel de juiste certificate, in shodan ga ik nu zoeken naar:
   - <img width="3121" height="1819" alt="image" src="https://github.com/user-attachments/assets/55720ea8-c34e-4f6f-9463-1d0b02ff805b" />
   - <img width="3815" height="1074" alt="image" src="https://github.com/user-attachments/assets/28921093-dd0b-4af8-ac6f-0a9ec9d0310d" />
   - <img width="3800" height="1838" alt="image" src="https://github.com/user-attachments/assets/0a45228f-8605-46b0-ace4-4b61705ae758" />
+
+dit heeft poort 433 open,  
+de opdracht was om Schneider Electric op poort 502 te zoeken
+
+#### port:502 Schneider Electric
+<img width="2455" height="434" alt="image" src="https://github.com/user-attachments/assets/aca5b1af-0026-4edc-8e34-522d5d15b8e4" />  
+<img width="2586" height="416" alt="image" src="https://github.com/user-attachments/assets/0c905a42-1e98-47ba-8701-57114ceb00f0" />
+<img width="2468" height="439" alt="image" src="https://github.com/user-attachments/assets/2a291a4d-0c0d-4098-9f7d-fe94d7177d6a" />
+
+> port:"502" org:Schneider Electric, org:Schneider Electric port:"502", port:502 vendor:"Schneider Electric" -> geen results
+
+Met `port:502 "Schneider Electric"` zie je wel alle aparaten die port 502 open hebben met Schneider Electric als Device Identification
+<img width="3792" height="1812" alt="image" src="https://github.com/user-attachments/assets/afd73136-2903-4c94-816d-30be3f0ed538" />
+
 
 ---
 
