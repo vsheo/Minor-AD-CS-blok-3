@@ -27,7 +27,7 @@ Ik zie `top results 388,162` dus er zijn 388,164 modbus devices die verbonden zi
 Zoek op poort 502 (modbus protocol poort) en op vendor: Schneider Electric
 screenshot waar duidelijk je zoek term zichtbaar is. Leg verder uit wat je te zien krijgt.  
 
-#### crt.sh
+#### crt.sh (extra)
 op de website van Schneider electric heb ik bij certificate dit gevonden:  
 <img width="2833" height="1506" alt="image" src="https://github.com/user-attachments/assets/e80fadd2-6ed8-4ab0-8aa5-69af3bee8231" />
 
@@ -66,9 +66,18 @@ de opdracht was om Schneider Electric op poort 502 te zoeken
 
 > port:"502" org:Schneider Electric, org:Schneider Electric port:"502", port:502 vendor:"Schneider Electric" -> geen results
 
+
 Met `port:502 "Schneider Electric"` zie je wel alle aparaten die port 502 open hebben met Schneider Electric als Device Identification
 <img width="3792" height="1812" alt="image" src="https://github.com/user-attachments/assets/afd73136-2903-4c94-816d-30be3f0ed538" />
 
+in totaal 2.737 Schneider Electric apparaten met poort 502 open op het internet.
+
+open ports:  
+<img width="3745" height="522" alt="image" src="https://github.com/user-attachments/assets/3c544867-c3f4-42e8-bd17-0b59aa8df423" />
+<img width="3777" height="526" alt="image" src="https://github.com/user-attachments/assets/7fc0cd11-d450-4937-a82a-95a761e8feb3" />
+<img width="3769" height="1067" alt="image" src="https://github.com/user-attachments/assets/c463320d-10a7-4015-88ab-52b5f0a9ad3b" />
+
+uit de lijst hebben alle devices 1 of meerdere poorten open, waarvan 1 open port 502 is
 
 ---
 
