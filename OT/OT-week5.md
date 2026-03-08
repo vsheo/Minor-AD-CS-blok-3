@@ -8,6 +8,7 @@ We gaan nu een zoekopdracht uitvoeren op SHODAN.
 
 > opgezocht hoe ik shodan kan gebruiken:
 > - [Mastering Shodan Search Engine](https://infosecwriteups.com/mastering-shodan-search-engine-8c80b80dae09)
+> - [Search Query Fundamentals](https://help.shodan.io/the-basics/search-query-fundamentals)
 
 ---
 
@@ -84,6 +85,31 @@ uit de lijst hebben alle devices 1 of meerdere poorten open, waarvan 1 open port
 ### Vraag 1C: Hoeveel apparaten worden blootgesteld? Ondersteun dit met een
 Zoek op poort 502 (modbus protocol poort), vendor: Schneider Electric en een gekozen [modelnummer]
 screenshot waar duidelijk je zoek term zichtbaar is. Leg verder uit wat je te zien krijgt.
+
+van claude heb ik begrepen dat de moddelnummer naast de rodr Schneider electric staat:  
+<img width="1137" height="814" alt="image" src="https://github.com/user-attachments/assets/2faf0018-57a5-44dc-94e8-c2d7aa3e0fcf" />
+
+search naar:
+- Device Identification: Schneider Electric TM221CE16T
+  - <img width="2331" height="1824" alt="image" src="https://github.com/user-attachments/assets/4b464636-9aae-4b66-80e8-71ceaf5a74f2" />
+  - 182 apparaten blootgesteld
+  - port:502 erbij -> 170 apparaten blootgesteld
+    - <img width="2241" height="1818" alt="image" src="https://github.com/user-attachments/assets/c4cbcc98-7b4f-41c1-a83b-35e7ed5204df" />
+- Device Identification: Schneider Electric TM251MESE V05.00.08.07
+  - <img width="2363" height="1770" alt="image" src="https://github.com/user-attachments/assets/9dbb1502-cfd6-4a11-86a2-a6bd7a310369" />
+  - 4 apparaten blootgesteld
+  - port:502 erbij -> geen verschill
+    - <img width="2376" height="1774" alt="image" src="https://github.com/user-attachments/assets/430a3250-545b-4229-a5af-91a2d283768f" />
+
+
+Device Identification: Schneider Electric TM221CE16T port:502
+Dit leverde 170 blootgestelde apparaten op.
+
+Device Identification: Schneider Electric TM251MESE V05.00.08.07 port:502 (met een versie nummer erbij)
+Dit leverde 4 blootgestelde apparaten op, allemaal in Spanje.
+
+Ik heb ook eerst gezocht zonder port:502, wat bij de eerste 182 resultaten gaf.  
+en bioj de 2de veranderde niets.
 
 ---
 
