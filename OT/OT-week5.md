@@ -167,19 +167,7 @@ wat ik zie is een inlog pagina en de locatie van waar het apparaat zit.
 
 alles bahalve `intitle:"Schneider Electric Telecontrol` gaf resultaten over producten die schneider verkoopt en documentatie.
 deze hadden geen url naar inlog paginas
-<<<<<<< Updated upstream
 `<img width="1287" height="1911" alt="image" src="https://github.com/user-attachments/assets/0edb3dce-4845-46df-a87c-b0215a374c3a" />`
-
-=======
-`<img width="1918" height="1911" alt="image" src="https://github.com/user-attachments/assets/0edb3dce-4845-46df-a87c-b0215a374c3a" />`
-
->>>>>>> Stashed changes
->>>>>>>
->>>>>>
->>>>>
->>>>
->>>
->>
 
 #### ik ging verkeerd zoeken
 
@@ -199,16 +187,4 @@ daarna vroeg ik aan claude wat ik nog meer zou kunnen testen en: `inurl:/portal/
 
 ---
 
-<<<<<<< Updated upstream
-`<img width="1287" height="1605" alt="image" src="https://github.com/user-attachments/assets/f6e61987-a6e2-4030-b7f3-9edbb4df4644" />`
-
-=======
-`<img width="2863" height="1605" alt="image" src="https://github.com/user-attachments/assets/f6e61987-a6e2-4030-b7f3-9edbb4df4644" />`
-
->>>>>>> Stashed changes
->>>>>>>
->>>>>>
->>>>>
->>>>
->>>
->>
+<img width="1187" height="720" alt="image" src="https://github.com/user-attachments/assets/f6e61987-a6e2-4030-b7f3-9edbb4df4644" />
