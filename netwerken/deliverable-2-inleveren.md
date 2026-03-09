@@ -1,4 +1,5 @@
 # Deliverable 2 — IDS/IPS vs Firewall
+
 ### pfSense / OPNsense + Snort vs Kali + UFW
 
 ---
@@ -17,6 +18,7 @@ In welke klas zitten jullie?
 ## Vraag 2 — Duoleden
 
 **Wat zijn de volledige namen van de duoleden?**
+
 ```
 Naam 1: Viresh
 Naam 2: Muazma
@@ -33,6 +35,7 @@ Naam 2: Muazma
 - Wat zijn de IP-adressen — DHCP of statisch?
 - Is er end-to-end connectiviteit?
 - Waar staat het target (telefoon/hotspot, VM achter pfSense, etc.)?
+
 ```
 Antwoord: ___________________________
 ```
@@ -46,6 +49,7 @@ Antwoord: ___________________________
 - `default incoming` / `outgoing` policy
 - `logging` aan of uit
 - Voeg 1 regel output toe uit `sudo ufw status verbose` (beschrijf in tekst)
+
 ```
 Antwoord: ___________________________
 ```
@@ -58,6 +62,7 @@ Antwoord: ___________________________
 
 - IDS of IPS/Block?
 - Welke (globale) rules/categorieën staan aan?
+
 ```
 Antwoord: ___________________________
 ```
@@ -69,6 +74,7 @@ Antwoord: ___________________________
 **Hoe hebben jullie gecontroleerd dat het verkeer langs Snort loopt?**
 
 Bijv. Snort alerts verschijnen / interface counters / pfSense logs.
+
 ```
 Antwoord: ___________________________
 ```
@@ -80,14 +86,17 @@ Antwoord: ___________________________
 > Voer de test uit op **beide clients/laptops**!
 
 **Commando:**
+
 ```bash
 ping -c 4 <target-ip>
 ```
 
 Beantwoord:
+
 - Resultaat: success of fail?
 - Wat logt **UFW**?
 - Wat logt **Snort**?
+
 ```
 Antwoord: ___________________________
 ```
@@ -99,27 +108,32 @@ Antwoord: ___________________________
 > Voer de test uit op **beide clients/laptops**!
 
 **Commando:**
+
 ```bash
 sudo hping3 -S -p 80 -c 20 <target-ip>
 ```
 
 Beantwoord:
+
 - Wat gebeurt er?
 - Welke logs/alerts zie je in **UFW** en **Snort**?
+
 ```
 Antwoord: ___________________________
 ```
 
 ---
 
-## Vraag 9 — Extra Test A *(jullie keuze)*
+## Vraag 9 — Extra Test A _(jullie keuze)_
 
 **Voer 1 van de extra aanvalstypen uit** (bijv. nmap scan).
 
 Beantwoord:
+
 - Welke test precies (commando)?
 - Observatie **UFW**
 - Observatie **Snort**
+
 ```
 Commando: ___________________________
 UFW:      ___________________________
@@ -128,14 +142,16 @@ Snort:    ___________________________
 
 ---
 
-## Vraag 10 — Extra Test B *(jullie keuze)*
+## Vraag 10 — Extra Test B _(jullie keuze)_
 
 **Voer 1 van de extra aanvalstypen uit.**
 
 Beantwoord:
+
 - Welke test precies (commando)?
 - Observatie **UFW**
 - Observatie **Snort**
+
 ```
 Commando: ___________________________
 UFW:      ___________________________
@@ -144,14 +160,16 @@ Snort:    ___________________________
 
 ---
 
-## Vraag 11 — Extra Test C *(jullie keuze)*
+## Vraag 11 — Extra Test C _(jullie keuze)_
 
 **Voer 1 van de extra aanvalstypen uit.**
 
 Beantwoord:
+
 - Welke test precies (commando)?
 - Observatie **UFW**
 - Observatie **Snort**
+
 ```
 Commando: ___________________________
 UFW:      ___________________________
@@ -165,8 +183,10 @@ Snort:    ___________________________
 **Zet Snort (indien mogelijk) in IPS/Block-modus en herhaal 1 test** (bijv. nmap of hping).
 
 Beantwoord:
+
 - Wat veranderde er?
 - Hoe merk je dat het echt blokkeert — symptoom + log?
+
 ```
 Antwoord: ___________________________
 ```
@@ -176,8 +196,10 @@ Antwoord: ___________________________
 ## Vraag 13 — Conclusie & Advies
 
 **Als jij een klein bedrijf moest adviseren:**
+
 - Wanneer kies je alleen voor een firewall?
 - Wanneer voeg je IDS/IPS toe?
+
 ```
 Antwoord: ___________________________
 ```
@@ -197,6 +219,7 @@ Antwoord: ___________________________
 ## Vraag 15 — Opmerkingen
 
 **Willen jullie nog iets kwijt?**
+
 ```
 Antwoord: ___________________________
 ```

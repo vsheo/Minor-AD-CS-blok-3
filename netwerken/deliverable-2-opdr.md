@@ -12,6 +12,7 @@
 
 ## Stap 1 — UFW controleren
 > *Mijn laptop*
+> gewisseld Muazma doet deze nu
 
 opzet:  
 ```bash
@@ -38,6 +39,7 @@ Noteer alvast:
 
 ## Stap 2 — Snort controleren
 > *Muazma's laptop*
+> ik doe deze nu
 
 opzet:  
 ```bash
@@ -50,6 +52,8 @@ opzet:
 4. Services → Snort → Interface: LAN
 5. Kies modus: IDS (alleen log) of IPS (log + block) -> noteer wat gebeurt
 ```
+> via netgate pfsense iso gedownload en geinstaleerd in vmware
+> 
 
 Noteer alvast:
 - Op welke interface draait Snort?
