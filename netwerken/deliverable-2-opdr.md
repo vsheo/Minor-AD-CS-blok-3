@@ -52,13 +52,37 @@ opzet:
 4. Services → Snort → Interface: LAN
 5. Kies modus: IDS (alleen log) of IPS (log + block) -> noteer wat gebeurt
 ```
-> via netgate pfsense iso gedownload en geinstaleerd in vmware
-> 
+beide vms op dezelfde "netwerk"  
+<img width="758" height="599" alt="image" src="https://github.com/user-attachments/assets/df3d0b93-14d3-4bab-9cd5-002626b1cf54" />
+> restart netwerk om ip te vinden
+> sudo ip link set eth0 down
+> sudo ip link set eth0 up
+> sudo dhcpcd eth0
+
+- via netgate pfsense iso gedownload en geinstaleerd in vmware  
+- vms op hetzelfde netwerk gezet
+- op de host only naar `https://192.168.1.1`
+- de wizard gevolgd alles next gedaan, default was goed
+- daarna boven bij system -> package manager, snort gedownload
+
+
+daarna
+- boven bijn services -> snort
+- lan toevoegen (save)
+- bij block settings -> block offenders aan zetten -> save
+- terug naar services -> snort en de play button klikken (dit is voor ips)
+- voor ids moet block settings uit zijn
+
 
 Noteer alvast:
 - Op welke interface draait Snort?
+  - <img width="1942" height="201" alt="image" src="https://github.com/user-attachments/assets/776d4a54-bd83-40fd-95a3-7ddfb97a88d3" />
+  - op LAn (em1)
 - IDS of IPS modus?
+  - IDS
 - Welke categorieën/rulesets staan aan?
+  - <img width="1926" height="685" alt="image" src="https://github.com/user-attachments/assets/5ba89e80-0fb3-414b-8d17-fc2d7d7383ed" />
+  - Snort GPLv2 Community Rules (Talos certified)
 
 ---
 
