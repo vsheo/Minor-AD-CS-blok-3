@@ -1,28 +1,40 @@
-# CYBERSECURITY AD | Lab OT
+# OT - Pentest
+In dit lab gaan we oefenen met het pentesten van een Modbus PLC systeem, we gaan het
+geheugenblok uitlezen en manipuleren. Zorg ervoor dat je het OT-lab hebt opgezet en dat het werkt.
+Werkt het niet, kijk dan naar het document “Lab inrichten V3.pdf” om dit op te lossen. We gaan in dit
+lab aan de slag met verschillende tools voor het pentesten van de OT-omgeving. De opdrachten zijn
+meer doe opdrachten en bij sommige zul je het zelf moeten gaan uitzoeken.
 
-## Opdracht 1: Opstarten Labomgeving
+Benodigdheden: Kali Linux
 
-### 1. opstarten Labomgeving
+## 1. opstarten Labomgeving
 - `docker-compose up -d`
 - Controleer of alle containers draaien: `docker ps`
 
+---
 
-### 2. Controleren of PLC werkt
+## 2. Controleren of PLC werkt
 - Log in op PLC webinterface: http://127.0.0.1:8080/login
   - username: openplc
   - password: openplc
 - Controleer of het programma plc-work werkt: Status: Running
 - Werkt het programma niet klik dan op `Start PLC` om het op te starten
 
-### 3. Monitoring –pagina in Openplc
+---
+
+## 3. Monitoring –pagina in Openplc
 Plaats een screenshot en geef een korte beschrijving van wat je ziet op deze pagina  
 [autonomy edge - Modbus Addressing](https://edge.autonomylogic.com/docs/openplc-editor/communication/modbus/addressing)
 
-### 4. Open de scada
+---
+
+## 4. Open de scada
 Open de scada web-interface: http://127.0.0.1:1881  
 Plaats een screenshot en geef een korte beschrijving van wat je ziet
 
-### 5.1 Geheugen blok uitlezen met Mobus-cli
+---
+
+## 5.1 Geheugen blok uitlezen met Mobus-cli
 - Start en nieuwe terminal op en typ: `modbus --help`
   - Als output krijg je te zien hoe de commando gebruikt kan worden. Dus hoe het is gestructureerd
 - Typ het volgende commando: `modbus read –help`
@@ -33,7 +45,9 @@ Plaats een screenshot en geef een korte beschrijving van wat je ziet
 
 **Noteer wat je ziet en leg het resultaat uit. Ondersteun dit met een screenshot**
 
-### 5.2 Geheugenblok manipuleren
+---
+
+## 5.2 Geheugenblok manipuleren
 Nu zullen we het geheugenblok gaan manipuleren namelijk de holding registers
 
 - Typ: `modbus write –help`
@@ -48,21 +62,27 @@ Nu zullen we het geheugenblok gaan manipuleren namelijk de holding registers
 - Typ eerst : `docker-compose down`
 - Vervolgens : `docker-compose up -d`
 
-### 6. UnitID
+---
+
+## 6. UnitID
 - Start Metasploit en type : `search modbus`
 - Kies vervolgens voor modbus_findunitid : `type 12`
   - Gebruik “info” om meer informatie te vergaren over de module
   - Geef aan de juiste rhost en start de module
 - **Noteer wat je ziet en leg het resultaat uit. Geef aan wat een station ID is en ondersteun dit met een screenshot**
 
-### 7. Modbusclient Utility
+---
+
+## 7. Modbusclient Utility
 - Kies vervolgens de modbusclient utility met commando: `use 2`
 - Om te kijken wat je allemaal met deze module kunt doen typ : `info`
 - Zoals te zien is kunnen er verschillende acties worden uitgevoerd. Om te zien welke acties binnen de module worden uitgevoerd kun je gebruik maken van het commando : `show actions`
   - Een actie kun je vervolgens selecteren met : `set action [naam van de actie]`
   - Met `show options` krijg je een overzicht van alle parameters die je moet aanpassen
 
-### 8. Geheugenadressen zoeken
+---
+
+## 8. Geheugenadressen zoeken
 We gaan nu proberen beide pompen aan te zetten en het toerental van de pompen maximaal te zetten
 
 - Configureer
@@ -85,7 +105,9 @@ We gaan nu proberen beide pompen aan te zetten en het toerental van de pompen ma
   - Lees de geheugenwaardes uit opdracht 4 overnieuw uit.
     - Je ziet nu dat er specifieke waardes veranderd zijn. Dit zijn de instellingen van de pomp
 
-### 9. Geheugenadressen aanpassen
+---
+
+## 9. Geheugenadressen aanpassen
 We hebben nu de juiste geheugenadressen gevonden.  
 Dit zijn 2 coils en 2 registers. We gaan deze nu via Metasploit aanpassen.
 
