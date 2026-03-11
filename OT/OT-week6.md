@@ -138,6 +138,12 @@ Nu zullen we het geheugenblok gaan manipuleren namelijk de holding registers
 - Typ eerst : `docker-compose down`
 - Vervolgens : `docker-compose up -d`
 
+nadat de lab opnieuw opgestart was, zag ik dat de speed voor pomp 1 terug was op 50:  
+<img width="562" height="513" alt="image" src="https://github.com/user-attachments/assets/6aa04767-1de4-4237-8ebc-1e34e3889a65" />  
+<img width="1923" height="181" alt="image" src="https://github.com/user-attachments/assets/bc7bdbf2-14bf-45d7-9a89-ee8667b4e212" />
+
+
+
 ---
 
 ## 6. UnitID
