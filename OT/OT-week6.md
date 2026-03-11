@@ -27,7 +27,7 @@ Benodigdheden: Kali Linux
 ---
 
 ## 3. Monitoring – pagina in Openplc
-Plaats een screenshot en geef een korte beschrijving van wat je ziet op deze pagina  
+**Plaats een screenshot en geef een korte beschrijving van wat je ziet op deze pagina**  
 [autonomy edge - Modbus Addressing](https://edge.autonomylogic.com/docs/openplc-editor/communication/modbus/addressing)
 
 <img width="1905" height="1101" alt="image" src="https://github.com/user-attachments/assets/9a992761-ac1e-4fc0-a100-83f3d51fb00b" />  
@@ -35,7 +35,7 @@ Plaats een screenshot en geef een korte beschrijving van wat je ziet op deze pag
 
 wat ik zie:
 - een overzicht van alle informatie van 2 pompen zoals:
-  - flow rate, temperatuur, pressure
+  - flow rate, temperatuur, pressure en speed
 - Type
   - Bool: iets dat true of false kan zijn, in dit geval aan of uit
   - INT: een rond getal, deze is terug te zijn bij de Value kolom
@@ -44,7 +44,7 @@ wat ik zie:
     - `%Q` -> output 
     - `X` -> in Bits 
     - `X` -> in Bits
-    - in [link van de workshop](https://edge.autonomylogic.com/docs/openplc-editor/communication/modbus/addressing#coils-(fc-1,-5,-15)) kan je opzoeken wat deze "dingen" betekenen
+    - in [link van de workshop](https://edge.autonomylogic.com/docs/openplc-editor/communication/modbus/addressing#coils-(fc-1,-5,-15):~:text=0-,%25QX0.0,-Digital%20output%20bit) kan je opzoeken wat deze "dingen" betekenen
 - Write: die is er alleen voor `pump1_start` en `pump2_start`
   - aan en uit buttons (true/false) voor pomp 1 en 2
 - Value: de waarde van het onderdeel
@@ -55,7 +55,18 @@ wat ik zie:
 
 ## 4. Open de scada
 Open de scada web-interface: http://127.0.0.1:1881  
-Plaats een screenshot en geef een korte beschrijving van wat je ziet
+**Plaats een screenshot en geef een korte beschrijving van wat je ziet**
+
+<img width="2406" height="1427" alt="image" src="https://github.com/user-attachments/assets/c5dbde2a-f121-401e-85d4-01f59c486251" />
+
+ik zie:
+- hoe olie van links onder door de dirty filters naar pomp 1 gaat. vandaar naar pomp 2 en als laatst naar de controll valves
+- er zijn ook deze valves, die rood zijn
+  - <img width="107" height="81" alt="image" src="https://github.com/user-attachments/assets/439b2dcf-79d0-4673-854e-110d5bbfe593" />
+  - deze zijn gesloten (op dit moment, mischien kan ik later zie aan zetten)
+- als laatst zie ik de info van de value kolom terug op deze pagina
+  - flow rate, temperatuur, pressure en speed
+
 
 ---
 
