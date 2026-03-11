@@ -67,7 +67,6 @@ ik zie:
 - als laatst zie ik de info van de value kolom terug op deze pagina
   - flow rate, temperatuur, pressure en speed
 
-
 ---
 
 ## 5.1 Geheugen blok uitlezen met Mobus-cli
@@ -79,7 +78,35 @@ ik zie:
   - Typ het volgende commando in: `modbus read [ip-adres] %MW0 22`
   - Hier zie je dat het geheugen-adres is gedefinieerd met %MW het geheugenbloknummer 0 en de lengte 10. Dus hiermee worden de eerste 10 heugenblokken gelezen
 
+uit [OT-week3](https://github.com/vsheo/Minor-AD-CS-blok-3/blob/main/OT/OT-week3.md#opdracht-4-network-discovery-ip-route--layer-3) (bij opdracht 5):
+- plc: 192.168.2.10
+- scada: 192.168.3.20
+
 **Noteer wat je ziet en leg het resultaat uit. Ondersteun dit met een screenshot**
+PLC;
+- `modbus read 192.168.2.10 %MW0 22`
+- <img width="586" height="732" alt="image" src="https://github.com/user-attachments/assets/4e0eaf7b-3a03-4774-8ae8-9aeb601c3240" />
+
+wat ik zie:
+- een lijst van `%MW` 0 t/m 21
+- `MW` staat voor [Memory Words](https://edge.autonomylogic.com/docs/openplc-editor/communication/modbus/addressing#memory-words-(via-holding-registers))
+  - Holding Registers:
+- `%MW10` en `%MW10` staan op 50, de rest is op 0
+
+what is memory word
+<img width="1005" height="524" alt="image" src="https://github.com/user-attachments/assets/3bd031d9-7414-4fbd-b107-af4d8fbfac97" />
+<img width="982" height="868" alt="image" src="https://github.com/user-attachments/assets/6b979768-bd71-47a0-a5d1-fca917bbce3c" />
+<img width="1009" height="175" alt="image" src="https://github.com/user-attachments/assets/917118e0-6d91-4449-a03f-26fd30f82773" />
+memory word is een adress waar je gegevens kan opslaan, en later kan ophalen 
+
+
+SCADA:
+- `modbus read 192.168.3.20 %MW0 22`
+- <img width="2359" height="180" alt="image" src="https://github.com/user-attachments/assets/c1bfe546-a6ff-4da7-b0ad-fad90ca0701f" />
+Dit geeft een error  
+omdat `%MW0 22` alleen op plc ip gelezen kan worden, (omdat plc het apparaat kan beheren)
+scada is alleen om te zien war er op de machine gebeurt
+
 
 ---
 
