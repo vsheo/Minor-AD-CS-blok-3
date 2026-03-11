@@ -93,12 +93,13 @@ wat ik zie:
   - Holding Registers:
 - `%MW10` en `%MW10` staan op 50, de rest is op 0
 
-what is memory word
+[wat is memory word](https://www.quora.com/What-is-a-%E2%80%9Cmemory-word%E2%80%9D-in-PLC):
 <img width="1005" height="524" alt="image" src="https://github.com/user-attachments/assets/3bd031d9-7414-4fbd-b107-af4d8fbfac97" />
 <img width="982" height="868" alt="image" src="https://github.com/user-attachments/assets/6b979768-bd71-47a0-a5d1-fca917bbce3c" />
 <img width="1009" height="175" alt="image" src="https://github.com/user-attachments/assets/917118e0-6d91-4449-a03f-26fd30f82773" />
 memory word is een adress waar je gegevens kan opslaan, en later kan ophalen 
 
+De command `modbus read 192.168.2.10 %MW0 22` laat dus zien wat in memory word 0 tot 22 opgelagen is
 
 SCADA:
 - `modbus read 192.168.3.20 %MW0 22`
@@ -120,6 +121,18 @@ Nu zullen we het geheugenblok gaan manipuleren namelijk de holding registers
   - **Maak de monitoring pagina open en noteer welke parameter gewijzigd is. Ondersteun dit met een screenshot**
 - Manipuleren van het coil register. Type het volgende commando om het coil register in te lezen. : `modbus read [ip-adres] %M0 10`
   - Schrijf het commando om pomp1 uit te schakelen
+ 
+`%MV10` de 11de geheugen plek/locatie veranderen:
+- `modbus write 192.168.2.10 %MW10 87`
+- de pomp 1 speed_in en speed_out zijn nu veranderd naar 87
+  - <img width="1924" height="169" alt="image" src="https://github.com/user-attachments/assets/258972b2-60f9-4f2f-9fa6-9b69e1464aee" />
+  - <img width="559" height="363" alt="image" src="https://github.com/user-attachments/assets/f678abd2-7713-43a9-b3b5-8d4cb96856ce" />
+> `%M` is de memory, `%i` is de input en `%Q` is de output  
+> Ze hebben allemaal `W10`, dus wat opgeslagen is in `W10` zorgt voor snelheid (de speed_in en speed_out) van pomp 1  
+> als je de Memory van `W10` veranderd dan veranderd de input en output mee,  
+> volgens mij omdat de input(%I) en output(%Q) lezen wat in de memory(%M) opgeslagen is  
+
+
 
 ### Resetten van de labomgeving
 - Typ eerst : `docker-compose down`
