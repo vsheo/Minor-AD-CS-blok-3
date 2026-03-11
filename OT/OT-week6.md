@@ -11,6 +11,8 @@ Benodigdheden: Kali Linux
 - `docker-compose up -d`
 - Controleer of alle containers draaien: `docker ps`
 
+<img width="2317" height="360" alt="image" src="https://github.com/user-attachments/assets/cdc4e50f-f556-45ee-9b91-fec4cef774ff" />
+
 ---
 
 ## 2. Controleren of PLC werkt
@@ -20,11 +22,34 @@ Benodigdheden: Kali Linux
 - Controleer of het programma plc-work werkt: Status: Running
 - Werkt het programma niet klik dan op `Start PLC` om het op te starten
 
+<img width="1361" height="834" alt="image" src="https://github.com/user-attachments/assets/6388373d-0f94-44d3-b84d-9a380a577bfe" />
+
 ---
 
-## 3. Monitoring –pagina in Openplc
+## 3. Monitoring – pagina in Openplc
 Plaats een screenshot en geef een korte beschrijving van wat je ziet op deze pagina  
 [autonomy edge - Modbus Addressing](https://edge.autonomylogic.com/docs/openplc-editor/communication/modbus/addressing)
+
+<img width="1905" height="1101" alt="image" src="https://github.com/user-attachments/assets/9a992761-ac1e-4fc0-a100-83f3d51fb00b" />  
+<img width="1903" height="1147" alt="image" src="https://github.com/user-attachments/assets/e3b5f77e-7ef2-49da-aa57-493f4953f440" />
+
+wat ik zie:
+- een overzicht van alle informatie van 2 pompen zoals:
+  - flow rate, temperatuur, pressure
+- Type
+  - Bool: iets dat true of false kan zijn, in dit geval aan of uit
+  - INT: een rond getal, deze is terug te zijn bij de Value kolom
+- Location: dit is een string waar elk letter iets betekent, bijvoorbeeld
+  -  op pomp 1: `pump1_start` `%QX0.0`
+    - `%Q` -> output 
+    - `X` -> in Bits 
+    - `X` -> in Bits
+    - in [link van de workshop](https://edge.autonomylogic.com/docs/openplc-editor/communication/modbus/addressing#coils-(fc-1,-5,-15)) kan je opzoeken wat deze "dingen" betekenen
+- Write: die is er alleen voor `pump1_start` en `pump2_start`
+  - aan en uit buttons (true/false) voor pomp 1 en 2
+- Value: de waarde van het onderdeel
+  - `pump1_start` en `pump2_start` hebben boolean, daarom kunnen deze 2 alleen true of false zijn in deze kolom
+  - derest zijn integers, en hebben daarom een geheel getal als voorde in deze kolom
 
 ---
 
