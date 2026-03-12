@@ -31,14 +31,24 @@ Naam 2: Muazma
 **Beschrijf jullie testopstelling:**
 
 - Welke VM's gebruik je (Kali / pfSense / OPNsense)?
+  - Viresh: pfSense VM en kali host only VM
+  - Muazma: Kali VM Aanvaller en Kali VM Client
 - Netwerkmodus per VM (NAT, Host-Only, Internal Network)?
+  - Viresh:
+    - pfsense -> Bridged en host only
+    - kali -> host only
+  - Muazma:
+    - kali aanvaller -> NAT en host only
+    - kali client -> host only
 - Wat zijn de IP-adressen — DHCP of statisch?
+  - pfSense: `192.168.1.1`, Statisch in kali host only op de web pagina aangegeve
+  - Kali host only: `192.168.1.100`
 - Is er end-to-end connectiviteit?
+  - Kali aanvaller van Muazma kan pfSense met nmap vinden: `nmap -sS -Pn 192.168.1.1`
+  - Maar in de webpagina van Viresh kali host only zien we niks bij alerts
 - Waar staat het target (telefoon/hotspot, VM achter pfSense, etc.)?
+  - pfSense zelf `192.168.1.1` is het target
 
-```
-Antwoord: ___________________________
-```
 
 ---
 
