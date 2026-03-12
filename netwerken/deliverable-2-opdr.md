@@ -97,13 +97,33 @@ Je hebt een doel-IP nodig om op te testen.
 
 > **Hint:** Mogelijk moet je routing handmatig instellen op Kali/pfSense.
 
+de Ip richting getest met `nmap -sS -Pn 192.168.1.1`,  
+op Muazma's kali aanvaller VM kon ze wel de target vinden:  
+<img width="664" height="292" alt="image" src="https://github.com/user-attachments/assets/3ea9a052-d695-4650-a9c4-a33791d84cb0" />  
+
+Maar op de pfsense webpagina kregen we geen alerts:  
+<img width="1778" height="862" alt="Schermafbeelding 2026-03-11 173442" src="https://github.com/user-attachments/assets/9f6dcf8e-aae0-4430-a1fd-d7ede8fa6c40" />
+
+
 ---
 
 ## Stap 4 — Tests uitvoeren
 
 Per test vergelijk je:
 - **UFW:** block of allow? Log ja of nee?
+  - op Muazma's laptop
+  - Outgoing ping: allow
+  - Logging is on(low)
+  - <img width="537" height="126" alt="image" src="https://github.com/user-attachments/assets/6b7a1b46-b7e7-4358-9c6a-518edf9ec1ad" />
+
 - **Snort:** alert of log? Wordt er geblokkeerd?
+  - geen alerts
+    - <img width="1778" height="862" alt="Schermafbeelding 2026-03-11 173442" src="https://github.com/user-attachments/assets/94914751-f057-4092-8ee8-0333dc321a06" />
+  - snort settings
+    - <img width="1807" height="457" alt="Schermafbeelding 2026-03-11 173605" src="https://github.com/user-attachments/assets/c0b5d4ab-ed8d-42d1-a30a-b428857bf4e8" />
+    - <img width="1770" height="843" alt="Schermafbeelding 2026-03-11 183125" src="https://github.com/user-attachments/assets/e84873ce-7069-4553-a55f-f1a704cf8d76" />
+    - <img width="1900" height="527" alt="Schermafbeelding 2026-03-11 183919" src="https://github.com/user-attachments/assets/b79bad52-e894-4108-a0f2-2d87c7dfa77b" />
+
 
 **[Open de Forms](https://forms.office.com/e/TE8dYk2LME)** — vul meteen in, daar staat ook meer instructie.
 
