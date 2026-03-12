@@ -147,6 +147,14 @@ status -. system logs -> firewall:
 <img width="662" height="527" alt="image" src="https://github.com/user-attachments/assets/ab8897b7-c534-457a-8763-6555b56edc12" />
 
 
+Het wertk:  
+<img width="1940" height="858" alt="image" src="https://github.com/user-attachments/assets/d670f618-a4f3-483a-8a91-06761ee5a186" />  
+
+dit hebben we aangezet  
+<img width="1910" height="714" alt="image" src="https://github.com/user-attachments/assets/b244949f-e9fa-481e-8031-b41ce6dee2fc" />  
+enable all en dan apply
+
+
 ---
 
 ## Stap 4 — Tests uitvoeren
