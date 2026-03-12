@@ -149,8 +149,10 @@ Per test vergelijk je:
   - <img width="537" height="126" alt="image" src="https://github.com/user-attachments/assets/6b7a1b46-b7e7-4358-9c6a-518edf9ec1ad" />
 
 - **Snort:** alert of log? Wordt er geblokkeerd?
-  - geen alerts
-    - <img width="1778" height="862" alt="Schermafbeelding 2026-03-11 173442" src="https://github.com/user-attachments/assets/94914751-f057-4092-8ee8-0333dc321a06" />
+  - <details>
+      <summary> voorheen geen alerts, maar toen was de Pfsense Lan IP de target</summary>
+      <img width="1778" height="862" alt="Schermafbeelding 2026-03-11 173442" src="https://github.com/user-attachments/assets/94914751-f057-4092-8ee8-0333dc321a06" />
+    </details>
   - <details>
     <summary>snort settings screenshots</summary>
       <img width="1807" height="457" alt="Schermafbeelding 2026-03-11 173605" src="https://github.com/user-attachments/assets/c0b5d4ab-ed8d-42d1-a30a-b428857bf4e8" />
