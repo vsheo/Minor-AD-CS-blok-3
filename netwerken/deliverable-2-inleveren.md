@@ -46,7 +46,7 @@ Naam 2: Muazma
     - Kali host only: `192.168.216.130` DHCP omdat hier dynamisch staat op de regel van de IP:
       - <img width="1489" height="488" alt="Schermafbeelding 2026-03-11 180835" src="https://github.com/user-attachments/assets/81b1781c-c16a-42a4-aee9-6fa7360818d8" />
   - Muazma
-    - Kali aanvaller: `172.20.10.8` MISCHIEN AANGEPAST OMDAT HET NAT IS
+    - Kali aanvaller: `172.20.10.8`
     - client VM: 
 - Is er end-to-end connectiviteit?
   - Kali aanvaller van Muazma kan pfSense met nmap vinden: `nmap -sS -Pn 192.168.1.1`
