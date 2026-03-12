@@ -54,10 +54,10 @@ opzet:
 ```
 beide vms op dezelfde "netwerk"  
 <img width="758" height="599" alt="image" src="https://github.com/user-attachments/assets/df3d0b93-14d3-4bab-9cd5-002626b1cf54" />
-> restart netwerk om ip te vinden
-> sudo ip link set eth0 down
-> sudo ip link set eth0 up
-> sudo dhcpcd eth0
+> restart netwerk om ip te vinden  
+> sudo ip link set eth0 down  
+> sudo ip link set eth0 up  
+> sudo dhcpcd eth0  
 
 - via netgate pfsense iso gedownload en geinstaleerd in vmware  
 - vms op hetzelfde netwerk gezet
@@ -104,6 +104,38 @@ op Muazma's kali aanvaller VM kon ze wel de target vinden:
 Maar op de pfsense webpagina kregen we geen alerts:  
 <img width="1778" height="862" alt="Schermafbeelding 2026-03-11 173442" src="https://github.com/user-attachments/assets/9f6dcf8e-aae0-4430-a1fd-d7ede8fa6c40" />
 
+We hebben nu door dat we als target de pf sense IP hadden, maar die moest de hotspot zijn.  
+
+| Machine | IP | Netwerk | Rol |
+|---|---|---|---|
+| Telefoon/hotspot | `172.20.10.1` | Hotspot | Target |
+| pfSense WAN | `172.20.10.10` | ip van telefoon hotspot | Firewall/IDS |
+| Muazma's Kali aanvaller | `172.20.10.8` | ip van telefoon hotspot | Aanvaller |
+| pfSense LAN | `192.168.1.1` | LAN, static gemaakt | Firewall/IDS |
+| Jouw Kali | `192.168.1.100` | LAN, via pfsense | Pfsense beheer |
+
+ pfSense WAN:  
+ De WAN (Wide Area Network) interface is de buitenkant van pfSense. Deze is verbonden met de hotspot/internet. Verkeer van buiten (zoals Muazma's Kali) komt binnen via deze interface. Het IP 172.20.10.10 wordt via DHCP toegewezen door de hotspot.  
+
+pfSense LAN:  
+De LAN (Local Area Network) interface is de binnenkant van pfSense. Dit is het interne netwerk waar jouw Kali (192.168.1.100) op zit. pfSense beheert dit netwerk zelf met een vast (statisch) IP 192.168.1.1 en geeft via DHCP adressen uit aan apparaten op het LAN.
+
+<details>
+  <summary>screenshots</summary>
+  viresh kali host only  
+  <img width="1245" height="180" alt="image" src="https://github.com/user-attachments/assets/ddfa09ad-330b-4ce6-a5d9-691922fb3dad" />  
+
+  pfsense  
+  <img width="1590" height="160" alt="image" src="https://github.com/user-attachments/assets/3d70ae31-2088-4780-ade1-dfe07b5d4e61" />
+
+  Muazma kali aanvaller  
+  <img width="672" height="121" alt="image" src="https://github.com/user-attachments/assets/a1cf7006-5ade-4fa7-9446-176adf82609e" />
+</details>
+
+Wat moet gebeuren:  
+- beide laptops zijn met hetzelfde netwerk verbonden
+- Muazmas aanvaller VM target de hotspot
+- ik moet in de kali host only (pfsense beheer) alerts krijgen
 
 ---
 
