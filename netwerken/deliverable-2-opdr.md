@@ -53,7 +53,7 @@ opzet:
 5. Kies modus: IDS (alleen log) of IPS (log + block) -> noteer wat gebeurt
 ```
 beide vms op dezelfde "netwerk"  
-<img width="758" height="599" alt="image" src="https://github.com/user-attachments/assets/df3d0b93-14d3-4bab-9cd5-002626b1cf54" />
+<img width="350" height="599" alt="image" src="https://github.com/user-attachments/assets/df3d0b93-14d3-4bab-9cd5-002626b1cf54" />
 > restart netwerk om ip te vinden  
 > sudo ip link set eth0 down  
 > sudo ip link set eth0 up  
@@ -151,11 +151,12 @@ Per test vergelijk je:
 - **Snort:** alert of log? Wordt er geblokkeerd?
   - geen alerts
     - <img width="1778" height="862" alt="Schermafbeelding 2026-03-11 173442" src="https://github.com/user-attachments/assets/94914751-f057-4092-8ee8-0333dc321a06" />
-  - snort settings
-    - <img width="1807" height="457" alt="Schermafbeelding 2026-03-11 173605" src="https://github.com/user-attachments/assets/c0b5d4ab-ed8d-42d1-a30a-b428857bf4e8" />
-    - <img width="1770" height="843" alt="Schermafbeelding 2026-03-11 183125" src="https://github.com/user-attachments/assets/e84873ce-7069-4553-a55f-f1a704cf8d76" />
-    - <img width="1900" height="527" alt="Schermafbeelding 2026-03-11 183919" src="https://github.com/user-attachments/assets/b79bad52-e894-4108-a0f2-2d87c7dfa77b" />
-
+  - <details>
+    <summary>snort settings screenshots</summary>
+      <img width="1807" height="457" alt="Schermafbeelding 2026-03-11 173605" src="https://github.com/user-attachments/assets/c0b5d4ab-ed8d-42d1-a30a-b428857bf4e8" />
+      <img width="1770" height="843" alt="Schermafbeelding 2026-03-11 183125" src="https://github.com/user-attachments/assets/e84873ce-7069-4553-a55f-f1a704cf8d76" />
+      <img width="1900" height="527" alt="Schermafbeelding 2026-03-11 183919" src="https://github.com/user-attachments/assets/b79bad52-e894-4108-a0f2-2d87c7dfa77b" />
+  </details>
 
 **[Open de Forms](https://forms.office.com/e/TE8dYk2LME)** — vul meteen in, daar staat ook meer instructie.
 
