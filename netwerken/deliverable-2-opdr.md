@@ -109,7 +109,7 @@ We hebben nu door dat we als target de pf sense IP hadden, maar die moest de hot
 | Machine | IP | Netwerk | Rol |
 |---|---|---|---|
 | Telefoon/hotspot | `172.20.10.1` | Hotspot | Target |
-| pfSense WAN | `172.20.10.10` | ip van telefoon hotspot | Firewall/IDS |
+| pfSense WAN | `192.168.58.134` | ip van telefoon hotspot | Firewall/IDS |
 | Muazma's Kali aanvaller | `172.20.10.8` | ip van telefoon hotspot | Aanvaller |
 | pfSense LAN | `192.168.1.1` | LAN, static gemaakt | Firewall/IDS |
 | Jouw Kali | `192.168.1.100` | LAN, via pfsense | Pfsense beheer |
@@ -126,7 +126,7 @@ De LAN (Local Area Network) interface is de binnenkant van pfSense. Dit is het i
   <img width="1245" height="180" alt="image" src="https://github.com/user-attachments/assets/ddfa09ad-330b-4ce6-a5d9-691922fb3dad" />  
 
   pfsense  
-  <img width="1590" height="160" alt="image" src="https://github.com/user-attachments/assets/3d70ae31-2088-4780-ade1-dfe07b5d4e61" />
+  <img width="1700" height="167" alt="image" src="https://github.com/user-attachments/assets/2e2d13db-181d-4064-8603-200e482ebe76" />
 
   Muazma kali aanvaller  
   <img width="672" height="121" alt="image" src="https://github.com/user-attachments/assets/a1cf7006-5ade-4fa7-9446-176adf82609e" />
