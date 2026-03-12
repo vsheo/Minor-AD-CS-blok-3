@@ -96,6 +96,7 @@ Je hebt een doel-IP nodig om op te testen.
 3. Test richting het IP van je telefoon/hotspot
 
 > **Hint:** Mogelijk moet je routing handmatig instellen op Kali/pfSense.
+> we hebben NAT veranderd naar bridged zodat de aanvaller Vm ook op hetzelfde netwerk zit als de hotspot
 
 de Ip richting getest met `nmap -sS -Pn 192.168.1.1`,  
 op Muazma's kali aanvaller VM kon ze wel de target vinden:  
@@ -109,7 +110,7 @@ We hebben nu door dat we als target de pf sense IP hadden, maar die moest de hot
 | Machine | IP | Netwerk | Rol |
 |---|---|---|---|
 | Telefoon/hotspot | `172.20.10.1` | Hotspot | Target |
-| pfSense WAN | `192.168.58.134` | ip van telefoon hotspot | Firewall/IDS |
+| pfSense WAN | `172.20.10.10` | ip van telefoon hotspot | Firewall/IDS |
 | Muazma's Kali aanvaller | `172.20.10.8` | ip van telefoon hotspot | Aanvaller |
 | pfSense LAN | `192.168.1.1` | LAN, static gemaakt | Firewall/IDS |
 | Jouw Kali | `192.168.1.100` | LAN, via pfsense | Pfsense beheer |
@@ -126,7 +127,7 @@ De LAN (Local Area Network) interface is de binnenkant van pfSense. Dit is het i
   <img width="1245" height="180" alt="image" src="https://github.com/user-attachments/assets/ddfa09ad-330b-4ce6-a5d9-691922fb3dad" />  
 
   pfsense  
-  <img width="1700" height="167" alt="image" src="https://github.com/user-attachments/assets/2e2d13db-181d-4064-8603-200e482ebe76" />
+  <img width="1590" height="160" alt="Schermafbeelding 2026-03-12 120827" src="https://github.com/user-attachments/assets/5a8e98f6-0855-4f0f-9eed-ea5d74bf5832" />
 
   Muazma kali aanvaller  
   <img width="672" height="121" alt="image" src="https://github.com/user-attachments/assets/a1cf7006-5ade-4fa7-9446-176adf82609e" />
@@ -136,6 +137,15 @@ Wat moet gebeuren:
 - beide laptops zijn met hetzelfde netwerk verbonden
 - Muazmas aanvaller VM target de hotspot
 - ik moet in de kali host only (pfsense beheer) alerts krijgen
+
+we hebben dit geprobeert, maar we zien nog steeds geen alerts op de webpagina.  
+wat we hebben aangepast:
+- Interfaces -> WAN
+- Snort -> services -> WAN interface settings
+
+status -. system logs -> firewall:  
+<img width="662" height="527" alt="image" src="https://github.com/user-attachments/assets/ab8897b7-c534-457a-8763-6555b56edc12" />
+
 
 ---
 
@@ -153,6 +163,7 @@ Per test vergelijk je:
       <summary> voorheen geen alerts, maar toen was de Pfsense Lan IP de target</summary>
       <img width="1778" height="862" alt="Schermafbeelding 2026-03-11 173442" src="https://github.com/user-attachments/assets/94914751-f057-4092-8ee8-0333dc321a06" />
     </details>
+  - aanval veranderd naar `172.20.10.1` maar nog steeds geen alerts
   - <details>
     <summary>snort settings screenshots</summary>
       <img width="1807" height="457" alt="Schermafbeelding 2026-03-11 173605" src="https://github.com/user-attachments/assets/c0b5d4ab-ed8d-42d1-a30a-b428857bf4e8" />
@@ -169,6 +180,8 @@ Per test vergelijk je:
 ```bash
 ping -c 4 <target-ip>
 ```
+
+<img width="582" height="188" alt="image" src="https://github.com/user-attachments/assets/f6ba4fb1-5914-4c73-bfc2-6f8dbdb74bed" />
 
 Controleer:
 - UFW logs / status
