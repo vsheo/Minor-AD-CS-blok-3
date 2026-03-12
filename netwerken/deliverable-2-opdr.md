@@ -3,7 +3,7 @@
 
 ## Benodigdheden (per duo)
 
-| | **Laptop 1 (mijn laptop)** | **Laptop 2 (Muazma's laptop)** | **Target** |
+| | **Laptop 1 ( Muazma's laptop)** | **Laptop 2 (mijn laptop)** | **Target** |
 |---|---|---|---|
 | VM 1 | Kali (aanvaller) | pfSense/OPNsense + Snort | Telefoon/hotspot |
 | VM 2 | Client VM (kloon van Kali) | Client VM (mag Kali zijn) | — |
