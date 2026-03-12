@@ -35,19 +35,25 @@ Naam 2: Muazma
   - Muazma: Kali VM Aanvaller en Kali VM Client
 - Netwerkmodus per VM (NAT, Host-Only, Internal Network)?
   - Viresh:
-    - pfsense -> Bridged en host only
+    - pfsense -> NAT en host only
     - kali -> host only
   - Muazma:
     - kali aanvaller -> NAT en host only
     - kali client -> host only
 - Wat zijn de IP-adressen — DHCP of statisch?
-  - pfSense: `192.168.1.1`, Statisch in kali host only op de web pagina aangegeve
-  - Kali host only: `192.168.1.100`
+  - Viresh
+    - pfSense: `192.168.1.1`, Statisch in kali host only op de web pagina aangegeve
+    - Kali host only: `192.168.216.130` DHCP omdat hier dynamisch staat op de regel van de IP:
+      - <img width="1489" height="488" alt="Schermafbeelding 2026-03-11 180835" src="https://github.com/user-attachments/assets/81b1781c-c16a-42a4-aee9-6fa7360818d8" />
+  - Muazma
+    - Kali aanvaller: `172.20.10.8`
+    - client VM: 
 - Is er end-to-end connectiviteit?
   - Kali aanvaller van Muazma kan pfSense met nmap vinden: `nmap -sS -Pn 192.168.1.1`
   - Maar in de webpagina van Viresh kali host only zien we niks bij alerts
 - Waar staat het target (telefoon/hotspot, VM achter pfSense, etc.)?
-  - pfSense zelf `192.168.1.1` is het target
+  - pfSense zelf `192.168.1.1` is het target -> voorheen
+  - We hebben nu door dat de target de Ip van mijn telefoon moet zijn dat is: ``
 
 
 ---
@@ -57,12 +63,15 @@ Naam 2: Muazma
 **Welke UFW-instellingen hebben jullie gezet?**
 
 - `default incoming` / `outgoing` policy
+  - Default policies:
+  - Incoming: deny incomming
+  - Outgoing: allow outgoing
+  - Routed: disabled
 - `logging` aan of uit
+  - logging: on (low)
 - Voeg 1 regel output toe uit `sudo ufw status verbose` (beschrijf in tekst)
-
-```
-Antwoord: ___________________________
-```
+  - <img width="537" height="126" alt="image" src="https://github.com/user-attachments/assets/6f05274a-1923-4a7b-b519-bb0a124f7448" />
+  - Dit is de output van `sudo ufw status verbose` op Muazma's Kali aanvaller VM. Je ziet dat UFW actief is, logging staat aan op 'low', inkomend verkeer wordt standaard geblokkeerd (deny) en uitgaand verkeer is toegestaan (allow).
 
 ---
 
