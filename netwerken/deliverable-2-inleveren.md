@@ -80,17 +80,17 @@ Naam 2: Muazma
 **Op welke interface draait Snort en in welke modus?**
 
 - IDS of IPS/Block?
+  - wij hebben voor IDS gekozen
 - Welke (globale) rules/categorieën staan aan?
-
-```
-Antwoord: ___________________________
-```
+  - <img width="1910" height="714" alt="image" src="https://github.com/user-attachments/assets/b244949f-e9fa-481e-8031-b41ce6dee2fc" />
+  - 
 
 ---
 
 ## Vraag 6 — Routing Check ⚠️
 
 **Hoe hebben jullie gecontroleerd dat het verkeer langs Snort loopt?**
+~nmap -sS -Pn 172.20.10.10 en 10.1
 
 Bijv. Snort alerts verschijnen / interface counters / pfSense logs.
 
@@ -104,21 +104,20 @@ Antwoord: ___________________________
 
 > Voer de test uit op **beide clients/laptops**!
 
-**Commando:**
-
-```bash
-ping -c 4 <target-ip>
-```
-
 Beantwoord:
 
 - Resultaat: success of fail?
+- viresh kali host only ping naar pfsense
+  - <img width="1008" height="550" alt="image" src="https://github.com/user-attachments/assets/1920a6f0-a7b6-4b09-8a60-b205201ad593" />
+- Muazma client VM
+  - zei moets haar ping versturen naar `192.168.56.100` omdat op haar client vm dat de hotspot ip is
+    - <img width="582" height="213" alt="image" src="https://github.com/user-attachments/assets/8bdffff9-235c-4a6d-a344-11f55f322828" />
 - Wat logt **UFW**?
+  -  omdat log op low staat, wordt uitgaand verkeer niet gelogd wordt. Alleen geblokkeerd inkomend verkeer wordt gelogd door UFW.
 - Wat logt **Snort**?
-
-```
-Antwoord: ___________________________
-```
+  - <img width="1905" height="730" alt="image" src="https://github.com/user-attachments/assets/9ac11eb8-6e78-4a42-aa20-d4f93bdaca30" />
+  - Logt niets voor ping. Ping wordt geblokkeerd door de pfSense firewall voordat Snort het analyseert. De Community Rules bevatten geen ICMP regels die deze ping detecteren.
+  - Logt wel TCP alerts
 
 ---
 
@@ -135,11 +134,16 @@ sudo hping3 -S -p 80 -c 20 <target-ip>
 Beantwoord:
 
 - Wat gebeurt er?
-- Welke logs/alerts zie je in **UFW** en **Snort**?
+  - ik heb op mijn client VM(kali host only) hpin3 geinstalleerd
+    - ik heb pfsense VM gepinged via LAN en WAN 0 received
+    - <img width="1159" height="490" alt="image" src="https://github.com/user-attachments/assets/bff353d7-8a4c-44e6-90d9-5dd9e55c9f9e" />
+    - in alerts zie ik geen nieuwe alerts komen
+    - daarna hping gedaan op `192.168.1.100`, toen zag ik wel alerts komen
+  - Muazma gepinged op `192.168.56.100`
+    - <img width="624" height="351" alt="image" src="https://github.com/user-attachments/assets/76faa7a8-fe61-45ac-9b11-1eb7f3301628" />
+    - eerste keer wel alerts ontvangen, daarna clear en op nieuw gedaan maar kreeg niet opnieuw een alerts ( mischien waren die alerts van ergens anders)
 
-```
-Antwoord: ___________________________
-```
+- Welke logs/alerts zie je in **UFW** en **Snort**?
 
 ---
 
@@ -150,6 +154,7 @@ Antwoord: ___________________________
 Beantwoord:
 
 - Welke test precies (commando)?
+  - 
 - Observatie **UFW**
 - Observatie **Snort**
 
@@ -160,6 +165,50 @@ Snort:    ___________________________
 ```
 
 ---
+
+---
+
+## Vraag 12 — Snort IDS → IPS Verschil
+
+**Zet Snort (indien mogelijk) in IPS/Block-modus en herhaal 1 test** (bijv. nmap of hping).
+
+Beantwoord:
+
+- Wat veranderde er?
+- Hoe merk je dat het echt blokkeert — symptoom + log?
+
+```
+Antwoord: ___________________________
+```
+
+---
+
+## Vraag 13 — Conclusie & Advies
+
+**Als jij een klein bedrijf moest adviseren:**
+
+- Wanneer kies je alleen voor een firewall?
+- Wanneer voeg je IDS/IPS toe?
+
+```
+Antwoord: ___________________________
+```
+
+---
+
+
+
+
+
+
+
+
+
+
+
+---
+## extra opdrachten
+
 
 ## Vraag 10 — Extra Test B _(jullie keuze)_
 
@@ -195,50 +244,3 @@ UFW:      ___________________________
 Snort:    ___________________________
 ```
 
----
-
-## Vraag 12 — Snort IDS → IPS Verschil
-
-**Zet Snort (indien mogelijk) in IPS/Block-modus en herhaal 1 test** (bijv. nmap of hping).
-
-Beantwoord:
-
-- Wat veranderde er?
-- Hoe merk je dat het echt blokkeert — symptoom + log?
-
-```
-Antwoord: ___________________________
-```
-
----
-
-## Vraag 13 — Conclusie & Advies
-
-**Als jij een klein bedrijf moest adviseren:**
-
-- Wanneer kies je alleen voor een firewall?
-- Wanneer voeg je IDS/IPS toe?
-
-```
-Antwoord: ___________________________
-```
-
----
-
-## Vraag 14 — Feedback
-
-**Vond je deze deliverable leuk om te doen?**
-
-- [ ] Ja
-- [ ] Nee
-- [ ] Min of meer
-
----
-
-## Vraag 15 — Opmerkingen
-
-**Willen jullie nog iets kwijt?**
-
-```
-Antwoord: ___________________________
-```
