@@ -234,6 +234,7 @@ We gaan nu proberen beide pompen aan te zetten en het toerental van de pompen ma
       - voor deze kan ik niet zien wat het precies terug geeft.
       - ![1773409870315](image/OT-week6/1773409870315.png)
       - deze zegt als de pomp aan of uit is, eerst was pomp 2 uit, die heb ik op de monitoring pagina aan gezet, en nu geeft `set action READ_COILS` en `run` aan dat die aan is(met de 2de `1`)
+      - dus `index 8` is voor pomp 2 aan en uit zetten
 
 
 - De waardes zijn de instellingen van de PLC.
@@ -241,9 +242,71 @@ We gaan nu proberen beide pompen aan te zetten en het toerental van de pompen ma
   - Kijk hiervoor alleen naar de waardes van de coils en input registers.
     - Dit zijn namelijk de enige waardes die we met deze tool kunnen aanpassen.
   - Verander de snelheid van de beide pompen en zet beide pompen aan of uit (afhankelijk van de huidige status).
-    - k
+    - bij opdracht 5: Geheugenblok manipuleren heb ik dit volgens mij al gedaan, maar dat was niet met metasploit (`modbus read 192.168.2.10 %MW0 22`)
+    - bij opdracht 8 heb ik gezien dat je eerst alle waardes kan aangeven met `set` en daarna run kan uitvoeren om hetzelfde te bereiken
+    - ![1773410982687](image/OT-week6/1773410982687.png)
+    - dus volgens mij moet ik nu de `WRITE_COILS` en `WRITE_REGISTER` om de beurt selecteren, de waardes aangeven met `set` en daarna uitvoeren met `run`
   - Lees de geheugenwaardes uit opdracht 4 overnieuw uit.
     - Je ziet nu dat er specifieke waardes veranderd zijn. Dit zijn de instellingen van de pomp
+
+
+
+### Registers lezen:
+- `set action READ_HOLDING_REGISTERS` & `set action READ_COILS`
+- `set DATA_ADDRESS 0`
+- `set NUMBER 25`
+  - pomp speed:
+  - ![1773412908180](image/OT-week6/1773412908180.png)
+    - pomp 1 speed = 50
+    - pomp 2 speed = 50
+  - pomp aan of uit:
+  - ![1773412929554](image/OT-week6/1773412929554.png)
+    - pomp 1 = aan
+    - pomp 2 = uit
+
+>mischien moet deze erbij als het de eerste keer is: `set RHOSTS 192.168.2.10`
+
+### Snelheid veranderen:
+- `set action WRITE_REGISTER`
+- `set DATA_ADDRESS 10` & `set DATA_ADDRESS 20`
+  - index 10 en index 20 was voor snelheid (uit opdracht 5)
+- `set DATA 4` & `set DATA 12`
+  - ![1773411624077](image/OT-week6/1773411624077.png)
+  - ![1773411647087](image/OT-week6/1773411647087.png)
+  - ![1773413623573](image/OT-week6/1773413623573.png)
+  - ![1773413640104](image/OT-week6/1773413640104.png)
+- ik had geprobeert om 10 en 20 in een keer te veranderen, maar dat kon niet (het neemt alleen de nieuwste)
+    - ![1773411808060](image/OT-week6/1773411808060.png)
+- later ook `WRITE_REGISTERS` gebprobeert maar die kan alleen meerdere achter elkaar aanpassen, niet 10 en 20
+
+### Pomp 1 uitzetten:
+- `set action WRITE_COIL`
+- `set DATA_ADDRESS 0`
+- `set DATA 0`
+  - ![1773413881205](image/OT-week6/1773413881205.png)
+  - ![1773411673966](image/OT-week6/1773411673966.png)
+
+### pomp 2 aanmaken:
+- `set action WRITE_COIL`
+- `set DATA_ADDRESS 8`
+- `set DATA 1`
+  - ![1773413993896](image/OT-week6/1773413993896.png)
+  - ik heb pomp 2 zien aan gaan
+
+***als je op de `monitoring pagina` in de `Point name` kolom telt, met 0 beginnen, dan krijg je ook de juiste index die je daarna bij `DATA_ADDRESS` kan gebruiken***
+
+### Registers opnieuw lezen:
+- `set action READ_HOLDING_REGISTERS` & `set action READ_COILS`
+  - pomp speed:
+  - ![1773414095601](image/OT-week6/1773414095601.png)
+    - pomp 1 speed = 4
+    - pomp 2 speed = 12
+  - pomp aan of uit:
+  - ![1773414200310](image/OT-week6/1773414200310.png)
+    - pomp 1 = uit
+    - pomp 2 = aan
+
+
 
 ---
 
