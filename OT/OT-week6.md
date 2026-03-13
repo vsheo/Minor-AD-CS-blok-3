@@ -218,18 +218,30 @@ We gaan nu proberen beide pompen aan te zetten en het toerental van de pompen ma
       - DATA_ADDRESS 0 -> begin bij adress 0 -> `%MW0`
       - NUMBER 25 -> ga langs de eerste 25 registers
       - RHOSTS 192.168.2.10 -> de target/ PLC IP
-      - UNIT_NUMBER 1 -> ??
+      - UNIT_NUMBER 1 -> ??, hetzelfde ald station ID(ss van opdracht 6), maar ik weet niet precies wat het hier doet
 
-- Kijk wat je nog meer kan uitlezen met het commando show actions.
+- Kijk wat je nog meer kan uitlezen met het commando `show actions`.
   - Selecteer nu met set actions de actie READ_INPUT_REGISTERS en start de scanner opnieuw.
+    - `set action READ_INPUT_REGISTERS` daarna `run`
+    - ![1773407006429](image/OT-week6/1773407006429.png)
+      - de vorige command was data lezen uit de holding registers ik denk dat die voor `%M`, de memory, was
+      - en dat deze `%I` is, de inputs
+      - dus met `set action READ_HOLDING_REGISTERS` werd de `%M` memory gelezen. en met `set action READ_INPUT_REGISTERS` word `%I` de inputs gelezen, deze waardes zag ik op http://127.0.0.1:8080/monitoring voor pomp 2
+
   - Doe dit ook voor de actie READ_COILS.
-  - **Maak een screenshot van de resultaten**
+    - `set action READ_COILS` daarna `run`
+    - ![1773408614540](image/OT-week6/1773408614540.png)
+      - voor deze kan ik niet zien wat het precies terug geeft.
+      - ![1773409870315](image/OT-week6/1773409870315.png)
+      - deze zegt als de pomp aan of uit is, eerst was pomp 2 uit, die heb ik op de monitoring pagina aan gezet, en nu geeft `set action READ_COILS` en `run` aan dat die aan is(met de 2de `1`)
+
 
 - De waardes zijn de instellingen van de PLC.
   - Analyseer de hierboven gevonden resultaten en controleer op de SCADA of je deze waardes kunt koppelen aan de waardes daarop.
   - Kijk hiervoor alleen naar de waardes van de coils en input registers.
     - Dit zijn namelijk de enige waardes die we met deze tool kunnen aanpassen.
   - Verander de snelheid van de beide pompen en zet beide pompen aan of uit (afhankelijk van de huidige status).
+    - k
   - Lees de geheugenwaardes uit opdracht 4 overnieuw uit.
     - Je ziet nu dat er specifieke waardes veranderd zijn. Dit zijn de instellingen van de pomp
 
