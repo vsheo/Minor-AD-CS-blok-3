@@ -175,10 +175,16 @@ wat ik zie:
 
 ## 7. Modbusclient Utility
 - Kies vervolgens de modbusclient utility met commando: `use 2`
+  - terug gaan command: `back`
+  - `search modbus`
+  - `use 2`
 - Om te kijken wat je allemaal met deze module kunt doen typ : `info`
+  - This module allows reading and writing data to a PLC using Modbus protocol
 - Zoals te zien is kunnen er verschillende acties worden uitgevoerd. Om te zien welke acties binnen de module worden uitgevoerd kun je gebruik maken van het commando : `show actions`
-  - Een actie kun je vervolgens selecteren met : `set action [naam van de actie]`
+  - ![1773404124514](image/OT-week6/1773404124514.png)
+    - Een actie kun je vervolgens selecteren met : `set action [naam van de actie]`
   - Met `show options` krijg je een overzicht van alle parameters die je moet aanpassen
+    - ![1773404172100](image/OT-week6/1773404172100.png)
 
 ---
 
