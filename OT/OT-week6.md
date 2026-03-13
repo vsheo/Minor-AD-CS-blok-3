@@ -150,9 +150,17 @@ nadat de lab opnieuw opgestart was, zag ik dat de speed voor pomp 1 terug was op
 
 ## 6. UnitID
 - Start Metasploit en type : `search modbus`
+  - Start Metasploit: `msfconsole`
+  - metasploit documentatie: https://docs.metasploit.com/
 - Kies vervolgens voor modbus_findunitid : `type 12`
   - Gebruik “info” om meer informatie te vergaren over de module
+    - `use auxiliary(scanner/scada/modbus_findunitid)`
+    - `info`
+      - [using metasploit](https://docs.metasploit.com/docs/using-metasploit/basics/using-metasploit.html)
   - Geef aan de juiste rhost en start de module
+    - rhost staat voor remote host, hier moet ik de PLC IP aan geven, zodat metaspoilt weet met welk device het moet verbinden. Daarna kan ik metasploits dingen kan doen op de PLC
+    - `set rhost`
+    - 
 - **Noteer wat je ziet en leg het resultaat uit. Geef aan wat een station ID is en ondersteun dit met een screenshot**
 
 ---
