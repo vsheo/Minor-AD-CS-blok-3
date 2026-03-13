@@ -43,7 +43,6 @@ wat ik zie:
   -  op pomp 1: `pump1_start` `%QX0.0`
     - `%Q` -> output 
     - `X` -> in Bits 
-    - `X` -> in Bits
     - in [link van de workshop](https://edge.autonomylogic.com/docs/openplc-editor/communication/modbus/addressing#coils-(fc-1,-5,-15):~:text=0-,%25QX0.0,-Digital%20output%20bit) kan je opzoeken wat deze "dingen" betekenen
 - Write: die is er alleen voor `pump1_start` en `pump2_start`
   - aan en uit buttons (true/false) voor pomp 1 en 2
@@ -76,14 +75,14 @@ ik zie:
   - Als output krijg je te zien hoe de commando gebruikt kan worden. Dus hoe het is gestructureerd. Hier zien we ook de commando die we moeten gebruiken om de inhoud van het geheugen in te lezen
 - Geheugen inlezen
   - Typ het volgende commando in: `modbus read [ip-adres] %MW0 22`
-  - Hier zie je dat het geheugen-adres is gedefinieerd met %MW het geheugenbloknummer 0 en de lengte 10. Dus hiermee worden de eerste 10 heugenblokken gelezen
+  - Hier zie je dat het geheugen-adres is gedefinieerd met `%MW` het geheugenbloknummer 0 en de lengte 22. Dus hiermee worden de eerste 22 heugenblokken gelezen
 
 uit [OT-week3](https://github.com/vsheo/Minor-AD-CS-blok-3/blob/main/OT/OT-week3.md#opdracht-4-network-discovery-ip-route--layer-3) (bij opdracht 5):
 - plc: 192.168.2.10
 - scada: 192.168.3.20
 
 **Noteer wat je ziet en leg het resultaat uit. Ondersteun dit met een screenshot**
-PLC;
+PLC:
 - `modbus read 192.168.2.10 %MW0 22`
 - <img width="586" height="732" alt="image" src="https://github.com/user-attachments/assets/4e0eaf7b-3a03-4774-8ae8-9aeb601c3240" />
 
@@ -91,12 +90,15 @@ wat ik zie:
 - een lijst van `%MW` 0 t/m 21
 - `MW` staat voor [Memory Words](https://edge.autonomylogic.com/docs/openplc-editor/communication/modbus/addressing#memory-words-(via-holding-registers))
   - Holding Registers:
-- `%MW10` en `%MW10` staan op 50, de rest is op 0
+- `%MW10` en `%MW20` staan op 50, de rest is op 0
 
 [wat is memory word](https://www.quora.com/What-is-a-%E2%80%9Cmemory-word%E2%80%9D-in-PLC):
-<img width="1005" height="524" alt="image" src="https://github.com/user-attachments/assets/3bd031d9-7414-4fbd-b107-af4d8fbfac97" />
-<img width="982" height="868" alt="image" src="https://github.com/user-attachments/assets/6b979768-bd71-47a0-a5d1-fca917bbce3c" />
-<img width="1009" height="175" alt="image" src="https://github.com/user-attachments/assets/917118e0-6d91-4449-a03f-26fd30f82773" />
+<details>
+  <summary>wat is memory word screenshots</summary>
+  <img width="1005" height="524" alt="image" src="https://github.com/user-attachments/assets/3bd031d9-7414-4fbd-b107-af4d8fbfac97" />  
+  <img width="982" height="868" alt="image" src="https://github.com/user-attachments/assets/6b979768-bd71-47a0-a5d1-fca917bbce3c" />  
+  <img width="1009" height="175" alt="image" src="https://github.com/user-attachments/assets/917118e0-6d91-4449-a03f-26fd30f82773" />
+</details>
 memory word is een adress waar je gegevens kan opslaan, en later kan ophalen 
 
 De command `modbus read 192.168.2.10 %MW0 22` laat dus zien wat in memory word 0 tot 22 opgelagen is
