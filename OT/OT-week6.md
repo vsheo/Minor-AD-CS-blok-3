@@ -185,6 +185,8 @@ wat ik zie:
     - Een actie kun je vervolgens selecteren met : `set action [naam van de actie]`
   - Met `show options` krijg je een overzicht van alle parameters die je moet aanpassen
     - ![1773404172100](image/OT-week6/1773404172100.png)
+    - ![1773404914613](image/OT-week6/1773404914613.png)
+
 
 ---
 
@@ -197,12 +199,32 @@ We gaan nu proberen beide pompen aan te zetten en het toerental van de pompen ma
   - RHOSTS met het IP address van de PLC
   - en het UNIT_NUMBER 1
   - **Maak een screenshot en geef een korte uitleg wat je daar ziet(zie de info screenshot)**
+- met `show options` zie ik al deze waarden, daarna kan ik weer `set` gebruiken om de waarden aan te geven
+  - `set DATA_ADDRESS 0`
+  - `set NUMBER 25`
+  - `set RHOSTS 192.168.2.10`
+  - `set UNIT_NUMBER 1`
+  - ![1773405184943](image/OT-week6/1773405184943.png)
+    - ik zie dat de waarden succesvol zijn ingesteld
+
 - Start de scanner: `run`
   - **Maak een screenshot van het resultaat en leg uit wat je ziet**
+  - ![1773405313124](image/OT-week6/1773405313124.png)
+    - de modules die ik zonet heb ingesteld worden gebruikt op de PLC(`192.168.2.10`)
+    - sending reading holding registers: ...
+    - 25 register values from address 0: volgens mij omdat ik de number op 25 heb gezet, wordt gelezen welke data in de eerste 25 opgeslagen is
+    - een list met op index 10 en index 20 nummer 50. net als wat ik zag bij `modbus read 192.168.2.10 %MW0 22` van opdracht 5
+    - het lijkt erop dat `modbus read 192.168.2.10 %MW0 25`
+      - DATA_ADDRESS 0 -> begin bij adress 0 -> `%MW0`
+      - NUMBER 25 -> ga langs de eerste 25 registers
+      - RHOSTS 192.168.2.10 -> de target/ PLC IP
+      - UNIT_NUMBER 1 -> ??
+
 - Kijk wat je nog meer kan uitlezen met het commando show actions.
   - Selecteer nu met set actions de actie READ_INPUT_REGISTERS en start de scanner opnieuw.
   - Doe dit ook voor de actie READ_COILS.
   - **Maak een screenshot van de resultaten**
+
 - De waardes zijn de instellingen van de PLC.
   - Analyseer de hierboven gevonden resultaten en controleer op de SCADA of je deze waardes kunt koppelen aan de waardes daarop.
   - Kijk hiervoor alleen naar de waardes van de coils en input registers.
