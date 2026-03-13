@@ -78,8 +78,8 @@ ik zie:
   - Hier zie je dat het geheugen-adres is gedefinieerd met `%MW` het geheugenbloknummer 0 en de lengte 22. Dus hiermee worden de eerste 22 heugenblokken gelezen
 
 uit [OT-week3](https://github.com/vsheo/Minor-AD-CS-blok-3/blob/main/OT/OT-week3.md#opdracht-4-network-discovery-ip-route--layer-3) (bij opdracht 5):
-- plc: 192.168.2.10
-- scada: 192.168.3.20
+- plc: `192.168.2.10`
+- scada: `192.168.3.20`
 
 **Noteer wat je ziet en leg het resultaat uit. Ondersteun dit met een screenshot**
 PLC:
@@ -154,14 +154,22 @@ nadat de lab opnieuw opgestart was, zag ik dat de speed voor pomp 1 terug was op
   - metasploit documentatie: https://docs.metasploit.com/
 - Kies vervolgens voor modbus_findunitid : `type 12`
   - Gebruik “info” om meer informatie te vergaren over de module
-    - `use auxiliary(scanner/scada/modbus_findunitid)`
+    - `use auxiliary/scanner/scada/modbus_findunitid` 0f `use 12`
     - `info`
       - [using metasploit](https://docs.metasploit.com/docs/using-metasploit/basics/using-metasploit.html)
   - Geef aan de juiste rhost en start de module
     - rhost staat voor remote host, hier moet ik de PLC IP aan geven, zodat metaspoilt weet met welk device het moet verbinden. Daarna kan ik metasploits dingen kan doen op de PLC
     - `set rhost`
-    - 
-- **Noteer wat je ziet en leg het resultaat uit. Geef aan wat een station ID is en ondersteun dit met een screenshot**
+    - ![1773402612039](image/OT-week6/1773402612039.png)
+    - in mijn geval: `set rhost 192.168.2.10`
+    - daarna `run`
+- **Noteer wat je ziet en leg het resultaat uit. Geef aan wat een station ID is en ondersteun dit met een screenshot**  
+
+![1773402757068](image/OT-week6/1773402757068.png)  
+![1773403159375](image/OT-week6/1773403159375.png)  
+wat ik zie:
+- dat de de IP van mijn PLC is toegevoegd aan rhost
+- en de `run` command wordt een request gestuurd naar alle station IDs, en allemaal reageren met Received: Correct, dit betekent dat alle station IDs requests kunnen accepteren
 
 ---
 
