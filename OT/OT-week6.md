@@ -1,4 +1,5 @@
 # OT - Pentest
+
 In dit lab gaan we oefenen met het pentesten van een Modbus PLC systeem, we gaan het
 geheugenblok uitlezen en manipuleren. Zorg ervoor dat je het OT-lab hebt opgezet en dat het werkt.
 Werkt het niet, kijk dan naar het document “Lab inrichten V3.pdf” om dit op te lossen. We gaan in dit
@@ -8,6 +9,7 @@ meer doe opdrachten en bij sommige zul je het zelf moeten gaan uitzoeken.
 Benodigdheden: Kali Linux
 
 ## 1. opstarten Labomgeving
+
 - `docker-compose up -d`
 - Controleer of alle containers draaien: `docker ps`
 
@@ -16,6 +18,7 @@ Benodigdheden: Kali Linux
 ---
 
 ## 2. Controleren of PLC werkt
+
 - Log in op PLC webinterface: http://127.0.0.1:8080/login
   - username: openplc
   - password: openplc
@@ -27,6 +30,7 @@ Benodigdheden: Kali Linux
 ---
 
 ## 3. Monitoring – pagina in Openplc
+
 **Plaats een screenshot en geef een korte beschrijving van wat je ziet op deze pagina**  
 [autonomy edge - Modbus Addressing](https://edge.autonomylogic.com/docs/openplc-editor/communication/modbus/addressing)
 
@@ -34,16 +38,17 @@ Benodigdheden: Kali Linux
 ![1773490437423](image/OT-week6/1773490437423.png)
 
 wat ik zie:
+
 - een overzicht van alle informatie van 2 pompen zoals:
   - flow rate, temperatuur, pressure en speed
 - Type
   - Bool: iets dat true of false kan zijn, in dit geval aan of uit
   - INT: een rond getal, deze is terug te zijn bij de Value kolom
 - Location: dit is een string waar elk letter iets betekent, bijvoorbeeld
-  -  op pomp 1: `pump1_start` `%QX0.0`
-    - `%Q` -> output 
-    - `X` -> in Bits 
-    - in [link van de workshop](https://edge.autonomylogic.com/docs/openplc-editor/communication/modbus/addressing#coils-(fc-1,-5,-15):~:text=0-,%25QX0.0,-Digital%20output%20bit) kan je opzoeken wat deze "dingen" betekenen
+  - op pomp 1: `pump1_start` `%QX0.0`
+  - `%Q` -> output
+  - `X` -> in Bits
+  - in [link van de workshop](<https://edge.autonomylogic.com/docs/openplc-editor/communication/modbus/addressing#coils-(fc-1,-5,-15):~:text=0-,%25QX0.0,-Digital%20output%20bit>) kan je opzoeken wat deze "dingen" betekenen
 - Write: die is er alleen voor `pump1_start` en `pump2_start`
   - aan en uit buttons (true/false) voor pomp 1 en 2
 - Value: de waarde van het onderdeel
@@ -53,12 +58,14 @@ wat ik zie:
 ---
 
 ## 4. Open de scada
+
 Open de scada web-interface: http://127.0.0.1:1881  
 **Plaats een screenshot en geef een korte beschrijving van wat je ziet**
 
 ![1773490482250](image/OT-week6/1773490482250.png)
 
 ik zie:
+
 - hoe olie van links onder door de dirty filters naar pomp 1 gaat. vandaar naar pomp 2 en als laatst naar de controll valves
 - er zijn ook deze valves, die rood zijn
   - ![1773490519225](image/OT-week6/1773490519225.png)
@@ -69,6 +76,7 @@ ik zie:
 ---
 
 ## 5.1 Geheugen blok uitlezen met Mobus-cli
+
 - Start en nieuwe terminal op en typ: `modbus --help`
   - Als output krijg je te zien hoe de commando gebruikt kan worden. Dus hoe het is gestructureerd
 - Typ het volgende commando: `modbus read –help`
@@ -78,43 +86,49 @@ ik zie:
   - Hier zie je dat het geheugen-adres is gedefinieerd met `%MW` het geheugenbloknummer 0 en de lengte 22. Dus hiermee worden de eerste 22 heugenblokken gelezen
 
 uit [OT-week3](https://github.com/vsheo/Minor-AD-CS-blok-3/blob/main/OT/OT-week3.md#opdracht-4-network-discovery-ip-route--layer-3) (bij opdracht 5):
+
 - plc: `192.168.2.10`
 - scada: `192.168.3.20`
 
 **Noteer wat je ziet en leg het resultaat uit. Ondersteun dit met een screenshot**
 PLC:
+
 - `modbus read 192.168.2.10 %MW0 22`
 - ![1773490550671](image/OT-week6/1773490550671.png)
 
 wat ik zie:
+
 - een lijst van `%MW` 0 t/m 21
-- `MW` staat voor [Memory Words](https://edge.autonomylogic.com/docs/openplc-editor/communication/modbus/addressing#memory-words-(via-holding-registers))
+- `MW` staat voor [Memory Words](<https://edge.autonomylogic.com/docs/openplc-editor/communication/modbus/addressing#memory-words-(via-holding-registers)>)
   - Holding Registers:
 - `%MW10` en `%MW20` staan op 50, de rest is op 0
 
 [wat is memory word](https://www.quora.com/What-is-a-%E2%80%9Cmemory-word%E2%80%9D-in-PLC):
+
 <details>
   <summary>wat is memory word screenshots</summary>
 
-  ![1773490582198](image/OT-week6/1773490582198.png)
-  ![1773490607290](image/OT-week6/1773490607290.png)
-  ![1773490626792](image/OT-week6/1773490626792.png)
+![1773490582198](image/OT-week6/1773490582198.png)
+![1773490607290](image/OT-week6/1773490607290.png)
+![1773490626792](image/OT-week6/1773490626792.png)
+
 </details>
-memory word is een adress waar je gegevens kan opslaan, en later kan ophalen 
+memory word is een adress waar je gegevens kan opslaan, en later kan ophalen
 
 De command `modbus read 192.168.2.10 %MW0 22` laat dus zien wat in memory word 0 tot 22 opgelagen is
 
 SCADA:
+
 - `modbus read 192.168.3.20 %MW0 22`
 - ![1773490654175](image/OT-week6/1773490654175.png)
-Dit geeft een error  
-omdat `%MW0 22` alleen op plc ip gelezen kan worden, (omdat plc het apparaat kan beheren)
-scada is alleen om te zien war er op de machine gebeurt
-
+  Dit geeft een error  
+  omdat `%MW0 22` alleen op plc ip gelezen kan worden, (omdat plc het apparaat kan beheren)
+  scada is alleen om te zien war er op de machine gebeurt
 
 ---
 
 ## 5.2 Geheugenblok manipuleren
+
 Nu zullen we het geheugenblok gaan manipuleren namelijk de holding registers
 
 - Typ: `modbus write –help`
@@ -124,20 +138,20 @@ Nu zullen we het geheugenblok gaan manipuleren namelijk de holding registers
   - **Maak de monitoring pagina open en noteer welke parameter gewijzigd is. Ondersteun dit met een screenshot**
 - Manipuleren van het coil register. Type het volgende commando om het coil register in te lezen. : `modbus read [ip-adres] %M0 10`
   - Schrijf het commando om pomp1 uit te schakelen
- 
+
 `%MV10` de 11de geheugen plek/locatie veranderen:
+
 - `modbus write 192.168.2.10 %MW10 87`
 - de pomp 1 speed_in en speed_out zijn nu veranderd naar 87
   - ![1773490700271](image/OT-week6/1773490700271.png)
   - ![1773490712935](image/OT-week6/1773490712935.png)
-> `%M` is de memory, `%i` is de input en `%Q` is de output  
-> Ze hebben allemaal `W10`, dus wat opgeslagen is in `W10` zorgt voor snelheid (de speed_in en speed_out) van pomp 1  
-> als je de Memory van `W10` veranderd dan veranderd de input en output mee,  
-> volgens mij omdat de input(%I) en output(%Q) lezen wat in de memory(%M) opgeslagen is  
-
-
+    > `%M` is de memory, `%i` is de input en `%Q` is de output  
+    > Ze hebben allemaal `W10`, dus wat opgeslagen is in `W10` zorgt voor snelheid (de speed_in en speed_out) van pomp 1  
+    > als je de Memory van `W10` veranderd dan veranderd de input en output mee,  
+    > volgens mij omdat de input(%I) en output(%Q) lezen wat in de memory(%M) opgeslagen is
 
 ### Resetten van de labomgeving
+
 - Typ eerst : `docker-compose down`
 - Vervolgens : `docker-compose up -d`
 
@@ -145,10 +159,10 @@ nadat de lab opnieuw opgestart was, zag ik dat de speed voor pomp 1 terug was op
 ![1773490735735](image/OT-week6/1773490735735.png)  
 ![1773490743201](image/OT-week6/1773490743201.png)
 
-
 ---
 
 ## 6. UnitID
+
 - Start Metasploit en type : `search modbus`
   - Start Metasploit: `msfconsole`
   - metasploit documentatie: https://docs.metasploit.com/
@@ -163,17 +177,19 @@ nadat de lab opnieuw opgestart was, zag ik dat de speed voor pomp 1 terug was op
     - ![1773402612039](image/OT-week6/1773402612039.png)
     - in mijn geval: `set rhost 192.168.2.10`
     - daarna `run`
-- **Noteer wat je ziet en leg het resultaat uit. Geef aan wat een station ID is en ondersteun dit met een screenshot**  
+- **Noteer wat je ziet en leg het resultaat uit. Geef aan wat een station ID is en ondersteun dit met een screenshot**
 
 ![1773402757068](image/OT-week6/1773402757068.png)  
 ![1773403159375](image/OT-week6/1773403159375.png)  
 wat ik zie:
+
 - dat de de IP van mijn PLC is toegevoegd aan rhost
 - en de `run` command wordt een request gestuurd naar alle station IDs, en allemaal reageren met Received: Correct, dit betekent dat alle station IDs requests kunnen accepteren
 
 ---
 
 ## 7. Modbusclient Utility
+
 - Kies vervolgens de modbusclient utility met commando: `use 2`
   - terug gaan command: `back`
   - `search modbus`
@@ -187,10 +203,10 @@ wat ik zie:
     - ![1773404172100](image/OT-week6/1773404172100.png)
     - ![1773404914613](image/OT-week6/1773404914613.png)
 
-
 ---
 
 ## 8. Geheugenadressen zoeken
+
 We gaan nu proberen beide pompen aan te zetten en het toerental van de pompen maximaal te zetten
 
 - Configureer
@@ -236,7 +252,6 @@ We gaan nu proberen beide pompen aan te zetten en het toerental van de pompen ma
       - deze zegt als de pomp aan of uit is, eerst was pomp 2 uit, die heb ik op de monitoring pagina aan gezet, en nu geeft `set action READ_COILS` en `run` aan dat die aan is(met de 2de `1`)
       - dus `index 8` is voor pomp 2 aan en uit zetten
 
-
 - De waardes zijn de instellingen van de PLC.
   - Analyseer de hierboven gevonden resultaten en controleer op de SCADA of je deze waardes kunt koppelen aan de waardes daarop.
   - Kijk hiervoor alleen naar de waardes van de coils en input registers.
@@ -249,9 +264,8 @@ We gaan nu proberen beide pompen aan te zetten en het toerental van de pompen ma
   - Lees de geheugenwaardes uit opdracht 4 overnieuw uit.
     - Je ziet nu dat er specifieke waardes veranderd zijn. Dit zijn de instellingen van de pomp
 
-
-
 ### Registers lezen:
+
 - `set action READ_HOLDING_REGISTERS` & `set action READ_COILS`
 - `set DATA_ADDRESS 0`
 - `set NUMBER 25`
@@ -264,9 +278,10 @@ We gaan nu proberen beide pompen aan te zetten en het toerental van de pompen ma
     - pomp 1 = aan
     - pomp 2 = uit
 
->mischien moet deze erbij als het de eerste keer is: `set RHOSTS 192.168.2.10`
+> mischien moet deze erbij als het de eerste keer is: `set RHOSTS 192.168.2.10`
 
 ### Snelheid veranderen:
+
 - `set action WRITE_REGISTER`
 - `set DATA_ADDRESS 10` & `set DATA_ADDRESS 20`
   - index 10 en index 20 was voor snelheid (uit opdracht 5)
@@ -276,10 +291,11 @@ We gaan nu proberen beide pompen aan te zetten en het toerental van de pompen ma
   - ![1773413623573](image/OT-week6/1773413623573.png)
   - ![1773413640104](image/OT-week6/1773413640104.png)
 - ik had geprobeert om 10 en 20 in een keer te veranderen, maar dat kon niet (het neemt alleen de nieuwste)
-    - ![1773411808060](image/OT-week6/1773411808060.png)
+  - ![1773411808060](image/OT-week6/1773411808060.png)
 - later ook `WRITE_REGISTERS` gebprobeert maar die kan alleen meerdere achter elkaar aanpassen, niet 10 en 20
 
 ### Pomp 1 uitzetten:
+
 - `set action WRITE_COIL`
 - `set DATA_ADDRESS 0`
 - `set DATA 0`
@@ -287,15 +303,17 @@ We gaan nu proberen beide pompen aan te zetten en het toerental van de pompen ma
   - ![1773411673966](image/OT-week6/1773411673966.png)
 
 ### pomp 2 aanmaken:
+
 - `set action WRITE_COIL`
 - `set DATA_ADDRESS 8`
 - `set DATA 1`
   - ![1773413993896](image/OT-week6/1773413993896.png)
   - ik heb pomp 2 zien aan gaan
 
-***als je op de `monitoring pagina` in de `Point name` kolom telt, met 0 beginnen, dan krijg je ook de juiste index die je daarna bij `DATA_ADDRESS` kan gebruiken***
+**_als je op de `monitoring pagina` in de `Point name` kolom telt, met 0 beginnen, dan krijg je ook de juiste index die je daarna bij `DATA_ADDRESS` kan gebruiken_**
 
 ### Registers opnieuw lezen:
+
 - `set action READ_HOLDING_REGISTERS` & `set action READ_COILS`
   - pomp speed:
   - ![1773414095601](image/OT-week6/1773414095601.png)
@@ -306,11 +324,10 @@ We gaan nu proberen beide pompen aan te zetten en het toerental van de pompen ma
     - pomp 1 = uit
     - pomp 2 = aan
 
-
-
 ---
 
 ## 9. Geheugenadressen aanpassen
+
 We hebben nu de juiste geheugenadressen gevonden.  
 Dit zijn 2 coils en 2 registers. We gaan deze nu via Metasploit aanpassen.
 
@@ -342,5 +359,3 @@ Dit zijn 2 coils en 2 registers. We gaan deze nu via Metasploit aanpassen.
   - `set action WRITE_COILS`, `set DATA_ADDRESS 0`, `set DATA_COILS 000000000`
   - ![1773416863918](image/OT-week6/1773416863918.png)
   - ![1773416885981](image/OT-week6/1773416885981.png)
-
-
