@@ -11,7 +11,7 @@ Benodigdheden: Kali Linux
 - `docker-compose up -d`
 - Controleer of alle containers draaien: `docker ps`
 
-<img width="2317" height="360" alt="image" src="https://github.com/user-attachments/assets/cdc4e50f-f556-45ee-9b91-fec4cef774ff" />
+![1773490335604](image/OT-week6/1773490335604.png)
 
 ---
 
@@ -22,7 +22,7 @@ Benodigdheden: Kali Linux
 - Controleer of het programma plc-work werkt: Status: Running
 - Werkt het programma niet klik dan op `Start PLC` om het op te starten
 
-<img width="1361" height="834" alt="image" src="https://github.com/user-attachments/assets/6388373d-0f94-44d3-b84d-9a380a577bfe" />
+![1773490401640](image/OT-week6/1773490401640.png)
 
 ---
 
@@ -30,8 +30,8 @@ Benodigdheden: Kali Linux
 **Plaats een screenshot en geef een korte beschrijving van wat je ziet op deze pagina**  
 [autonomy edge - Modbus Addressing](https://edge.autonomylogic.com/docs/openplc-editor/communication/modbus/addressing)
 
-<img width="1905" height="1101" alt="image" src="https://github.com/user-attachments/assets/9a992761-ac1e-4fc0-a100-83f3d51fb00b" />  
-<img width="1903" height="1147" alt="image" src="https://github.com/user-attachments/assets/e3b5f77e-7ef2-49da-aa57-493f4953f440" />
+![1773490428398](image/OT-week6/1773490428398.png)
+![1773490437423](image/OT-week6/1773490437423.png)
 
 wat ik zie:
 - een overzicht van alle informatie van 2 pompen zoals:
@@ -56,12 +56,12 @@ wat ik zie:
 Open de scada web-interface: http://127.0.0.1:1881  
 **Plaats een screenshot en geef een korte beschrijving van wat je ziet**
 
-<img width="2406" height="1427" alt="image" src="https://github.com/user-attachments/assets/c5dbde2a-f121-401e-85d4-01f59c486251" />
+![1773490482250](image/OT-week6/1773490482250.png)
 
 ik zie:
 - hoe olie van links onder door de dirty filters naar pomp 1 gaat. vandaar naar pomp 2 en als laatst naar de controll valves
 - er zijn ook deze valves, die rood zijn
-  - <img width="107" height="81" alt="image" src="https://github.com/user-attachments/assets/439b2dcf-79d0-4673-854e-110d5bbfe593" />
+  - ![1773490519225](image/OT-week6/1773490519225.png)
   - deze zijn gesloten (op dit moment, mischien kan ik later zie aan zetten)
 - als laatst zie ik de info van de value kolom terug op deze pagina
   - flow rate, temperatuur, pressure en speed
@@ -84,7 +84,7 @@ uit [OT-week3](https://github.com/vsheo/Minor-AD-CS-blok-3/blob/main/OT/OT-week3
 **Noteer wat je ziet en leg het resultaat uit. Ondersteun dit met een screenshot**
 PLC:
 - `modbus read 192.168.2.10 %MW0 22`
-- <img width="586" height="732" alt="image" src="https://github.com/user-attachments/assets/4e0eaf7b-3a03-4774-8ae8-9aeb601c3240" />
+- ![1773490550671](image/OT-week6/1773490550671.png)
 
 wat ik zie:
 - een lijst van `%MW` 0 t/m 21
@@ -95,9 +95,10 @@ wat ik zie:
 [wat is memory word](https://www.quora.com/What-is-a-%E2%80%9Cmemory-word%E2%80%9D-in-PLC):
 <details>
   <summary>wat is memory word screenshots</summary>
-  <img width="1005" height="524" alt="image" src="https://github.com/user-attachments/assets/3bd031d9-7414-4fbd-b107-af4d8fbfac97" />  
-  <img width="982" height="868" alt="image" src="https://github.com/user-attachments/assets/6b979768-bd71-47a0-a5d1-fca917bbce3c" />  
-  <img width="1009" height="175" alt="image" src="https://github.com/user-attachments/assets/917118e0-6d91-4449-a03f-26fd30f82773" />
+
+  ![1773490582198](image/OT-week6/1773490582198.png)
+  ![1773490607290](image/OT-week6/1773490607290.png)
+  ![1773490626792](image/OT-week6/1773490626792.png)
 </details>
 memory word is een adress waar je gegevens kan opslaan, en later kan ophalen 
 
@@ -105,7 +106,7 @@ De command `modbus read 192.168.2.10 %MW0 22` laat dus zien wat in memory word 0
 
 SCADA:
 - `modbus read 192.168.3.20 %MW0 22`
-- <img width="2359" height="180" alt="image" src="https://github.com/user-attachments/assets/c1bfe546-a6ff-4da7-b0ad-fad90ca0701f" />
+- ![1773490654175](image/OT-week6/1773490654175.png)
 Dit geeft een error  
 omdat `%MW0 22` alleen op plc ip gelezen kan worden, (omdat plc het apparaat kan beheren)
 scada is alleen om te zien war er op de machine gebeurt
@@ -127,8 +128,8 @@ Nu zullen we het geheugenblok gaan manipuleren namelijk de holding registers
 `%MV10` de 11de geheugen plek/locatie veranderen:
 - `modbus write 192.168.2.10 %MW10 87`
 - de pomp 1 speed_in en speed_out zijn nu veranderd naar 87
-  - <img width="1924" height="169" alt="image" src="https://github.com/user-attachments/assets/258972b2-60f9-4f2f-9fa6-9b69e1464aee" />
-  - <img width="559" height="363" alt="image" src="https://github.com/user-attachments/assets/f678abd2-7713-43a9-b3b5-8d4cb96856ce" />
+  - ![1773490700271](image/OT-week6/1773490700271.png)
+  - ![1773490712935](image/OT-week6/1773490712935.png)
 > `%M` is de memory, `%i` is de input en `%Q` is de output  
 > Ze hebben allemaal `W10`, dus wat opgeslagen is in `W10` zorgt voor snelheid (de speed_in en speed_out) van pomp 1  
 > als je de Memory van `W10` veranderd dan veranderd de input en output mee,  
@@ -141,9 +142,8 @@ Nu zullen we het geheugenblok gaan manipuleren namelijk de holding registers
 - Vervolgens : `docker-compose up -d`
 
 nadat de lab opnieuw opgestart was, zag ik dat de speed voor pomp 1 terug was op 50:  
-<img width="562" height="513" alt="image" src="https://github.com/user-attachments/assets/6aa04767-1de4-4237-8ebc-1e34e3889a65" />  
-<img width="1923" height="181" alt="image" src="https://github.com/user-attachments/assets/bc7bdbf2-14bf-45d7-9a89-ee8667b4e212" />
-
+![1773490735735](image/OT-week6/1773490735735.png)  
+![1773490743201](image/OT-week6/1773490743201.png)
 
 
 ---
