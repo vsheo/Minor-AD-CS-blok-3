@@ -14,7 +14,7 @@ import mss.tools
 import sys, ctypes, subprocess, os
 
 # API token van telegram en botnaam
-API_TOKEN = "7962006638:AAHyEPjerT5QiHURMoqBsszaErLRLcxoo5A"
+API_TOKEN = ""
 BOT_HANDLE = '@Mumu1222322Bot'
 
 # Start van bot
